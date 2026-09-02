@@ -130,30 +130,61 @@
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    gsap.from('.petal-card', {
-      scrollTrigger: {
-        trigger: '#journey',
-        start: 'top 70%',
-      },
-      scale: 0.8,
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'back.out(1.7)'
-    });
+  gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from('.why-looca-card', {
-      scrollTrigger: {
-        trigger: '.why-looca-card',
-        start: 'top 80%',
-      },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out'
-    });
-  });
+  const initJourney = () => {
+    gsap.fromTo(
+      '.petal-card',
+      { opacity: 0, scale: 0.85, y: 30 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'back.out(1.5)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#journey',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      '.why-looca-card',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.why-looca-card',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe
+    setTimeout(() => {
+      document.querySelectorAll('.petal-card, .why-looca-card').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initJourney);
+  } else {
+    initJourney();
+  }
 </script>

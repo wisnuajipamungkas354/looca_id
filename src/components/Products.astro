@@ -34,7 +34,7 @@
         <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
           <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
             <img 
-              src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-beaded-rings.jpg" 
               alt="Beaded Rings" 
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
             />
@@ -52,7 +52,7 @@
         <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
           <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
             <img 
-              src="https://images.unsplash.com/photo-1611591475834-d93545099137?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-charm-bracelet.jpg" 
               alt="Charm Bracelet" 
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
             />
@@ -70,7 +70,7 @@
         <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
           <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
             <img 
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-phone-strap.jpg" 
               alt="Phone Strap" 
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
             />
@@ -88,7 +88,7 @@
         <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
           <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
             <img 
-              src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-hair-claw.jpg" 
               alt="Hair Claw" 
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
             />
@@ -106,7 +106,7 @@
         <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all col-span-2 sm:col-span-1">
           <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
             <img 
-              src="https://images.unsplash.com/photo-1576053139778-7e32f2ae3cfd?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-bag-charms.jpg" 
               alt="Bag Charms" 
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
             />
@@ -142,7 +142,7 @@
           </div>
           <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
             <img 
-              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" 
+              src="/images/souvenir-wedding.jpg" 
               alt="Wedding Souvenir" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
             />
@@ -161,7 +161,7 @@
           </div>
           <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
             <img 
-              src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" 
+              src="/images/souvenir-corporate.jpg" 
               alt="Corporate Souvenir" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
             />
@@ -180,7 +180,7 @@
           </div>
           <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
             <img 
-              src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" 
+              src="/images/souvenir-kpop.jpg" 
               alt="K-Pop Merch" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
             />
@@ -203,7 +203,7 @@
         <div class="p-4 rounded-2xl bg-cream border border-pink/20 flex flex-col items-center text-center">
           <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
             <img 
-              src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=600&q=80" 
+              src="/images/channel-offline.jpg" 
               alt="Offline Store & Events" 
               class="w-full h-full object-cover hover:scale-105 transition-transform" 
             />
@@ -215,7 +215,7 @@
         <div class="p-4 rounded-2xl bg-cream border border-yellow/20 flex flex-col items-center text-center">
           <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
             <img 
-              src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=600&q=80" 
+              src="/images/channel-online.jpg" 
               alt="Nasional Online Store" 
               class="w-full h-full object-cover hover:scale-105 transition-transform" 
             />
@@ -227,7 +227,7 @@
         <div class="p-4 rounded-2xl bg-cream border border-blue-soft/20 flex flex-col items-center text-center">
           <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
             <img 
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" 
+              src="/images/channel-shipping.jpg" 
               alt="International Shipping" 
               class="w-full h-full object-cover hover:scale-105 transition-transform" 
             />
@@ -243,30 +243,64 @@
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    gsap.from('.product-card', {
-      scrollTrigger: {
-        trigger: '#products',
-        start: 'top 75%',
-      },
-      scale: 0.8,
-      opacity: 0,
-      stagger: 0.08,
-      duration: 0.5,
-      ease: 'back.out(1.5)'
-    });
+  gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from('.souvenir-card', {
-      scrollTrigger: {
-        trigger: '.souvenir-card',
-        start: 'top 80%',
-      },
-      y: 40,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.7,
-      ease: 'power3.out'
-    });
-  });
+  const initProducts = () => {
+    // Reveal product cards
+    gsap.fromTo(
+      '.product-card',
+      { opacity: 0, scale: 0.9, y: 20 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        stagger: 0.06,
+        duration: 0.6,
+        ease: 'back.out(1.4)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#products',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Reveal souvenir cards
+    gsap.fromTo(
+      '.souvenir-card',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.12,
+        duration: 0.6,
+        ease: 'power2.out',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.souvenir-card',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe: Ensure everything is always 100% visible even if scroll calculation lags
+    setTimeout(() => {
+      document.querySelectorAll('.product-card, .souvenir-card').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProducts);
+  } else {
+    initProducts();
+  }
 </script>

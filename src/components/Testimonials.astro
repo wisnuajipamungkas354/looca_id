@@ -29,7 +29,7 @@
       <div class="testi-card bg-white p-6 sm:p-7 rounded-3xl border-2 border-pink/40 shadow-sm relative group hover:shadow-md transition-all">
         <div class="flex items-center gap-3 mb-4">
           <img 
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
+            src="/images/avatar-1.jpg" 
             alt="Nisrina A." 
             class="w-12 h-12 rounded-full object-cover border-2 border-pink shadow-sm" 
           />
@@ -45,7 +45,7 @@
           <!-- Photo Attachment like real WhatsApp unboxing -->
           <div class="w-full h-36 rounded-xl overflow-hidden shadow-xs">
             <img 
-              src="https://images.unsplash.com/photo-1611591475834-d93545099137?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-charm-bracelet.jpg" 
               alt="Bracelet Unboxing" 
               class="w-full h-full object-cover" 
             />
@@ -61,7 +61,7 @@
       <div class="testi-card bg-white p-6 sm:p-7 rounded-3xl border-2 border-yellow/40 shadow-sm relative group hover:shadow-md transition-all">
         <div class="flex items-center gap-3 mb-4">
           <img 
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" 
+            src="/images/avatar-2.jpg" 
             alt="Sarah M." 
             class="w-12 h-12 rounded-full object-cover border-2 border-yellow shadow-sm" 
           />
@@ -76,7 +76,7 @@
           <!-- Photo Attachment -->
           <div class="w-full h-36 rounded-xl overflow-hidden shadow-xs">
             <img 
-              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80" 
+              src="/images/souvenir-wedding.jpg" 
               alt="Souvenir Wedding" 
               class="w-full h-full object-cover" 
             />
@@ -92,7 +92,7 @@
       <div class="testi-card bg-white p-6 sm:p-7 rounded-3xl border-2 border-blue-soft/50 shadow-sm relative group hover:shadow-md transition-all">
         <div class="flex items-center gap-3 mb-4">
           <img 
-            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80" 
+            src="/images/avatar-3.jpg" 
             alt="Devina K." 
             class="w-12 h-12 rounded-full object-cover border-2 border-blue-soft shadow-sm" 
           />
@@ -107,7 +107,7 @@
           <!-- Photo Attachment -->
           <div class="w-full h-36 rounded-xl overflow-hidden shadow-xs">
             <img 
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" 
+              src="/images/product-phone-strap.jpg" 
               alt="Phone Strap" 
               class="w-full h-full object-cover" 
             />
@@ -126,19 +126,43 @@
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    gsap.from('.testi-card', {
-      scrollTrigger: {
-        trigger: '#testimonials',
-        start: 'top 75%',
-      },
-      scale: 0.8,
-      y: 40,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: 'back.out(1.7)'
-    });
-  });
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initTestimonials = () => {
+    gsap.fromTo(
+      '.testi-card',
+      { opacity: 0, scale: 0.85, y: 30 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.7,
+        ease: 'back.out(1.5)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#testimonials',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe
+    setTimeout(() => {
+      document.querySelectorAll('.testi-card').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTestimonials);
+  } else {
+    initTestimonials();
+  }
 </script>

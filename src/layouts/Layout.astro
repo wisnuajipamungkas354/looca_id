@@ -43,6 +43,11 @@ const { title } = Astro.props;
       });
 
       gsap.ticker.lagSmoothing(0);
+
+      // Refresh ScrollTrigger once images and DOM are completely loaded
+      window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+      });
     </script>
   </body>
 </html>

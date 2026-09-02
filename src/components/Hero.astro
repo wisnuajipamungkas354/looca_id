@@ -5,7 +5,7 @@
   <!-- Subtle craft background texture like the original store photo -->
   <div class="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply">
     <img 
-      src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1600&q=70" 
+      src="/images/hero-craft-table.jpg" 
       alt="Craft Table Background" 
       class="w-full h-full object-cover" 
     />
@@ -93,7 +93,7 @@
 <script>
   import { gsap } from 'gsap';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  const initHero = () => {
     // Bubble pop-in
     gsap.from('.hero-bubble', {
       scale: 0,
@@ -132,5 +132,11 @@
       ease: 'back.out(2)',
       delay: 1.0
     });
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHero);
+  } else {
+    initHero();
+  }
 </script>

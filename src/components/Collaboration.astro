@@ -1,83 +1,83 @@
 ---
 // Collaboration.astro
+const majorPartners = [
+  { name: 'IPB University', logo: '/images/partners/partner-ipb.png' },
+  { name: 'KlikBi & SparksEnglish', logo: '/images/partners/partner-klikbi.png' },
+  { name: 'Pink Rabbit Lens', logo: '/images/partners/partner-pinkrabbit.png' },
+  { name: 'Chupa Chups', logo: '/images/partners/partner-chupachups.png' },
+  { name: 'P Creative', logo: '/images/partners/partner-p.png' },
+  { name: 'Emina Cosmetics', logo: '/images/partners/partner-emina.png' },
+  { name: 'OMG Oh My Glam', logo: '/images/partners/partner-omg.png' },
+  { name: 'Hala Gold', logo: '/images/partners/partner-halagold.png' },
+];
+
+const communityPartners = [
+  { name: 'Kalato', logo: '/images/partners/partner-kalato.png' },
+  { name: 'Sisi Teduh', logo: '/images/partners/partner-sisiteduh.png' },
+  { name: 'Glosplum', logo: '/images/partners/partner-glosplum.png' },
+  { name: 'The Bouquet', logo: '/images/partners/partner-thebouquet.png' },
+  { name: 'atristuff', logo: '/images/partners/partner-atristuff.png' },
+  { name: 'Juta Tawa', logo: '/images/partners/partner-jutatawa.png' },
+  { name: 'Karen Wow', logo: '/images/partners/partner-karenwow.png' },
+  { name: 'Shali Coffee', logo: '/images/partners/partner-shali.png' },
+  { name: 'AIEC Educare', logo: '/images/partners/partner-aiec.png' },
+  { name: 'Pink Emoji', logo: '/images/partners/partner-pinkemoji.png' },
+  { name: 'Let\'s Go Girls', logo: '/images/partners/partner-letsgogirls.png' },
+];
 ---
-<section id="collaboration" class="relative py-16 sm:py-20 px-4 sm:px-8 bg-white border-y border-pink/30 overflow-hidden">
+
+<section id="collaboration" class="relative py-16 sm:py-24 px-4 sm:px-8 bg-[#FFFDF9] border-y border-pink/30 overflow-hidden">
   <div class="max-w-6xl mx-auto text-center">
     
-    <!-- Title -->
+    <!-- Title & Slogan -->
     <div class="inline-block bg-yellow-light text-yellow-dark font-handwriting text-xl sm:text-2xl px-6 py-1 rounded-full shadow-sm mb-3">
       Together We Grow 🤝
     </div>
-    <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-text-dark mb-4">
+    <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-text-dark mb-4">
       Collaboration & Partnership
     </h2>
-    <p class="text-xs sm:text-sm text-text-muted max-w-md mx-auto mb-12">
-      Telah dipercaya oleh berbagai institusi, brand kecantikan, hingga komunitas ternama.
+    <p class="text-xs sm:text-sm text-text-muted max-w-lg mx-auto mb-12">
+      Telah dipercaya oleh berbagai institusi, brand kecantikan ternama, event organizer, hingga komunitas kreatif.
     </p>
 
-    <!-- Partner Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 items-center justify-center">
-      
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-pink-deep">IPB University</span>
-        <span class="text-[10px] text-text-muted">Sekolah Vokasi</span>
+    <!-- Row 1: Major Institutional & Brand Partners -->
+    <div class="mb-8">
+      <span class="text-xs font-heading font-bold uppercase tracking-wider text-text-muted/80 block mb-5">
+        Brand & Institutional Partners
+      </span>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 items-center justify-center">
+        {majorPartners.map((partner) => (
+          <div class="collab-item group bg-white p-3 rounded-2xl border border-pink/25 shadow-xs hover:shadow-md hover:border-pink transition-all flex items-center justify-center aspect-[4/3] relative">
+            <img 
+              src={partner.logo} 
+              alt={partner.name}
+              title={partner.name}
+              class="max-h-12 w-auto max-w-full object-contain group-hover:scale-110 transition-transform duration-300" 
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
+    </div>
 
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-[#E75480]">emina</span>
-        <span class="text-[10px] text-text-muted">Born to be Loved</span>
+    <!-- Row 2: Community & Creative Partners -->
+    <div>
+      <span class="text-xs font-heading font-bold uppercase tracking-wider text-text-muted/80 block mb-5">
+        Community & Creative Collaborators
+      </span>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-3 sm:gap-3.5 items-center justify-center">
+        {communityPartners.map((partner) => (
+          <div class="collab-item group bg-white p-2.5 rounded-2xl border border-yellow/30 shadow-xs hover:shadow-md hover:border-yellow transition-all flex items-center justify-center aspect-square relative">
+            <img 
+              src={partner.logo} 
+              alt={partner.name}
+              title={partner.name}
+              class="max-h-11 w-auto max-w-full object-contain group-hover:scale-115 transition-transform duration-300" 
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-text-dark">OMG!</span>
-        <span class="text-[10px] text-text-muted">Oh My Glam</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-[#D4AF37]">HALA GOLD</span>
-        <span class="text-[10px] text-text-muted">Jewellery Partner</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-red-500">Chupa Chups</span>
-        <span class="text-[10px] text-text-muted">Special Collab</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-pink-500">Pink Rabbit</span>
-        <span class="text-[10px] text-text-muted">Softlens & Beauty</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-blue-600">KlikBi</span>
-        <span class="text-[10px] text-text-muted">Partner Media</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-green-600">SparksEnglish</span>
-        <span class="text-[10px] text-text-muted">Education</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-purple-600">Let's Go Girls</span>
-        <span class="text-[10px] text-text-muted">Community</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-pink-deep">The Bouquet</span>
-        <span class="text-[10px] text-text-muted">Gift & Florist</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-amber-700">Shali Coffee</span>
-        <span class="text-[10px] text-text-muted">F&B Partner</span>
-      </div>
-
-      <div class="collab-item bg-cream p-4 rounded-2xl border border-pink/20 flex flex-col items-center justify-center aspect-[3/2] shadow-xs hover:shadow-md hover:scale-105 transition-all">
-        <span class="font-heading font-extrabold text-sm sm:text-base text-pink-600">atristuff</span>
-        <span class="text-[10px] text-text-muted">Merchandise</span>
-      </div>
-
     </div>
 
   </div>
@@ -85,18 +85,43 @@
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    gsap.from('.collab-item', {
-      scrollTrigger: {
-        trigger: '#collaboration',
-        start: 'top 80%',
-      },
-      scale: 0.7,
-      opacity: 0,
-      stagger: 0.05,
-      duration: 0.5,
-      ease: 'back.out(1.5)'
-    });
-  });
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initCollab = () => {
+    gsap.fromTo(
+      '.collab-item',
+      { opacity: 0, scale: 0.85, y: 15 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        stagger: 0.03,
+        duration: 0.5,
+        ease: 'back.out(1.5)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#collaboration',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe
+    setTimeout(() => {
+      document.querySelectorAll('.collab-item').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1000);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCollab);
+  } else {
+    initCollab();
+  }
 </script>

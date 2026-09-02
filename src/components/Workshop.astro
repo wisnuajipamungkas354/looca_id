@@ -22,7 +22,7 @@
       <!-- Photo 1: Workshop Table & Beads -->
       <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
         <img 
-          src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80" 
+          src="/images/workshop-1.jpg" 
           alt="Workshop Craft Table" 
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
         />
@@ -34,7 +34,7 @@
       <!-- Photo 2: Participants Smiling -->
       <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
         <img 
-          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" 
+          src="/images/workshop-2.jpg" 
           alt="Participants Smiling" 
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
         />
@@ -46,7 +46,7 @@
       <!-- Photo 3: Hands-on Mentoring -->
       <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
         <img 
-          src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80" 
+          src="/images/workshop-3.jpg" 
           alt="Hands-on Mentoring" 
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
         />
@@ -58,7 +58,7 @@
       <!-- Photo 4: Community Gathering -->
       <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
         <img 
-          src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" 
+          src="/images/workshop-4.jpg" 
           alt="Community Gathering" 
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
         />
@@ -70,7 +70,7 @@
       <!-- Photo 5: Kids & DIY Activity -->
       <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
         <img 
-          src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80" 
+          src="/images/workshop-5.jpg" 
           alt="Kids Craft Workshop" 
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
         />
@@ -82,7 +82,7 @@
       <!-- Photo 6: Assembling Craft Detail -->
       <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
         <img 
-          src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=600&q=80" 
+          src="/images/workshop-6.jpg" 
           alt="Assembling Crafts" 
           class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
         />
@@ -99,7 +99,7 @@
       <div class="workshop-photo bg-white p-4 rounded-3xl shadow-md border-2 border-pink/30 hover:rotate-0 -rotate-1 transition-all duration-300 group">
         <div class="h-60 rounded-2xl overflow-hidden relative shadow-inner">
           <img 
-            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" 
+            src="/images/workshop-2.jpg" 
             alt="IPB University Workshop" 
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
           />
@@ -123,7 +123,7 @@
       <div class="workshop-photo bg-white p-4 rounded-3xl shadow-md border-2 border-blue-soft/50 hover:rotate-0 rotate-2 transition-all duration-300 group">
         <div class="h-60 rounded-2xl overflow-hidden relative shadow-inner">
           <img 
-            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" 
+            src="/images/workshop-3.jpg" 
             alt="Guimaras State University Workshop" 
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
           />
@@ -147,7 +147,7 @@
       <div class="workshop-photo bg-white p-4 rounded-3xl shadow-md border-2 border-yellow/50 hover:rotate-0 -rotate-2 transition-all duration-300 group sm:col-span-2 lg:col-span-1">
         <div class="h-60 rounded-2xl overflow-hidden relative shadow-inner">
           <img 
-            src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80" 
+            src="/images/workshop-5.jpg" 
             alt="Kids and Community Workshop" 
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
           />
@@ -188,31 +188,61 @@
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    gsap.from('.workshop-thumb', {
-      scrollTrigger: {
-        trigger: '.workshop-thumb',
-        start: 'top 80%',
-      },
-      scale: 0.6,
-      opacity: 0,
-      stagger: 0.08,
-      duration: 0.5,
-      ease: 'back.out(1.5)'
-    });
+  gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from('.workshop-photo', {
-      scrollTrigger: {
-        trigger: '.workshop-photo',
-        start: 'top 75%',
-      },
-      scale: 0.85,
-      y: 40,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'back.out(1.4)'
-    });
-  });
+  const initWorkshop = () => {
+    gsap.fromTo(
+      '.workshop-thumb',
+      { opacity: 0, scale: 0.8 },
+      {
+        opacity: 1,
+        scale: 1,
+        stagger: 0.06,
+        duration: 0.5,
+        ease: 'back.out(1.5)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.workshop-thumb',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      '.workshop-photo',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.7,
+        ease: 'back.out(1.4)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.workshop-photo',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe
+    setTimeout(() => {
+      document.querySelectorAll('.workshop-thumb, .workshop-photo').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWorkshop);
+  } else {
+    initWorkshop();
+  }
 </script>

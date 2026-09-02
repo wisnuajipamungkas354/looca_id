@@ -186,32 +186,63 @@
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initServices = () => {
     // Pill badges animation
-    gsap.from('.service-pill', {
-      scrollTrigger: {
-        trigger: '.service-tags',
-        start: 'top 80%',
-      },
-      scale: 0.5,
-      opacity: 0,
-      stagger: 0.08,
-      duration: 0.6,
-      ease: 'back.out(2)'
-    });
+    gsap.fromTo(
+      '.service-pill',
+      { opacity: 0, scale: 0.7 },
+      {
+        opacity: 1,
+        scale: 1,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: 'back.out(1.8)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.service-tags',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
 
     // Step cards stagger
-    gsap.from('.step-card', {
-      scrollTrigger: {
-        trigger: '.alur-pemesanan-wrapper',
-        start: 'top 75%',
-      },
-      y: 40,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: 'power2.out'
-    });
-  });
+    gsap.fromTo(
+      '.step-card',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.08,
+        duration: 0.6,
+        ease: 'power2.out',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.alur-pemesanan-wrapper',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe
+    setTimeout(() => {
+      document.querySelectorAll('.service-pill, .step-card').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServices);
+  } else {
+    initServices();
+  }
 </script>
