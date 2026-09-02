@@ -1,7 +1,7 @@
 ---
 // Hero.astro
 ---
-<section id="hero" class="relative min-h-[95vh] lg:min-h-screen pt-28 pb-24 px-4 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#FCE8ED] via-[#FFF3E8] to-[#FFFDF9]">
+<section id="hero" class="relative min-h-screen pt-36 sm:pt-40 lg:pt-36 pb-20 sm:pb-24 lg:pb-24 px-4 flex flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#FCE8ED] via-[#FFF3E8] to-[#FFFDF9]">
   <!-- Subtle craft background texture like the original store photo -->
   <div class="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply">
     <img 
@@ -13,71 +13,77 @@
 
   <!-- Top Scallop Border (like original) -->
   <div class="absolute top-0 left-0 w-full overflow-hidden leading-none z-10 opacity-90">
-    <img src="/decorations/wave-yellow.svg" alt="wave decoration" class="w-full h-8 sm:h-12 object-cover object-top" />
+    <img src="/decorations/wave-yellow.svg" alt="wave decoration" class="w-full h-8 sm:h-10 object-cover object-top" />
   </div>
 
   <!-- Floating Cute Decorative Stickers (Background Doodles) -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden z-10">
     <!-- Star Doodle Left -->
-    <div class="hero-sticker absolute top-28 left-4 sm:left-14 w-16 sm:w-28 -rotate-12 animate-float">
+    <div class="hero-sticker absolute top-28 sm:top-36 left-3 sm:left-14 w-12 sm:w-20 md:w-24 -rotate-12 animate-float opacity-90 sm:opacity-100">
       <img src="/decorations/star.svg" alt="star" class="w-full drop-shadow-md" />
     </div>
 
-    <!-- Heart Doodle Right -->
-    <div class="hero-sticker absolute top-32 right-4 sm:right-16 w-16 sm:w-28 rotate-12 animate-float" style="animation-delay: 1s;">
+    <!-- Heart Doodle Right (Clearly visible on mobile & desktop) -->
+    <div class="hero-sticker absolute top-28 sm:top-36 right-3 sm:right-16 w-12 sm:w-20 md:w-24 rotate-12 animate-float opacity-90 sm:opacity-100" style="animation-delay: 1s;">
       <img src="/decorations/heart.svg" alt="heart" class="w-full drop-shadow-md" />
     </div>
 
     <!-- Daisy Flower Bottom Left -->
-    <div class="hero-sticker absolute bottom-24 left-8 sm:left-24 w-16 sm:w-24 animate-spin-slow">
+    <div class="hero-sticker absolute bottom-20 sm:bottom-28 left-4 sm:left-24 w-11 sm:w-18 md:w-22 animate-spin-slow opacity-85 sm:opacity-100">
       <img src="/decorations/flower-daisy.svg" alt="daisy" class="w-full drop-shadow" />
     </div>
 
     <!-- Cherry Doodle Bottom Right -->
-    <div class="hero-sticker absolute bottom-24 right-8 sm:right-28 w-16 sm:w-24 rotate-6 animate-float" style="animation-delay: 1.5s;">
+    <div class="hero-sticker absolute bottom-20 sm:bottom-28 right-4 sm:right-28 w-11 sm:w-18 md:w-22 rotate-6 animate-float opacity-85 sm:opacity-100" style="animation-delay: 1.5s;">
       <img src="/decorations/cherry.svg" alt="cherry" class="w-full drop-shadow" />
     </div>
   </div>
 
-  <!-- Main Hero Content -->
-  <div class="relative z-20 max-w-5xl mx-auto text-center flex flex-col items-center">
-    <!-- Welcome Speech Bubble -->
-    <div class="hero-bubble inline-flex items-center gap-2 bg-[#89CFF0] text-white font-handwriting text-xl sm:text-3xl px-7 py-2.5 rounded-full shadow-lg border-2 border-white -rotate-2 mb-4">
+  <!-- Main Hero Content (Compact & Focused Width) -->
+  <div class="relative z-20 max-w-2xl mx-auto text-center flex flex-col items-center">
+    <!-- Welcome Speech Bubble (Generous 50px+ clearance below navbar) -->
+    <div class="hero-bubble inline-flex items-center gap-2 bg-[#89CFF0] text-white font-handwriting text-base sm:text-2xl px-6 sm:px-7 py-2 sm:py-2.5 rounded-full shadow-md border-2 border-white -rotate-2 mb-3 sm:mb-4">
       <span>Hi! Welcome to our home!</span>
-      <span class="text-xl">✨</span>
+      <span class="text-base sm:text-lg">✨</span>
     </div>
 
-    <!-- Central Looca Studio Flower Emblem (ENLARGED) -->
-    <div class="hero-flower relative my-2 w-72 sm:w-[440px] md:w-[520px] lg:w-[580px] xl:w-[620px] transition-transform duration-500 hover:scale-105 cursor-pointer flex items-center justify-center">
+    <!-- Central Looca Studio Flower Emblem -->
+    <div class="hero-flower relative my-2 w-[70vw] max-w-[270px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[440px] transition-transform duration-500 hover:scale-105 cursor-pointer flex items-center justify-center group">
       <img 
         src="/decorations/flower-looca.svg" 
         alt="Looca Studio Flower" 
-        class="w-full drop-shadow-2xl filter"
+        class="w-full drop-shadow-xl filter" 
+      />
+      <!-- Authentic Pink Looca Studio Logo in the center -->
+      <img 
+        src="/logo-pink.png" 
+        alt="Looca Studio Logo" 
+        class="absolute top-[51.25%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[38.5%] h-[38.5%] rounded-full object-contain pointer-events-none drop-shadow-md"
       />
     </div>
 
     <!-- Tagline & Description -->
-    <div class="hero-text mt-6 max-w-xl">
-      <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark tracking-tight leading-tight">
+    <div class="hero-text mt-3 sm:mt-4 max-w-lg">
+      <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text-dark tracking-tight leading-tight">
         Handmade with Love, <br class="hidden sm:inline"/> Crafted for Your Story
       </h1>
-      <p class="font-sans text-base sm:text-lg text-text-muted mt-4 leading-relaxed">
+      <p class="font-sans text-xs sm:text-sm lg:text-base text-text-muted mt-2 sm:mt-2.5 leading-relaxed">
         Accessories unik, merchandise kreatif, dan pengalaman workshop menyenangkan yang membawa keceriaan ke setiap momenmu.
       </p>
     </div>
 
     <!-- CTA Buttons -->
-    <div class="hero-cta mt-8 flex flex-wrap items-center justify-center gap-4">
+    <div class="hero-cta mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
       <a 
         href="#products" 
-        class="bg-pink-deep hover:bg-pink-deep/90 text-white font-heading font-bold text-base px-8 py-3.5 rounded-full shadow-lg shadow-pink-deep/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+        class="bg-pink-deep hover:bg-pink-deep/90 text-white font-heading font-bold text-sm sm:text-base px-6 sm:px-7 py-2.5 sm:py-3 rounded-full shadow-md shadow-pink-deep/25 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
       >
         <span>Explore Products</span>
         <span>🌸</span>
       </a>
       <a 
         href="#about" 
-        class="bg-white/90 hover:bg-white text-text-dark font-heading font-semibold text-base px-7 py-3.5 rounded-full shadow-md border border-pink/40 hover:scale-105 active:scale-95 transition-all"
+        class="bg-white/90 hover:bg-white text-text-dark font-heading font-semibold text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-sm border border-pink/40 hover:scale-105 active:scale-95 transition-all"
       >
         Tentang Looca
       </a>
@@ -86,7 +92,7 @@
 
   <!-- Bottom Wave Transition to About Section -->
   <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-    <img src="/decorations/wave-pink.svg" alt="pink wave divider" class="w-full h-12 sm:h-20 object-cover object-bottom" />
+    <img src="/decorations/wave-pink.svg" alt="pink wave divider" class="w-full h-10 sm:h-14 object-cover object-bottom" />
   </div>
 </section>
 
@@ -94,44 +100,40 @@
   import { gsap } from 'gsap';
 
   const initHero = () => {
-    // Bubble pop-in
-    gsap.from('.hero-bubble', {
-      scale: 0,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'back.out(1.8)',
-      delay: 0.2
-    });
+    // Safe entrance animation with clearProps
+    const tl = gsap.timeline();
 
-    // Central Flower entrance
-    gsap.from('.hero-flower', {
-      scale: 0.2,
-      rotation: -30,
-      opacity: 0,
-      duration: 1.2,
-      ease: 'elastic.out(1, 0.6)',
-      delay: 0.4
-    });
+    tl.fromTo(
+      '.hero-bubble',
+      { scale: 0.85, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.5)', clearProps: 'all' }
+    )
+    .fromTo(
+      '.hero-flower',
+      { scale: 0.9, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.2)', clearProps: 'all' },
+      '-=0.3'
+    )
+    .fromTo(
+      ['.hero-text', '.hero-cta'],
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out', clearProps: 'all' },
+      '-=0.2'
+    )
+    .fromTo(
+      '.hero-sticker',
+      { scale: 0.7, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(1.5)', clearProps: 'all' },
+      '-=0.3'
+    );
 
-    // Text and CTA entrance
-    gsap.from(['.hero-text', '.hero-cta'], {
-      y: 40,
-      opacity: 0,
-      duration: 0.9,
-      stagger: 0.2,
-      ease: 'power3.out',
-      delay: 0.8
-    });
-
-    // Floating stickers entrance
-    gsap.from('.hero-sticker', {
-      scale: 0,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'back.out(2)',
-      delay: 1.0
-    });
+    // Guaranteed failsafe: within 600ms, ensure EVERYTHING is 100% visible and at full natural size
+    setTimeout(() => {
+      document.querySelectorAll('.hero-bubble, .hero-flower, .hero-text, .hero-cta, .hero-sticker').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 600);
   };
 
   if (document.readyState === 'loading') {
