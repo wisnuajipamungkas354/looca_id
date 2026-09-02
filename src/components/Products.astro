@@ -1,0 +1,272 @@
+---
+// Products.astro
+---
+<section id="products" class="relative py-20 lg:py-28 px-4 sm:px-8 bg-cream overflow-hidden">
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-block bg-pink-light text-pink-deep border border-pink font-handwriting text-lg sm:text-xl px-6 py-1.5 rounded-full shadow-sm mb-3">
+        Koleksi Pilihan Kami 🌸
+      </div>
+      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark">
+        Our Products & Gallery
+      </h2>
+      <p class="text-text-muted mt-3 max-w-lg mx-auto text-sm sm:text-base">
+        Dari aksesori personal hingga ribuan souvenir acara istimewa.
+      </p>
+    </div>
+
+    <!-- Category 1: Jewelry and Acc -->
+    <div class="mb-16">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-heading text-xl sm:text-2xl font-bold text-text-dark flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-pink-deep"></span>
+          Jewelry and Acc
+        </h3>
+        <span class="text-xs font-heading font-semibold text-pink-deep bg-pink-light px-3 py-1 rounded-full">
+          Handmade • Stainless
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <!-- Item 1: Beaded Rings -->
+        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
+          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
+            <img 
+              src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" 
+              alt="Beaded Rings" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+            />
+            <span class="absolute top-2 left-2 bg-pink-deep/90 text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
+              Custom Ring
+            </span>
+          </div>
+          <div class="text-center">
+            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Beaded Rings</span>
+            <span class="text-[11px] text-text-muted font-sans">Floral collection</span>
+          </div>
+        </div>
+
+        <!-- Item 2: Charm Bracelet -->
+        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
+          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
+            <img 
+              src="https://images.unsplash.com/photo-1611591475834-d93545099137?auto=format&fit=crop&w=600&q=80" 
+              alt="Charm Bracelet" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+            />
+            <span class="absolute top-2 left-2 bg-yellow-dark text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
+              Best Seller
+            </span>
+          </div>
+          <div class="text-center">
+            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Charm Bracelet</span>
+            <span class="text-[11px] text-text-muted font-sans">Stainless steel</span>
+          </div>
+        </div>
+
+        <!-- Item 3: Phone Strap -->
+        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
+          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
+            <img 
+              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" 
+              alt="Phone Strap" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+            />
+            <span class="absolute top-2 left-2 bg-blue-500 text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
+              Trending
+            </span>
+          </div>
+          <div class="text-center">
+            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Phone Strap</span>
+            <span class="text-[11px] text-text-muted font-sans">Custom beads</span>
+          </div>
+        </div>
+
+        <!-- Item 4: Hair Claw -->
+        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
+          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
+            <img 
+              src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=600&q=80" 
+              alt="Hair Claw" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+            />
+            <span class="absolute top-2 left-2 bg-pink-deep/90 text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
+              Cute Pastel
+            </span>
+          </div>
+          <div class="text-center">
+            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Hair Claw</span>
+            <span class="text-[11px] text-text-muted font-sans">Flower accents</span>
+          </div>
+        </div>
+
+        <!-- Item 5: Bag Charms -->
+        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all col-span-2 sm:col-span-1">
+          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
+            <img 
+              src="https://images.unsplash.com/photo-1576053139778-7e32f2ae3cfd?auto=format&fit=crop&w=600&q=80" 
+              alt="Bag Charms" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+            />
+            <span class="absolute top-2 left-2 bg-yellow-dark text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
+              Special
+            </span>
+          </div>
+          <div class="text-center">
+            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Bag Charms</span>
+            <span class="text-[11px] text-text-muted font-sans">Special edition</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 2: Souvenir / Merchandise with Qty Badges (From Screenshot 4) -->
+    <div class="mb-16">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-heading text-xl sm:text-2xl font-bold text-text-dark flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-yellow-dark"></span>
+          Souvenir & Custom Merchandise
+        </h3>
+        <span class="text-xs font-heading font-semibold text-yellow-dark bg-yellow-light px-3 py-1 rounded-full">
+          Bulk Order Available
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Wedding Souvenir -->
+        <div class="souvenir-card bg-white p-5 rounded-3xl border border-yellow/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
+          <div class="absolute top-7 right-7 z-10 bg-yellow text-text-dark font-heading font-extrabold text-xs px-3.5 py-1 rounded-full shadow-md">
+            300 PCS+
+          </div>
+          <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" 
+              alt="Wedding Souvenir" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
+              <span class="font-handwriting text-2xl text-white drop-shadow">Wedding Edition</span>
+            </div>
+          </div>
+          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Pernikahan & Tunangan</h4>
+          <p class="text-xs text-text-muted">Aksesori eksklusif dengan custom tag nama pengantin yang manis dan berkesan.</p>
+        </div>
+
+        <!-- Corporate / Institution Souvenir -->
+        <div class="souvenir-card bg-white p-5 rounded-3xl border border-pink/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
+          <div class="absolute top-7 right-7 z-10 bg-pink-deep text-white font-heading font-extrabold text-xs px-3.5 py-1 rounded-full shadow-md">
+            1000 PCS+
+          </div>
+          <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" 
+              alt="Corporate Souvenir" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
+              <span class="font-handwriting text-2xl text-white drop-shadow">Corporate & School</span>
+            </div>
+          </div>
+          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Corporate / Institution</h4>
+          <p class="text-xs text-text-muted">Lanyard, gantungan kunci, dan pin untuk instansi, kampus, serta perayaan perusahaan.</p>
+        </div>
+
+        <!-- K-Pop / Fan Project Merch -->
+        <div class="souvenir-card bg-white p-5 rounded-3xl border border-blue-soft/50 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
+          <div class="absolute top-7 right-7 z-10 bg-[#5DADE2] text-white font-heading font-extrabold text-xs px-3.5 py-1 rounded-full shadow-md">
+            2500 PCS+
+          </div>
+          <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+            <img 
+              src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" 
+              alt="K-Pop Merch" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
+              <span class="font-handwriting text-2xl text-white drop-shadow">K-Pop Fan Projects</span>
+            </div>
+          </div>
+          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Concert & Fan Merch</h4>
+          <p class="text-xs text-text-muted">Freebies konser, strap lightstick, dan merchandise fan event berskala ribuan pcs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 3: Channels (Offline Events, Online & International Delivery) -->
+    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink/30 shadow-sm">
+      <h3 class="font-heading text-lg sm:text-xl font-bold text-text-dark mb-6 text-center">
+        Tersedia di Berbagai Channel 🌍
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="p-4 rounded-2xl bg-cream border border-pink/20 flex flex-col items-center text-center">
+          <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
+            <img 
+              src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=600&q=80" 
+              alt="Offline Store & Events" 
+              class="w-full h-full object-cover hover:scale-105 transition-transform" 
+            />
+          </div>
+          <h4 class="font-heading font-bold text-sm text-text-dark">Offline Store & Events</h4>
+          <p class="text-xs text-text-muted mt-1">Hadir di berbagai creative market, bazar, dan pop-up booth.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-cream border border-yellow/20 flex flex-col items-center text-center">
+          <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
+            <img 
+              src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=600&q=80" 
+              alt="Nasional Online Store" 
+              class="w-full h-full object-cover hover:scale-105 transition-transform" 
+            />
+          </div>
+          <h4 class="font-heading font-bold text-sm text-text-dark">Nasional Online Store</h4>
+          <p class="text-xs text-text-muted mt-1">Pengiriman aman ke seluruh penjuru Indonesia via Shopee & WA.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-cream border border-blue-soft/20 flex flex-col items-center text-center">
+          <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
+            <img 
+              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" 
+              alt="International Shipping" 
+              class="w-full h-full object-cover hover:scale-105 transition-transform" 
+            />
+          </div>
+          <h4 class="font-heading font-bold text-sm text-text-dark">International Shipping</h4>
+          <p class="text-xs text-text-muted mt-1">Telah mengirim pesanan hingga mancanegara (Singapore, dll).</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.from('.product-card', {
+      scrollTrigger: {
+        trigger: '#products',
+        start: 'top 75%',
+      },
+      scale: 0.8,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.5,
+      ease: 'back.out(1.5)'
+    });
+
+    gsap.from('.souvenir-card', {
+      scrollTrigger: {
+        trigger: '.souvenir-card',
+        start: 'top 80%',
+      },
+      y: 40,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.7,
+      ease: 'power3.out'
+    });
+  });
+</script>

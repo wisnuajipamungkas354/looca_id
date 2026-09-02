@@ -1,0 +1,131 @@
+---
+// About.astro
+---
+<section id="about" class="relative py-20 lg:py-28 px-4 sm:px-8 bg-pink-light overflow-hidden">
+  <!-- Subtle Background Daisy -->
+  <div class="absolute -right-12 top-12 w-48 opacity-25 pointer-events-none animate-spin-slow">
+    <img src="/src/assets/decorations/flower-daisy.svg" alt="daisy" class="w-full" />
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left: Visual Product Showcase with Scalloped / Rounded Aesthetic -->
+      <div class="about-visual lg:col-span-5 relative flex justify-center">
+        <!-- Background blob decoration -->
+        <div class="absolute inset-0 bg-pink/50 rounded-4xl -rotate-3 transform scale-105"></div>
+        
+        <!-- Main Product Card Showcase (Photo of gift boxes & handmade accessories like Screenshot 1) -->
+        <div class="relative z-10 w-full max-w-md bg-white p-4 rounded-3xl shadow-xl border-4 border-white rotate-2 hover:rotate-0 transition-transform duration-500 group">
+          <div class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-inner">
+            <img 
+              src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" 
+              alt="Looca Handmade Jewelry and Gift Boxes" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+            />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-5 text-white">
+              <div class="inline-block self-start bg-pink-deep/90 backdrop-blur-sm px-3.5 py-1 rounded-full text-xs font-heading font-bold mb-1.5 shadow-sm">
+                Handmade With Heart 💖
+              </div>
+              <p class="text-xs text-white/90 font-sans leading-relaxed">
+                Setiap detail kalung, cincin, dan manik-manik dirangkai dengan teliti dan penuh kehangatan.
+              </p>
+            </div>
+
+            <!-- Decorative mini badge -->
+            <div class="absolute top-3 left-3 bg-yellow text-text-dark font-handwriting text-sm px-3.5 py-1 rounded-full shadow-md">
+              Since 2023 ✨
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: About Story & Category Badges -->
+      <div class="about-content lg:col-span-7">
+        <!-- Official Logo & Brand Handle Header -->
+        <div class="flex items-center gap-3.5 mb-5">
+          <img 
+            src="/logo.png" 
+            alt="Looca ID Official Logo" 
+            class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover shadow-md border-2 border-pink/60 hover:rotate-6 transition-transform" 
+          />
+          <span class="bg-pink-deep text-white font-heading font-extrabold text-base sm:text-xl px-6 py-2 rounded-full shadow-sm">
+            Looca_id
+          </span>
+        </div>
+
+        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-text-dark leading-tight mb-6">
+          Kreativitas & Cinta dalam Setiap Karya Kerajinan
+        </h2>
+
+        <p class="font-sans text-base sm:text-lg text-text-dark/90 leading-relaxed mb-8">
+          Brand creative items yang menghadirkan <strong>handmade Accessories</strong>, <strong>merchandise</strong>, dan <strong>creative workshop</strong> sejak tahun 2023. Kami berkomitmen untuk menjadi brand yang berkualitas, terjangkau, unik, dan berdampak bagi masyarakat sekitar.
+        </p>
+
+        <!-- 4 Core Service / Category Badges -->
+        <div class="space-y-3">
+          <span class="text-xs font-heading font-bold uppercase tracking-wider text-text-muted">
+            Layanan & Kreasi Kami:
+          </span>
+          <div class="flex flex-wrap gap-3">
+            <div class="about-badge bg-pink-deep hover:bg-pink-dark text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md cursor-pointer hover:scale-105 transition-all">
+              💍 Accessories
+            </div>
+            <div class="about-badge bg-pink-deep hover:bg-pink-dark text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md cursor-pointer hover:scale-105 transition-all">
+              ✂️ Tailor
+            </div>
+            <div class="about-badge bg-pink-deep hover:bg-pink-dark text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md cursor-pointer hover:scale-105 transition-all">
+              🎁 Merchandise / Souvenir
+            </div>
+            <div class="about-badge bg-pink-deep hover:bg-pink-dark text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md cursor-pointer hover:scale-105 transition-all">
+              🎨 Creative Workshop
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.from('.about-visual', {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 75%',
+      },
+      x: -60,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.about-content', {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 75%',
+      },
+      x: 60,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+
+    gsap.from('.about-badge', {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 65%',
+      },
+      scale: 0.5,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'back.out(2)'
+    });
+  });
+</script>

@@ -1,0 +1,144 @@
+---
+// Testimonials.astro
+---
+<section id="testimonials" class="relative py-20 lg:py-28 px-4 sm:px-8 bg-yellow-light/50 overflow-hidden">
+  <!-- Subtle decorative flower -->
+  <div class="absolute -left-10 bottom-10 w-40 opacity-20 pointer-events-none animate-spin-slow">
+    <img src="/src/assets/decorations/flower-daisy.svg" alt="flower" class="w-full" />
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="inline-block bg-yellow text-text-dark font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-sm mb-3">
+        Cerita Mereka ✨
+      </div>
+      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark">
+        Customer Testimonials
+      </h2>
+      <p class="text-text-muted mt-3 max-w-lg mx-auto text-sm sm:text-base">
+        Kesan manis dan jujur dari sahabat Looca yang telah menerima pesanan mereka.
+      </p>
+    </div>
+
+    <!-- Cute Chat Bubble Testimonial Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      
+      <!-- Bubble 1 -->
+      <div class="testi-card bg-white p-6 sm:p-7 rounded-3xl border-2 border-pink/40 shadow-sm relative group hover:shadow-md transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <img 
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
+            alt="Nisrina A." 
+            class="w-12 h-12 rounded-full object-cover border-2 border-pink shadow-sm" 
+          />
+          <div>
+            <h4 class="font-heading font-bold text-sm text-text-dark">Nisrina A.</h4>
+            <span class="text-[11px] text-text-muted">Custom Bracelet Order</span>
+          </div>
+          <span class="ml-auto text-yellow-dark text-sm">★★★★★</span>
+        </div>
+        
+        <!-- Chat Bubble Quote with Photo Attachment -->
+        <div class="bg-pink-light/60 p-4 rounded-2xl rounded-tl-none border border-pink/20 text-text-dark text-sm font-sans leading-relaxed relative space-y-3">
+          <!-- Photo Attachment like real WhatsApp unboxing -->
+          <div class="w-full h-36 rounded-xl overflow-hidden shadow-xs">
+            <img 
+              src="https://images.unsplash.com/photo-1611591475834-d93545099137?auto=format&fit=crop&w=600&q=80" 
+              alt="Bracelet Unboxing" 
+              class="w-full h-full object-cover" 
+            />
+          </div>
+          <p>“sukaaaa banget nis, bagus bagus bangeettt 🫶🏻🥺 manaaa murahh lagiii! Bakal langganan terus fixx!”</p>
+        </div>
+        <div class="mt-3 text-right">
+          <span class="text-[10px] text-text-muted">Verified Customer via WhatsApp</span>
+        </div>
+      </div>
+
+      <!-- Bubble 2 -->
+      <div class="testi-card bg-white p-6 sm:p-7 rounded-3xl border-2 border-yellow/40 shadow-sm relative group hover:shadow-md transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <img 
+            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" 
+            alt="Sarah M." 
+            class="w-12 h-12 rounded-full object-cover border-2 border-yellow shadow-sm" 
+          />
+          <div>
+            <h4 class="font-heading font-bold text-sm text-text-dark">Sarah M.</h4>
+            <span class="text-[11px] text-text-muted">Wedding Souvenir (300 pcs)</span>
+          </div>
+          <span class="ml-auto text-yellow-dark text-sm">★★★★★</span>
+        </div>
+        
+        <div class="bg-yellow-light/60 p-4 rounded-2xl rounded-tl-none border border-yellow/30 text-text-dark text-sm font-sans leading-relaxed relative space-y-3">
+          <!-- Photo Attachment -->
+          <div class="w-full h-36 rounded-xl overflow-hidden shadow-xs">
+            <img 
+              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80" 
+              alt="Souvenir Wedding" 
+              class="w-full h-full object-cover" 
+            />
+          </div>
+          <p>“see!! ak pake jd keliatan mewah gaksieee... banyak tamu yg nanyain beli dmn! Packaging rapi, on time banget pengerjaannya!”</p>
+        </div>
+        <div class="mt-3 text-right">
+          <span class="text-[10px] text-text-muted">Verified Client via Instagram</span>
+        </div>
+      </div>
+
+      <!-- Bubble 3 -->
+      <div class="testi-card bg-white p-6 sm:p-7 rounded-3xl border-2 border-blue-soft/50 shadow-sm relative group hover:shadow-md transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <img 
+            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80" 
+            alt="Devina K." 
+            class="w-12 h-12 rounded-full object-cover border-2 border-blue-soft shadow-sm" 
+          />
+          <div>
+            <h4 class="font-heading font-bold text-sm text-text-dark">Devina K.</h4>
+            <span class="text-[11px] text-text-muted">Phone Strap & Bagcharms</span>
+          </div>
+          <span class="ml-auto text-yellow-dark text-sm">★★★★★</span>
+        </div>
+        
+        <div class="bg-blue-soft/20 p-4 rounded-2xl rounded-tl-none border border-blue-soft/30 text-text-dark text-sm font-sans leading-relaxed relative space-y-3">
+          <!-- Photo Attachment -->
+          <div class="w-full h-36 rounded-xl overflow-hidden shadow-xs">
+            <img 
+              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" 
+              alt="Phone Strap" 
+              class="w-full h-full object-cover" 
+            />
+          </div>
+          <p>“Unik banget ga pasaran! Bener-bener handmade yang rapi, warnanya estetik dan lucu banget buat kado temen 💖”</p>
+        </div>
+        <div class="mt-3 text-right">
+          <span class="text-[10px] text-text-muted">Verified Review via Shopee</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.from('.testi-card', {
+      scrollTrigger: {
+        trigger: '#testimonials',
+        start: 'top 75%',
+      },
+      scale: 0.8,
+      y: 40,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: 'back.out(1.7)'
+    });
+  });
+</script>

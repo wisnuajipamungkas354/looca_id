@@ -1,0 +1,35 @@
+Buat implementation plan dengan ketentuan berikut :
+- Setup project company profile menggunakan astro js
+- gunakan tailwindcss
+- gunakan animasi yang interaktif dan lucu, seperti GSAP
+- gunakan smooth scrolling, bisa make lenis (opsional)
+- hirarki projectnya seperti ini :
+src/
+├── components/
+│   ├── Navbar.astro
+│   ├── Hero.astro
+│   ├── About.astro
+│   ├── Journey.astro
+│   ├── Services.astro
+│   ├── Products.astro
+│   ├── Workshop.astro
+│   ├── Testimonials.astro
+│   ├── Collaboration.astro
+│   └── Contact.astro
+│
+├── layouts/
+│   └── Layout.astro
+│
+├── pages/
+│   └── index.astro
+│
+├── assets/
+│   ├── images/
+│   └── decorations/
+│
+└── styles/
+    └── global.css
+
+Ini hanyalah awalan (setup) saja, tidak perlu menulis html dengan lengkap, kecuali untuk preview saja
+Gunakan bahasa high level, jangan low level / terlalu detail.
+implementation plan ini akan di eksekusi oleh junior programmer atau ai yang lebih murah.

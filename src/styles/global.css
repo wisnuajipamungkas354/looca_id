@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&family=Quicksand:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #3D3D3D;
+    background-color: #FFFDF9;
+  }
+  
+  body {
+    @apply m-0 p-0 box-border;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-handwriting {
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .font-heading {
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .text-shadow-cute {
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  .text-shadow-pop {
+    text-shadow: 2px 3px 0px rgba(237, 91, 130, 0.25);
+  }
+
+  /* Scallop & Wavy background patterns */
+  .scallop-top {
+    mask-image: radial-gradient(circle 12px at top center, transparent 95%, black 100%);
+    mask-size: 24px 100%;
+    mask-repeat: repeat-x;
+  }
+}
+
+/* Custom cute scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF9E6;
+}
+::-webkit-scrollbar-thumb {
+  background: #F8C8DC;
+  border-radius: 9999px;
+  border: 2px solid #FFF9E6;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ED5B82;
+}

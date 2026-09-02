@@ -1,0 +1,218 @@
+---
+// Workshop.astro
+---
+<section id="workshop" class="relative py-20 lg:py-28 px-4 sm:px-8 bg-gradient-to-b from-white via-[#FFF0F5] to-cream overflow-hidden">
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <div class="inline-block bg-pink-deep text-white font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md rotate-1 mb-3">
+        Creative Experience 🎨
+      </div>
+      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark">
+        Creative Workshop & Events
+      </h2>
+      <p class="text-text-muted mt-3 max-w-xl mx-auto text-sm sm:text-base">
+        Menghubungkan orang-orang melalui sesi merangkai manik-manik, eksplorasi kreasi, dan kebahagiaan berkarya bersama.
+      </p>
+    </div>
+
+    <!-- Gallery Grid 1: Scrapbook Photo Grid (like Screenshot 2) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
+      <!-- Photo 1: Workshop Table & Beads -->
+      <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
+        <img 
+          src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80" 
+          alt="Workshop Craft Table" 
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+        />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="text-white text-xs font-heading font-bold bg-pink-deep/80 px-2 py-1 rounded-full">DIY Beads</span>
+        </div>
+      </div>
+
+      <!-- Photo 2: Participants Smiling -->
+      <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
+        <img 
+          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" 
+          alt="Participants Smiling" 
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+        />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="text-white text-xs font-heading font-bold bg-yellow-dark/90 px-2 py-1 rounded-full">Fun Vibes</span>
+        </div>
+      </div>
+
+      <!-- Photo 3: Hands-on Mentoring -->
+      <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
+        <img 
+          src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80" 
+          alt="Hands-on Mentoring" 
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+        />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="text-white text-xs font-heading font-bold bg-blue-500/80 px-2 py-1 rounded-full">Mentoring</span>
+        </div>
+      </div>
+
+      <!-- Photo 4: Community Gathering -->
+      <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
+        <img 
+          src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" 
+          alt="Community Gathering" 
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+        />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="text-white text-xs font-heading font-bold bg-pink-deep/80 px-2 py-1 rounded-full">Creative Team</span>
+        </div>
+      </div>
+
+      <!-- Photo 5: Kids & DIY Activity -->
+      <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
+        <img 
+          src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80" 
+          alt="Kids Craft Workshop" 
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+        />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="text-white text-xs font-heading font-bold bg-yellow-dark/90 px-2 py-1 rounded-full">Kids DIY</span>
+        </div>
+      </div>
+
+      <!-- Photo 6: Assembling Craft Detail -->
+      <div class="workshop-thumb rounded-2xl overflow-hidden shadow-sm aspect-square relative group">
+        <img 
+          src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=600&q=80" 
+          alt="Assembling Crafts" 
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+        />
+        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="text-white text-xs font-heading font-bold bg-pink-deep/80 px-2 py-1 rounded-full">Handmade</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Scrapbook Bento Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      
+      <!-- Card 1: IPB Collaboration -->
+      <div class="workshop-photo bg-white p-4 rounded-3xl shadow-md border-2 border-pink/30 hover:rotate-0 -rotate-1 transition-all duration-300 group">
+        <div class="h-60 rounded-2xl overflow-hidden relative shadow-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" 
+            alt="IPB University Workshop" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
+            <span class="bg-pink-deep self-start text-white text-[11px] font-heading font-bold px-3 py-0.5 rounded-full mb-1">
+              Kolaborasi IPB
+            </span>
+            <h4 class="font-heading font-bold text-base">Sekolah Vokasi IPB University</h4>
+          </div>
+          
+          <!-- Washi tape sticker top -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-yellow/85 -rotate-2 rounded-sm shadow-sm"></div>
+        </div>
+        <div class="pt-4 pb-2 px-2">
+          <h4 class="font-heading font-bold text-sm text-text-dark">Workshop Mahasiswa & Komunitas</h4>
+          <p class="text-xs text-text-muted mt-1">Pelatihan kerajinan tangan dan kreasi produk kreatif untuk mahasiswa dan umum dengan modul terarah.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: International Workshop (Guimaras State Univ, Filipina) -->
+      <div class="workshop-photo bg-white p-4 rounded-3xl shadow-md border-2 border-blue-soft/50 hover:rotate-0 rotate-2 transition-all duration-300 group">
+        <div class="h-60 rounded-2xl overflow-hidden relative shadow-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" 
+            alt="Guimaras State University Workshop" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
+            <span class="bg-blue-500 self-start text-white text-[11px] font-heading font-bold px-3 py-0.5 rounded-full mb-1">
+              Sesi Internasional
+            </span>
+            <h4 class="font-heading font-bold text-base">Guimaras State University, Filipina</h4>
+          </div>
+          
+          <!-- Washi tape -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-pink/85 rotate-2 rounded-sm shadow-sm"></div>
+        </div>
+        <div class="pt-4 pb-2 px-2">
+          <h4 class="font-heading font-bold text-sm text-text-dark">Pertukaran Budaya & Kreativitas</h4>
+          <p class="text-xs text-text-muted mt-1">Sesi hands-on membuat aksesori khas nusantara bersama delegasi mahasiswa dan dosen mancanegara.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Community & Kids Craft Session -->
+      <div class="workshop-photo bg-white p-4 rounded-3xl shadow-md border-2 border-yellow/50 hover:rotate-0 -rotate-2 transition-all duration-300 group sm:col-span-2 lg:col-span-1">
+        <div class="h-60 rounded-2xl overflow-hidden relative shadow-inner">
+          <img 
+            src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80" 
+            alt="Kids and Community Workshop" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
+            <span class="bg-yellow-dark self-start text-white text-[11px] font-heading font-bold px-3 py-0.5 rounded-full mb-1">
+              DIY Kids & Family
+            </span>
+            <h4 class="font-heading font-bold text-base">Kelas Merangkai Ceria</h4>
+          </div>
+          
+          <!-- Washi tape -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-yellow/90 -rotate-3 rounded-sm shadow-sm"></div>
+        </div>
+        <div class="pt-4 pb-2 px-2">
+          <h4 class="font-heading font-bold text-sm text-text-dark">Eksplorasi Warna & Motorik</h4>
+          <p class="text-xs text-text-muted mt-1">Mengasah imajinasi anak-anak serta remaja lewat aneka manik-manik warna-warni yang aman dan menyenangkan.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Workshop CTA Banner -->
+    <div class="mt-14 bg-white rounded-3xl p-8 border-2 border-pink/30 shadow-md flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div>
+        <h3 class="font-heading text-xl font-bold text-text-dark">Tertarik Mengadakan Workshop di Event Anda?</h3>
+        <p class="text-xs sm:text-sm text-text-muted mt-1">Kami menyediakan instruktur, paket alat bahan lengkap, dan modul seru untuk sekolah, kantor, atau komunitas.</p>
+      </div>
+      <a 
+        href="#contact" 
+        class="shrink-0 bg-yellow hover:bg-yellow-dark text-text-dark font-heading font-bold text-sm px-6 py-3.5 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all"
+      >
+        Ajukan Kolaborasi Workshop ✨
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.from('.workshop-thumb', {
+      scrollTrigger: {
+        trigger: '.workshop-thumb',
+        start: 'top 80%',
+      },
+      scale: 0.6,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.5,
+      ease: 'back.out(1.5)'
+    });
+
+    gsap.from('.workshop-photo', {
+      scrollTrigger: {
+        trigger: '.workshop-photo',
+        start: 'top 75%',
+      },
+      scale: 0.85,
+      y: 40,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: 'back.out(1.4)'
+    });
+  });
+</script>
