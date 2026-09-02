@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <g transform="translate(200, 200)">
+    <!-- Thick White Outer Sticker Contour -->
+    <path d="
+      M 0, -170
+      C 60, -170 100, -130 85, -70
+      C 145, -100 200, -55 170, 10
+      C 210, 45 195, 120 135, 140
+      C 135, 200 65, 205 15, 170
+      C -40, 205 -120, 185 -120, 120
+      C -185, 100 -200, 30 -155, -28
+      C -200, -85 -130, -145 -65, -115
+      C -65, -170 -28, -170 0, -170 Z
+    " fill="#FFFFFF" stroke="#FFFFFF" stroke-width="24" stroke-linejoin="round" stroke-linecap="round"/>
+    
+    <!-- Rich Sunny Yellow Flower Petals -->
+    <path d="
+      M 0, -160
+      C 55, -160 90, -120 78, -65
+      C 135, -90 185, -50 158, 8
+      C 195, 40 180, 110 125, 128
+      C 125, 185 60, 190 12, 158
+      C -35, 190 -110, 170 -110, 110
+      C -170, 92 -185, 25 -142, -25
+      C -185, -78 -120, -132 -60, -105
+      C -60, -160 -25, -160 0, -160 Z
+    " fill="#FFD43B"/>
+
+    <!-- Soft Golden-Yellow Inner Gradient Shadow -->
+    <circle cx="0" cy="5" r="82" fill="#F59F00" opacity="0.15"/>
+
+    <!-- Center Hot Pink Circle Badge (Like Original Looca Studio) -->
+    <circle cx="0" cy="5" r="76" fill="#ED5B82" stroke="#FFFFFF" stroke-width="6"/>
+
+    <!-- Authentic Looca Studio Center Lettering -->
+    <text x="0" y="-3" font-family="'Patrick Hand', cursive" font-size="44" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">looca</text>
+    <text x="0" y="28" font-family="'Patrick Hand', cursive" font-size="20" fill="#FFE5D9" text-anchor="middle" letter-spacing="2">studio</text>
+    
+    <!-- Cute Eyes / Sparkles inside the pink badge -->
+    <circle cx="38" cy="-25" r="4" fill="#FFFFFF"/>
+    <circle cx="48" cy="-18" r="2.5" fill="#FFFFFF"/>
+    <circle cx="-35" cy="35" r="3.5" fill="#FFFFFF"/>
+    <circle cx="-44" cy="42" r="2" fill="#FFFFFF"/>
+  </g>
+</svg>
