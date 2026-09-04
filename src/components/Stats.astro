@@ -1,0 +1,74 @@
+---
+// Stats.astro
+---
+<section id="stats" class="relative py-8 sm:py-10 px-4 sm:px-8 bg-white border-b border-pink/20">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 sm:gap-6 divide-y-0 md:divide-x divide-pink/20">
+      
+      <!-- Stats 1: Countries Reached -->
+      <div class="stats-item flex flex-col items-center justify-center text-center px-2">
+        <div class="flex items-center justify-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+          <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-pink-deep font-heading leading-none">2</span>
+          <div class="flex items-center gap-1.5 cursor-pointer">
+            <img src="https://flagcdn.com/id.svg" alt="Indonesia" class="w-7 sm:w-8 h-5 sm:h-auto rounded-sm object-cover shadow-[0_2px_4px_rgba(0,0,0,0.1)] border border-black/5 hover:scale-110 transition-transform" title="Indonesia">
+            <img src="https://flagcdn.com/sg.svg" alt="Singapore" class="w-7 sm:w-8 h-5 sm:h-auto rounded-sm object-cover shadow-[0_2px_4px_rgba(0,0,0,0.1)] border border-black/5 hover:scale-110 transition-transform" title="Singapore">
+          </div>
+        </div>
+        <span class="font-heading font-semibold text-text-dark text-xs sm:text-sm uppercase tracking-wide">Countries Reached</span>
+      </div>
+
+      <!-- Stats 2: Brand Collaborators -->
+      <div class="stats-item flex flex-col items-center justify-center text-center px-2">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-pink-deep font-heading mb-1 sm:mb-2">20+</span>
+        <span class="font-heading font-semibold text-text-dark text-xs sm:text-sm uppercase tracking-wide">Brand Collaborators</span>
+      </div>
+
+      <!-- Stats 3: Creative Workshop -->
+      <div class="stats-item flex flex-col items-center justify-center text-center px-2">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-pink-deep font-heading mb-1 sm:mb-2">6+</span>
+        <span class="font-heading font-semibold text-text-dark text-xs sm:text-sm uppercase tracking-wide">Creative Workshop</span>
+      </div>
+
+      <!-- Stats 4: Products Sell -->
+      <div class="stats-item flex flex-col items-center justify-center text-center px-2">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-pink-deep font-heading mb-1 sm:mb-2">10k+</span>
+        <span class="font-heading font-semibold text-text-dark text-xs sm:text-sm uppercase tracking-wide">Products Sell</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initStats = () => {
+    gsap.fromTo(
+      '.stats-item',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.5)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#stats',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStats);
+  } else {
+    initStats();
+  }
+</script>

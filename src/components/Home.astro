@@ -1,7 +1,7 @@
 ---
-// Hero.astro
+// Home.astro
 ---
-<section id="hero" class="relative min-h-screen pt-36 sm:pt-40 lg:pt-36 pb-20 sm:pb-24 lg:pb-24 px-4 flex flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#FCE8ED] via-[#FFF3E8] to-[#FFFDF9]">
+<section id="home" class="relative min-h-screen pt-28 sm:pt-32 lg:pt-24 pb-16 sm:pb-20 lg:pb-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#FCE8ED] via-[#FFF3E8] to-[#FFFDF9]">
   <!-- Subtle craft background texture like the original store photo -->
   <div class="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply">
     <img 
@@ -20,60 +20,54 @@
   <div class="absolute inset-0 pointer-events-none overflow-hidden z-10">
     <!-- Star Doodle Left -->
     <div class="hero-sticker absolute top-28 sm:top-36 left-3 sm:left-14 w-12 sm:w-20 md:w-24 -rotate-12 animate-float opacity-90 sm:opacity-100">
-      <img src="/decorations/star.svg" alt="star" class="w-full drop-shadow-md" />
+      <img src="/decorations/star.png" alt="star" class="w-full drop-shadow-md" />
     </div>
 
     <!-- Heart Doodle Right (Clearly visible on mobile & desktop) -->
     <div class="hero-sticker absolute top-28 sm:top-36 right-3 sm:right-16 w-12 sm:w-20 md:w-24 rotate-12 animate-float opacity-90 sm:opacity-100" style="animation-delay: 1s;">
-      <img src="/decorations/heart.svg" alt="heart" class="w-full drop-shadow-md" />
+      <img src="/decorations/heart.png" alt="heart" class="w-full drop-shadow-md" />
     </div>
 
     <!-- Daisy Flower Bottom Left -->
-    <div class="hero-sticker absolute bottom-20 sm:bottom-28 left-4 sm:left-24 w-11 sm:w-18 md:w-22 animate-spin-slow opacity-85 sm:opacity-100">
+    <div class="hero-sticker absolute bottom-20 sm:bottom-28 left-4 sm:left-24 w-11 sm:w-18 md:w-24 animate-spin-slow opacity-85 sm:opacity-100">
       <img src="/decorations/flower-daisy.svg" alt="daisy" class="w-full drop-shadow" />
     </div>
 
     <!-- Cherry Doodle Bottom Right -->
-    <div class="hero-sticker absolute bottom-20 sm:bottom-28 right-4 sm:right-28 w-11 sm:w-18 md:w-22 rotate-6 animate-float opacity-85 sm:opacity-100" style="animation-delay: 1.5s;">
+    <div class="hero-sticker absolute bottom-20 sm:bottom-28 right-4 sm:right-28 w-11 sm:w-18 md:w-24 rotate-6 animate-float opacity-85 sm:opacity-100" style="animation-delay: 1.5s;">
       <img src="/decorations/cherry.svg" alt="cherry" class="w-full drop-shadow" />
     </div>
   </div>
 
-  <!-- Main Hero Content (Compact & Focused Width) -->
-  <div class="relative z-20 max-w-2xl mx-auto text-center flex flex-col items-center">
-    <!-- Welcome Speech Bubble (Generous 50px+ clearance below navbar) -->
-    <div class="hero-bubble inline-flex items-center gap-2 bg-[#89CFF0] text-white font-handwriting text-base sm:text-2xl px-6 sm:px-7 py-2 sm:py-2.5 rounded-full shadow-md border-2 border-white -rotate-2 mb-3 sm:mb-4">
+  <!-- Main Hero Content (Centered 1-Column Layout - Compact & Fits in 1 Viewport) -->
+  <div class="relative z-20 max-w-2xl lg:max-w-3xl mx-auto text-center flex flex-col items-center my-auto">
+    <!-- Welcome Speech Bubble -->
+    <div class="hero-bubble inline-flex items-center gap-2 bg-[#89CFF0] text-white font-handwriting text-sm sm:text-base lg:text-lg px-5 sm:px-6 py-1.5 sm:py-2 rounded-full shadow-md border-2 border-white -rotate-2 mb-2 sm:mb-3">
       <span>Hi! Welcome to our home!</span>
       <span class="text-base sm:text-lg">✨</span>
     </div>
 
     <!-- Central Looca Studio Flower Emblem -->
-    <div class="hero-flower relative my-2 w-[70vw] max-w-[270px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[440px] transition-transform duration-500 hover:scale-105 cursor-pointer flex items-center justify-center group">
+    <div class="hero-flower relative my-1.5 sm:my-2.5 w-[75vw] max-w-[280px] sm:max-w-[330px] md:max-w-[370px] lg:max-w-[400px] xl:max-w-[420px] transition-transform duration-500 hover:scale-105 cursor-pointer flex items-center justify-center group">
       <img 
-        src="/decorations/flower-looca.svg" 
+        src="/decorations/hero-logo.png" 
         alt="Looca Studio Flower" 
         class="w-full drop-shadow-xl filter" 
-      />
-      <!-- Authentic Pink Looca Studio Logo in the center -->
-      <img 
-        src="/logo-pink.png" 
-        alt="Looca Studio Logo" 
-        class="absolute top-[51.25%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[38.5%] h-[38.5%] rounded-full object-contain pointer-events-none drop-shadow-md"
       />
     </div>
 
     <!-- Tagline & Description -->
-    <div class="hero-text mt-3 sm:mt-4 max-w-lg">
-      <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text-dark tracking-tight leading-tight">
-        Handmade with Love, <br class="hidden sm:inline"/> Crafted for Your Story
+    <div class="hero-text mt-2 sm:mt-3 max-w-lg">
+      <h1 class="font-heading text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-extrabold text-text-dark tracking-tight leading-tight">
+        Take a looca, Take your loove
       </h1>
-      <p class="font-sans text-xs sm:text-sm lg:text-base text-text-muted mt-2 sm:mt-2.5 leading-relaxed">
-        Accessories unik, merchandise kreatif, dan pengalaman workshop menyenangkan yang membawa keceriaan ke setiap momenmu.
+      <p class="font-sans text-xs sm:text-sm lg:text-base text-text-muted mt-1.5 sm:mt-2 leading-relaxed">
+        Affordable • More durable accessories <br /> Adjustable budget and quantity • Free service accessories.
       </p>
     </div>
 
     <!-- CTA Buttons -->
-    <div class="hero-cta mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+    <div class="hero-cta mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
       <a 
         href="#products" 
         class="bg-pink-deep hover:bg-pink-deep/90 text-white font-heading font-bold text-sm sm:text-base px-6 sm:px-7 py-2.5 sm:py-3 rounded-full shadow-md shadow-pink-deep/25 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
@@ -85,7 +79,7 @@
         href="#about" 
         class="bg-white/90 hover:bg-white text-text-dark font-heading font-semibold text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-sm border border-pink/40 hover:scale-105 active:scale-95 transition-all"
       >
-        Tentang Looca
+        About Looca
       </a>
     </div>
   </div>

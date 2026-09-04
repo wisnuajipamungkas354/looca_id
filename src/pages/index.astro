@@ -1,28 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
+import Home from '../components/Home.astro';
 import About from '../components/About.astro';
+import Stats from '../components/Stats.astro';
 import Journey from '../components/Journey.astro';
 import Services from '../components/Services.astro';
 import Products from '../components/Products.astro';
+import AlurPemesanan from '../components/AlurPemesanan.astro';
 import Workshop from '../components/Workshop.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Collaboration from '../components/Collaboration.astro';
 import Contact from '../components/Contact.astro';
 ---
 
-<Layout title="Looca ID | Company Profile">
+<Layout title="Handmade With Love | Looca ID">
   <Navbar />
   <main>
-    <Hero />
+    <Home />
     <About />
+    <Stats />
+    <Collaboration />
     <Journey />
     <Services />
     <Products />
+    <AlurPemesanan />
     <Workshop />
     <Testimonials />
-    <Collaboration />
     <Contact />
   </main>
 </Layout>
