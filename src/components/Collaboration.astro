@@ -1,34 +1,32 @@
 ---
 // Collaboration.astro
-const majorPartners = [
-  { name: 'IPB University', logo: '/images/partners/partner-ipb.png' },
-  { name: 'KlikBi & SparksEnglish', logo: '/images/partners/partner-klikbi.png' },
-  { name: 'Pink Rabbit Lens', logo: '/images/partners/partner-pinkrabbit.png' },
-  { name: 'Chupa Chups', logo: '/images/partners/partner-chupachups.png' },
-  { name: 'P Creative', logo: '/images/partners/partner-p.png' },
-  { name: 'Emina Cosmetics', logo: '/images/partners/partner-emina.png' },
-  { name: 'OMG Oh My Glam', logo: '/images/partners/partner-omg.png' },
-  { name: 'Hala Gold', logo: '/images/partners/partner-halagold.png' },
+const row1Partners = [
+  { id: 1, logo: '/images/partners/1.JPG' },
+  { id: 2, logo: '/images/partners/2.PNG' },
+  { id: 3, logo: '/images/partners/3.PNG' },
+  { id: 4, logo: '/images/partners/4.JPG' },
+  { id: 5, logo: '/images/partners/5.PNG' },
+  { id: 6, logo: '/images/partners/6.PNG' },
+  { id: 7, logo: '/images/partners/7.AVIF' },
+  { id: 8, logo: '/images/partners/8.PNG' },
+  { id: 9, logo: '/images/partners/9.png' },
 ];
 
-const communityPartners = [
-  { name: 'Kalato', logo: '/images/partners/partner-kalato.png' },
-  { name: 'Sisi Teduh', logo: '/images/partners/partner-sisiteduh.png' },
-  { name: 'Glosplum', logo: '/images/partners/partner-glosplum.png' },
-  { name: 'The Bouquet', logo: '/images/partners/partner-thebouquet.png' },
-  { name: 'atristuff', logo: '/images/partners/partner-atristuff.png' },
-  { name: 'Juta Tawa', logo: '/images/partners/partner-jutatawa.png' },
-  { name: 'Karen Wow', logo: '/images/partners/partner-karenwow.png' },
-  { name: 'Shali Coffee', logo: '/images/partners/partner-shali.png' },
-  { name: 'AIEC Educare', logo: '/images/partners/partner-aiec.png' },
-  { name: 'Pink Emoji', logo: '/images/partners/partner-pinkemoji.png' },
-  { name: 'Let\'s Go Girls', logo: '/images/partners/partner-letsgogirls.png' },
+const row2Partners = [
+  { id: 10, logo: '/images/partners/10.png' },
+  { id: 11, logo: '/images/partners/11.png' },
+  { id: 12, logo: '/images/partners/12.png' },
+  { id: 13, logo: '/images/partners/13.png' },
+  { id: 14, logo: '/images/partners/14.png' },
+  { id: 15, logo: '/images/partners/15.png' },
+  { id: 16, logo: '/images/partners/16.png' },
+  { id: 17, logo: '/images/partners/17.png' },
+  { id: 18, logo: '/images/partners/18.png' },
 ];
 ---
 
 <section id="collaboration" class="relative py-16 sm:py-24 px-4 sm:px-8 bg-[#FFFDF9] border-y border-pink/30 overflow-hidden">
-  <div class="max-w-6xl mx-auto text-center">
-    
+  <div class="max-w-6xl mx-auto text-center mb-10 sm:mb-12">
     <!-- Title & Slogan -->
     <div class="inline-block bg-yellow-light text-yellow-dark font-handwriting text-xl sm:text-2xl px-6 py-1 rounded-full shadow-sm mb-3">
       Together We Grow 🤝
@@ -36,23 +34,35 @@ const communityPartners = [
     <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-text-dark mb-4">
       Collaboration & Partnership
     </h2>
-    <p class="text-xs sm:text-sm text-text-muted max-w-lg mx-auto mb-12">
-      Telah dipercaya oleh berbagai institusi, brand kecantikan ternama, event organizer, hingga komunitas kreatif.
+    <p class="text-xs sm:text-sm text-text-muted max-w-lg mx-auto">
+      Trusted by institutions, well-known beauty brands, event organizers, and creative communities.
     </p>
+  </div>
 
-    <!-- Row 1: Major Institutional & Brand Partners -->
-    <div class="mb-8">
-      <span class="text-xs font-heading font-bold uppercase tracking-wider text-text-muted/80 block mb-5">
-        Brand & Institutional Partners
-      </span>
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 items-center justify-center">
-        {majorPartners.map((partner) => (
-          <div class="collab-item group bg-white p-3 rounded-2xl border border-pink/25 shadow-xs hover:shadow-md hover:border-pink transition-all flex items-center justify-center aspect-[4/3] relative">
+  <!-- Marquee Slider Container with Fade Masks -->
+  <div class="relative w-full max-w-7xl mx-auto space-y-4 sm:space-y-6 overflow-hidden marquee-mask">
+    
+    <!-- Row 1: Left to Right (LTR) -->
+    <div class="marquee-wrapper overflow-hidden py-1">
+      <div class="marquee-track marquee-ltr flex items-center gap-4 sm:gap-6 w-max">
+        <!-- Original List -->
+        {row1Partners.map((partner) => (
+          <div class="collab-card group bg-white px-5 py-4 rounded-2xl border border-pink/20 shadow-xs hover:shadow-md hover:border-pink transition-all duration-300 flex items-center justify-center w-36 h-24 sm:w-48 sm:h-28 flex-shrink-0">
             <img 
               src={partner.logo} 
-              alt={partner.name}
-              title={partner.name}
-              class="max-h-12 w-auto max-w-full object-contain group-hover:scale-110 transition-transform duration-300" 
+              alt={`Partner logo ${partner.id}`}
+              class="max-h-12 sm:max-h-16 w-auto max-w-full object-contain group-hover:scale-105 transition-transform duration-300" 
+              loading="lazy"
+            />
+          </div>
+        ))}
+        <!-- Duplicated List for Infinite Loop -->
+        {row1Partners.map((partner) => (
+          <div class="collab-card group bg-white px-5 py-4 rounded-2xl border border-pink/20 shadow-xs hover:shadow-md hover:border-pink transition-all duration-300 flex items-center justify-center w-36 h-24 sm:w-48 sm:h-28 flex-shrink-0" aria-hidden="true">
+            <img 
+              src={partner.logo} 
+              alt=""
+              class="max-h-12 sm:max-h-16 w-auto max-w-full object-contain group-hover:scale-105 transition-transform duration-300" 
               loading="lazy"
             />
           </div>
@@ -60,19 +70,27 @@ const communityPartners = [
       </div>
     </div>
 
-    <!-- Row 2: Community & Creative Partners -->
-    <div>
-      <span class="text-xs font-heading font-bold uppercase tracking-wider text-text-muted/80 block mb-5">
-        Community & Creative Collaborators
-      </span>
-      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-3 sm:gap-3.5 items-center justify-center">
-        {communityPartners.map((partner) => (
-          <div class="collab-item group bg-white p-2.5 rounded-2xl border border-yellow/30 shadow-xs hover:shadow-md hover:border-yellow transition-all flex items-center justify-center aspect-square relative">
+    <!-- Row 2: Right to Left (RTL) -->
+    <div class="marquee-wrapper overflow-hidden py-1">
+      <div class="marquee-track marquee-rtl flex items-center gap-4 sm:gap-6 w-max">
+        <!-- Original List -->
+        {row2Partners.map((partner) => (
+          <div class="collab-card group bg-white px-5 py-4 rounded-2xl border border-yellow/30 shadow-xs hover:shadow-md hover:border-yellow transition-all duration-300 flex items-center justify-center w-36 h-24 sm:w-48 sm:h-28 flex-shrink-0">
             <img 
               src={partner.logo} 
-              alt={partner.name}
-              title={partner.name}
-              class="max-h-11 w-auto max-w-full object-contain group-hover:scale-115 transition-transform duration-300" 
+              alt={`Partner logo ${partner.id}`}
+              class="max-h-12 sm:max-h-16 w-auto max-w-full object-contain group-hover:scale-105 transition-transform duration-300" 
+              loading="lazy"
+            />
+          </div>
+        ))}
+        <!-- Duplicated List for Infinite Loop -->
+        {row2Partners.map((partner) => (
+          <div class="collab-card group bg-white px-5 py-4 rounded-2xl border border-yellow/30 shadow-xs hover:shadow-md hover:border-yellow transition-all duration-300 flex items-center justify-center w-36 h-24 sm:w-48 sm:h-28 flex-shrink-0" aria-hidden="true">
+            <img 
+              src={partner.logo} 
+              alt=""
+              class="max-h-12 sm:max-h-16 w-auto max-w-full object-contain group-hover:scale-105 transition-transform duration-300" 
               loading="lazy"
             />
           </div>
@@ -83,45 +101,42 @@ const communityPartners = [
   </div>
 </section>
 
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const initCollab = () => {
-    gsap.fromTo(
-      '.collab-item',
-      { opacity: 0, scale: 0.85, y: 15 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        stagger: 0.03,
-        duration: 0.5,
-        ease: 'back.out(1.5)',
-        clearProps: 'all',
-        scrollTrigger: {
-          trigger: '#collaboration',
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      }
-    );
-
-    // Failsafe
-    setTimeout(() => {
-      document.querySelectorAll('.collab-item').forEach((el) => {
-        (el as HTMLElement).style.opacity = '1';
-        (el as HTMLElement).style.transform = 'none';
-      });
-    }, 1000);
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollab);
-  } else {
-    initCollab();
+<style>
+  /* Side gradient fade effect */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
-</script>
+
+  /* Smooth Continuous Infinite Scroll */
+  .marquee-ltr {
+    animation: scroll-ltr 28s linear infinite;
+  }
+
+  .marquee-rtl {
+    animation: scroll-rtl 28s linear infinite;
+  }
+
+  /* Pause when user hovers */
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-ltr {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes scroll-rtl {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
