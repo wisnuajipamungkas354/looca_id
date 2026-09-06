@@ -1,7 +1,7 @@
 ---
 // Navbar.astro
 ---
-<header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 px-4 sm:px-8">
+<header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out py-3 px-4 sm:px-8">
   <div class="max-w-7xl mx-auto bg-white/85 backdrop-blur-md border border-pink/40 shadow-sm rounded-full px-6 py-3 flex items-center justify-between">
     <!-- Brand Logo -->
     <a href="#" class="flex items-center gap-2.5 group">
@@ -68,6 +68,7 @@
   const toggleBtn = document.getElementById('menu-toggle');
   const dropdown = document.getElementById('mobile-dropdown');
   const navLinks = dropdown?.querySelectorAll('a');
+  const navbar = document.getElementById('main-navbar');
 
   toggleBtn?.addEventListener('click', () => {
     dropdown?.classList.toggle('hidden');
@@ -78,4 +79,31 @@
       dropdown?.classList.add('hidden');
     });
   });
+
+  // Hide on scroll down, show on scroll up
+  let lastScrollY = window.scrollY;
+  let scrollThreshold = 10;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const isMobileMenuOpen = dropdown && !dropdown.classList.contains('hidden');
+
+    if (Math.abs(currentScrollY - lastScrollY) < scrollThreshold) {
+      return;
+    }
+
+    if (currentScrollY > lastScrollY && currentScrollY > 80 && !isMobileMenuOpen) {
+      // Scroll Down -> Hide
+      navbar?.classList.add('-translate-y-full');
+    } else if (currentScrollY < lastScrollY) {
+      // Scroll Up -> Show
+      navbar?.classList.remove('-translate-y-full');
+    }
+
+    if (currentScrollY <= 20) {
+      navbar?.classList.remove('-translate-y-full');
+    }
+
+    lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+  }, { passive: true });
 </script>
