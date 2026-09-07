@@ -1,0 +1,179 @@
+---
+// FindUs.astro
+const stores = [
+  {
+    id: 'ipb',
+    name: 'Klinik Bisnis, SV IPB',
+    tag: 'Bogor',
+    instagram: '@klikbisvipb',
+    address: 'Jl. Kumbang No.14, RT.02/RW.06, Babakan, Kec. Bogor Tengah, Kota Bogor, Jawa Barat 16128',
+    mapsUrl: 'https://maps.google.com/?q=Klinik+Bisnis+Sekolah+Vokasi+IPB+Jl+Kumbang+No+14+Bogor',
+    image: '/images/findus/klinik-bisnis-ipb.jpeg',
+    products: ['Bagcharms', 'Bead Bracelets', 'Custom Accessories'],
+    accentColor: 'border-pink/40 hover:border-pink',
+    badgeColor: 'bg-pink-light text-pink-deep border border-pink/30',
+  },
+  {
+    id: 'oneten',
+    name: 'One Ten Cafe, Karawang',
+    tag: 'Karawang',
+    instagram: '@oneten.cafe',
+    address: 'Ruko Baraya 1, Jl. Surotokunto No.10, Warungbambu, Kec. Karawang Timur, Karawang, Jawa Barat 41371',
+    mapsUrl: 'https://maps.google.com/?q=One+Ten+Cafe+Ruko+Baraya+1+Jl+Surotokunto+No+10+Karawang',
+    image: '/images/findus/one-ten-cafe.jpeg',
+    products: ['DIY Craft Kit', 'Crafty Party Items', 'Stickers & Charms'],
+    accentColor: 'border-yellow/50 hover:border-yellow',
+    badgeColor: 'bg-yellow-light text-yellow-dark border border-yellow/40',
+  },
+  {
+    id: 'dekranasda',
+    name: 'Outlet Dekranasda Karawang',
+    tag: 'Karawang',
+    instagram: 'Dekranasda Karawang',
+    address: 'Jl. Interchange Karawang, Sukamakmur, Telukjambe Timur, Karawang, Jawa Barat 41361',
+    mapsUrl: 'https://maps.google.com/?q=Outlet+Dekranasda+Kabupaten+Karawang+Jl+Interchange+Karawang',
+    image: '/images/findus/outlet-deskranda-karawang.jpeg',
+    products: ['Scarf Hat', 'Handmade Bracelets', 'Unique Accessories'],
+    accentColor: 'border-blue-soft/50 hover:border-blue-400',
+    badgeColor: 'bg-blue-soft/20 text-blue-600 border border-blue-soft/40',
+  },
+];
+---
+
+<section id="find-us" class="relative py-16 sm:py-24 px-4 sm:px-8 bg-[#FFFDF9] border-t border-pink/20 overflow-hidden">
+  <!-- Subtle decorative flower -->
+  <div class="absolute -right-8 top-12 w-28 sm:w-36 opacity-20 pointer-events-none animate-spin-slow">
+    <img src="/decorations/flower-daisy.svg" alt="flower" class="w-full" />
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 sm:mb-16">
+      <div class="inline-block bg-pink-deep text-white font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
+        Offline Spot 📍
+      </div>
+      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark tracking-tight">
+        Where to Find Us
+      </h2>
+      <p class="text-text-muted mt-3 max-w-lg mx-auto text-sm sm:text-base">
+        Discover and shop your favorite Looca pieces in person at our official offline partner stores.
+      </p>
+    </div>
+
+    <!-- 3 Store Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      {stores.map((store) => (
+        <div class={`findus-card bg-white rounded-3xl p-5 sm:p-6 border-2 ${store.accentColor} shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}>
+          
+          <!-- Top Area: Image Showcase & Tag -->
+          <div>
+            <!-- Location Image Frame -->
+            <div class="relative w-full aspect-square rounded-2xl overflow-hidden shadow-xs mb-5 bg-cream/40">
+              <img 
+                src={store.image} 
+                alt={store.name} 
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy"
+              />
+              <div class="absolute top-3 right-3">
+                <span class="bg-white/90 backdrop-blur-md font-heading font-bold text-xs text-text-dark px-3 py-1 rounded-full shadow-sm border border-pink/20">
+                  📍 {store.tag}
+                </span>
+              </div>
+            </div>
+
+            <!-- Store Info -->
+            <div class="mb-4">
+              <span class={`inline-block font-heading font-bold text-[11px] px-3 py-0.5 rounded-full mb-2 ${store.badgeColor}`}>
+                {store.instagram}
+              </span>
+              <h3 class="font-heading text-xl font-bold text-text-dark leading-snug group-hover:text-pink-deep transition-colors">
+                {store.name}
+              </h3>
+            </div>
+
+            <!-- Address -->
+            <div class="flex items-start gap-2 text-xs text-text-muted leading-relaxed mb-5">
+              <span class="text-base shrink-0 mt-0.5">🏢</span>
+              <p>{store.address}</p>
+            </div>
+
+            <!-- Available Products in this Store -->
+            <div class="mb-6 pt-4 border-t border-dashed border-gray-200">
+              <span class="font-heading font-bold text-xs text-text-dark block mb-2.5">
+                🛍️ Available Products:
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                {store.products.map((product) => (
+                  <span class="bg-cream text-text-dark text-[11px] font-heading font-medium px-2.5 py-1 rounded-lg border border-yellow/30">
+                    {product}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action: Google Maps Button -->
+          <div>
+            <a 
+              href={store.mapsUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full bg-yellow hover:bg-yellow-dark text-text-dark font-heading font-bold text-xs sm:text-sm py-3 px-4 rounded-2xl shadow-xs hover:shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-text-dark" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M11.54 22.351A24.25 24.25 0 014.07 13.97a9.75 9.75 0 0115.86 0 24.255 24.255 0 01-7.47 8.381.75.75 0 01-.92 0zM12 12.75a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+              </svg>
+              <span>Open in Google Maps</span>
+              <span class="text-xs">↗</span>
+            </a>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initFindUs = () => {
+    gsap.fromTo(
+      '.findus-card',
+      { opacity: 0, y: 35 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.7,
+        ease: 'power3.out',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#find-us',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+
+    // Failsafe: Ensures cards are always 100% visible
+    setTimeout(() => {
+      document.querySelectorAll('.findus-card').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    }, 1000);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFindUs);
+  } else {
+    initFindUs();
+  }
+</script>

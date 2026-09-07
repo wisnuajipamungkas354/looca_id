@@ -1,26 +1,9 @@
 ---
-// Contact.astro (Thank you & Keep in touch)
+// Contact.astro (Keep in touch & Footer)
 ---
 <section id="contact" class="relative overflow-hidden">
-  
-  <!-- Part 1: Thank You & Slogan Banner (From Screenshot 3) -->
-  <div class="py-16 sm:py-24 px-4 sm:px-8 bg-gradient-to-b from-yellow-light/60 via-peach/40 to-blue-soft/30 text-center relative">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="thank-you-text font-handwriting text-4xl sm:text-6xl md:text-7xl font-bold text-yellow-dark mb-4 drop-shadow-sm">
-        Thank you 💖
-      </h2>
-      <p class="font-sans text-sm sm:text-xl text-text-dark max-w-xl mx-auto leading-relaxed mb-6">
-        Looca believes that every creation holds its own story, character, and meaning.
-      </p>
-      <div class="inline-block bg-white/90 backdrop-blur-sm border-2 border-yellow/60 px-5 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-md">
-        <span class="font-heading font-extrabold text-base sm:text-2xl text-text-dark">
-          Take a Looca, Take Your Loove.
-        </span>
-      </div>
-    </div>
-  </div>
 
-  <!-- Part 2: Keep In Touch Channels (From Screenshot 3) -->
+  <!-- Keep In Touch Channels -->
   <div class="py-16 sm:py-20 px-4 sm:px-8 bg-[#A8D8EA]/25 relative">
     <!-- Big cute rotating daisy in the bottom right corner (like original) -->
     <div class="absolute -right-4 sm:-right-6 -bottom-4 sm:-bottom-6 w-24 sm:w-40 md:w-48 pointer-events-none opacity-50 sm:opacity-80 animate-spin-slow">
@@ -142,25 +125,6 @@
   gsap.registerPlugin(ScrollTrigger);
 
   const initContact = () => {
-    // Thank you text bounce
-    gsap.fromTo(
-      '.thank-you-text',
-      { opacity: 0, scale: 0.7 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: 'elastic.out(1, 0.6)',
-        clearProps: 'all',
-        scrollTrigger: {
-          trigger: '#contact',
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      }
-    );
-
     // Contact channels reveal (Shopee, IG, WA, TikTok)
     gsap.fromTo(
       '.contact-channel',
@@ -183,7 +147,7 @@
 
     // Failsafe: Guarantees Shopee, IG, WA, and TikTok are ALWAYS 100% visible
     setTimeout(() => {
-      document.querySelectorAll('.contact-channel, .thank-you-text').forEach((el) => {
+      document.querySelectorAll('.contact-channel').forEach((el) => {
         (el as HTMLElement).style.opacity = '1';
         (el as HTMLElement).style.transform = 'none';
       });
