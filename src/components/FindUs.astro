@@ -49,8 +49,9 @@ const stores = [
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-12 sm:mb-16">
-      <div class="inline-block bg-pink-deep text-white font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
-        Offline Spot 📍
+      <div class="inline-flex items-center gap-1.5 bg-pink-deep text-white font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
+        <span>Offline Spot</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
       </div>
       <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark tracking-tight">
         Where to Find Us
@@ -76,8 +77,9 @@ const stores = [
                 loading="lazy"
               />
               <div class="absolute top-3 right-3">
-                <span class="bg-white/90 backdrop-blur-md font-heading font-bold text-xs text-text-dark px-3 py-1 rounded-full shadow-sm border border-pink/20">
-                  📍 {store.tag}
+                <span class="inline-flex items-center gap-1 bg-white/90 backdrop-blur-md font-heading font-bold text-xs text-text-dark px-3 py-1 rounded-full shadow-sm border border-pink/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-pink-deep fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>{store.tag}</span>
                 </span>
               </div>
             </div>
@@ -94,14 +96,15 @@ const stores = [
 
             <!-- Address -->
             <div class="flex items-start gap-2 text-xs text-text-muted leading-relaxed mb-5">
-              <span class="text-base shrink-0 mt-0.5">🏢</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-pink-deep shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
               <p>{store.address}</p>
             </div>
 
             <!-- Available Products in this Store -->
             <div class="mb-6 pt-4 border-t border-dashed border-gray-200">
-              <span class="font-heading font-bold text-xs text-text-dark block mb-2.5">
-                🛍️ Available Products:
+              <span class="inline-flex items-center gap-1.5 font-heading font-bold text-xs text-text-dark mb-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-pink-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                <span>Available Products:</span>
               </span>
               <div class="flex flex-wrap gap-1.5">
                 {store.products.map((product) => (

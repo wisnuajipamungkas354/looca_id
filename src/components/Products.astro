@@ -1,278 +1,342 @@
 ---
 // Products.astro
+const categories = [
+  { 
+    id: 'all', 
+    label: 'All Products', 
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>`
+  },
+  { 
+    id: 'fashion', 
+    label: 'Fashion', 
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>`
+  },
+  { 
+    id: 'accessories', 
+    label: 'Accessories & Bagcharms', 
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M11 3L8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>`
+  },
+  { 
+    id: 'souvenir', 
+    label: 'Souvenir & Custom Merchandise', 
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>`
+  },
+];
+
+const products = [
+  // Fashion
+  {
+    id: 1,
+    category: 'fashion',
+    categoryLabel: 'Fashion',
+    title: 'Custom Beaded Kebaya & Apparel',
+    description: 'Busana kebaya dengan detail payet & manik-manik handmade eksklusif untuk wisuda dan pesta.',
+    image: '/images/products/fashion1.jpeg',
+    badge: 'Custom Made',
+    badgeColor: 'bg-pink-deep text-white',
+    rating: '5.0',
+    sales: 'Custom Order',
+    actionText: 'Request Custom',
+    actionLink: '#contact',
+  },
+  {
+    id: 2,
+    category: 'fashion',
+    categoryLabel: 'Fashion',
+    title: 'Scarf Hat Polka Edition',
+    description: 'Topi scarf hijab-friendly dengan motif polkadot yang manis dan nyaman dipakai sehari-hari.',
+    image: '/images/products/fashion2.jpeg',
+    badge: 'Trending',
+    badgeColor: 'bg-yellow text-text-dark',
+    rating: '4.9',
+    sales: 'Best Seller',
+    actionText: 'Shop Now',
+    actionLink: '#contact',
+  },
+  {
+    id: 3,
+    category: 'fashion',
+    categoryLabel: 'Fashion',
+    title: 'Scarf Hat Multi-Size Edition',
+    description: 'Pilihan ukuran small & medium dengan desain stylish untuk perlindungan ekstra dan gaya maksimal.',
+    image: '/images/products/fashion3.jpeg',
+    badge: 'New Arrival',
+    badgeColor: 'bg-[#5DADE2] text-white',
+    rating: '5.0',
+    sales: 'Ready & Custom',
+    actionText: 'Shop Now',
+    actionLink: '#contact',
+  },
+
+  // Accessories & Bagcharms
+  {
+    id: 4,
+    category: 'accessories',
+    categoryLabel: 'Accessories',
+    title: 'Custom Charm Bracelet',
+    description: 'Gelang rantai stainless steel anti karat dengan kombinasi liontin charm custom sesuai kepribadianmu.',
+    image: '/images/product-charm-bracelet.jpg',
+    badge: 'Top Rated',
+    badgeColor: 'bg-pink-deep text-white',
+    rating: '5.0',
+    sales: '1.2k+ Sold',
+    actionText: 'Custom Order',
+    actionLink: '#contact',
+  },
+  {
+    id: 5,
+    category: 'accessories',
+    categoryLabel: 'Accessories',
+    title: 'Beaded Rings Floral Collection',
+    description: 'Cincin manik-manik elastis bertema floral pastel yang cantik dan cocok untuk daily outfit.',
+    image: '/images/product-beaded-rings.jpg',
+    badge: 'Handmade',
+    badgeColor: 'bg-yellow text-text-dark',
+    rating: '4.9',
+    sales: '850+ Sold',
+    actionText: 'Order via Shopee',
+    actionLink: 'https://shopee.co.id/looca_id',
+  },
+  {
+    id: 6,
+    category: 'accessories',
+    categoryLabel: 'Accessories',
+    title: 'Aesthetic Phone Strap',
+    description: 'Gantungan HP manik-manik estetik dengan tali kuat dan pilihan beads custom nama/karakter.',
+    image: '/images/product-phone-strap.jpg',
+    badge: 'Popular',
+    badgeColor: 'bg-[#5DADE2] text-white',
+    rating: '5.0',
+    sales: '2.5k+ Sold',
+    actionText: 'Order via Shopee',
+    actionLink: 'https://shopee.co.id/looca_id',
+  },
+  {
+    id: 7,
+    category: 'accessories',
+    categoryLabel: 'Accessories',
+    title: 'Pastel Floral Hair Claw',
+    description: 'Jepit rambut jedai premium berhiaskan ornamen bunga dan manik-manik pastel anti slip.',
+    image: '/images/product-hair-claw.jpg',
+    badge: 'Cute Pick',
+    badgeColor: 'bg-pink-deep text-white',
+    rating: '4.9',
+    sales: '600+ Sold',
+    actionText: 'Order via Shopee',
+    actionLink: 'https://shopee.co.id/looca_id',
+  },
+
+  // Souvenir & Custom Merchandise
+  {
+    id: 8,
+    category: 'souvenir',
+    categoryLabel: 'Merchandise',
+    title: 'Corporate Merch (Chupa Chups Edition)',
+    description: 'Custom bagcharm dan lanyard eksklusif untuk kolaborasi brand dan corporate giveaway.',
+    image: '/images/products/souvenir-institution-brand.jpeg',
+    badge: 'Brand Collab',
+    badgeColor: 'bg-yellow text-text-dark',
+    rating: '5.0',
+    sales: 'Bulk Order',
+    actionText: 'Inquire Bulk',
+    actionLink: '#contact',
+  },
+  {
+    id: 9,
+    category: 'souvenir',
+    categoryLabel: 'Souvenir',
+    title: 'Exclusive Wedding Souvenir',
+    description: 'Aksesori gelang/gantungan estetik dengan packaging box premium dan custom greeting tag pengantin.',
+    image: '/images/souvenir-wedding.jpg',
+    badge: 'Min. 100 pcs',
+    badgeColor: 'bg-pink-deep text-white',
+    rating: '5.0',
+    sales: 'Wedding Edition',
+    actionText: 'Inquire Bulk',
+    actionLink: '#contact',
+  },
+  {
+    id: 10,
+    category: 'souvenir',
+    categoryLabel: 'Souvenir',
+    title: 'Institution & Event Souvenir',
+    description: 'Merchandise resmi untuk seminar kampus, event promosi, dies natalis, dan gathering kantor.',
+    image: '/images/souvenir-corporate.jpg',
+    badge: 'Min. 100 pcs',
+    badgeColor: 'bg-[#5DADE2] text-white',
+    rating: '5.0',
+    sales: 'Corporate Order',
+    actionText: 'Inquire Bulk',
+    actionLink: '#contact',
+  },
+  {
+    id: 11,
+    category: 'souvenir',
+    categoryLabel: 'Merchandise',
+    title: 'Concert & Fan Merch Edition',
+    description: 'Freebies konser, strap lightstick, dan merchandise fan gathering berskala besar.',
+    image: '/images/souvenir-concert.jpg',
+    badge: 'Min. 50 pcs',
+    badgeColor: 'bg-pink-deep text-white',
+    rating: '5.0',
+    sales: 'Fan Edition',
+    actionText: 'Inquire Bulk',
+    actionLink: '#contact',
+  },
+];
 ---
+
 <section id="products" class="relative py-20 lg:py-28 px-4 sm:px-8 bg-cream overflow-hidden">
   <div class="max-w-6xl mx-auto">
     
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark">
+    <div class="text-center mb-10 sm:mb-12">
+      <div class="inline-flex items-center gap-2 bg-yellow text-text-dark font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span>Catalog & Gallery</span>
+      </div>
+      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark tracking-tight">
         Our Products & Gallery
       </h2>
       <p class="text-text-muted mt-3 max-w-lg mx-auto text-sm sm:text-base">
-        From personal fashion and accessory items to white-label products and bulk souvenir orders.
+        Explore our curated handmade creations, from daily accessories to custom fashion and bulk souvenir orders.
       </p>
     </div>
 
-    <!-- Category 1: Fashion -->
-    <div class="mb-16">
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
-        <h3 class="font-heading text-xl sm:text-2xl font-bold text-text-dark flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-yellow-dark"></span>
-          Fashion
-        </h3>
-        <span class="text-xs font-heading font-semibold text-yellow-dark bg-yellow-light px-3 py-1 rounded-full">
-          Bulk Order Available
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Wedding Souvenir -->
-        <div class="souvenir-card bg-white p-4 sm:p-5 rounded-3xl border border-yellow/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
-          <div class="absolute top-6 right-6 sm:top-7 sm:right-7 z-10 bg-yellow text-text-dark font-heading font-extrabold text-xs px-3 sm:px-3.5 py-1 rounded-full shadow-md">
-            300 PCS+
-          </div>
-          <div class="h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 relative">
-            <img 
-              src="/images/souvenir-wedding.jpg" 
-              alt="Wedding Souvenir" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
-              <span class="font-handwriting text-2xl text-white drop-shadow">Wedding Edition</span>
-            </div>
-          </div>
-          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Pernikahan & Tunangan</h4>
-          <p class="text-xs text-text-muted">Aksesori eksklusif dengan custom tag nama pengantin yang manis dan berkesan.</p>
-        </div>
-
-        <!-- Corporate / Institution Souvenir -->
-        <div class="souvenir-card bg-white p-4 sm:p-5 rounded-3xl border border-pink/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
-          <div class="absolute top-6 right-6 sm:top-7 sm:right-7 z-10 bg-pink-deep text-white font-heading font-extrabold text-xs px-3 sm:px-3.5 py-1 rounded-full shadow-md">
-            1000 PCS+
-          </div>
-          <div class="h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 relative">
-            <img 
-              src="/images/souvenir-corporate.jpg" 
-              alt="Corporate Souvenir" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
-              <span class="font-handwriting text-2xl text-white drop-shadow">Institution & Brand</span>
-            </div>
-          </div>
-          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Institusi & Perusahaan</h4>
-          <p class="text-xs text-text-muted">Merchandise seminar, workshop, dies natalis, dan event promosi brand berskala besar.</p>
-        </div>
-
-      </div>
+    <!-- Interactive E-Commerce Category Tabs -->
+    <div class="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-4 pt-1 mb-10 sm:mb-12 no-scrollbar">
+      {categories.map((cat, index) => (
+        <button
+          type="button"
+          data-tab={cat.id}
+          class={`tab-btn shrink-0 flex items-center gap-2 font-heading font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
+            index === 0
+              ? 'active bg-pink-deep text-white shadow-md shadow-pink-deep/20 scale-105'
+              : 'bg-white/90 text-text-dark hover:bg-white hover:text-pink-deep border border-pink/20 shadow-xs'
+          }`}
+        >
+          <span class="inline-flex items-center" set:html={cat.iconSvg} />
+          <span>{cat.label}</span>
+        </button>
+      ))}
     </div>
 
-    <!-- Category 2: Accessories & Bagcharms -->
-    <div class="mb-16">
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
-        <h3 class="font-heading text-xl sm:text-2xl font-bold text-text-dark flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-pink-deep"></span>
-          Accessories & Bagcharms
-        </h3>
-        <span class="text-xs font-heading font-semibold text-pink-deep bg-pink-light px-3 py-1 rounded-full">
-          Handmade • Stainless
-        </span>
-      </div>
+    <!-- E-Commerce Product Cards Grid -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {products.map((product) => (
+        <div 
+          class="product-item group bg-white rounded-3xl p-4 border border-pink/25 shadow-xs hover:shadow-xl hover:border-pink/50 transition-all duration-300 flex flex-col justify-between"
+          data-category={product.category}
+        >
+          <!-- Top Area: Image Showcase with Badges -->
+          <div>
+            <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-cream/50 mb-4">
+              <img 
+                src={product.image} 
+                alt={product.title} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy"
+              />
+              
+              <!-- Floating Top Tag -->
+              <div class="absolute top-3 left-3 z-10">
+                <span class={`font-heading font-extrabold text-[10px] sm:text-[11px] px-3 py-1 rounded-full shadow-sm ${product.badgeColor}`}>
+                  {product.badge}
+                </span>
+              </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        <!-- Item 1: Beaded Rings -->
-        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
-          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
-            <img 
-              src="/images/product-beaded-rings.jpg" 
-              alt="Beaded Rings" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-            />
-            <span class="absolute top-2 left-2 bg-pink-deep/90 text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
-              Custom Ring
-            </span>
-          </div>
-          <div class="text-center">
-            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Beaded Rings</span>
-            <span class="text-[11px] text-text-muted font-sans">Floral collection</span>
-          </div>
-        </div>
+              <!-- Wishlist Heart SVG Icon -->
+              <div class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/85 backdrop-blur-sm border border-pink/20 flex items-center justify-center text-pink-deep shadow-xs group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-pink-deep" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </div>
 
-        <!-- Item 2: Charm Bracelet -->
-        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
-          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
-            <img 
-              src="/images/product-charm-bracelet.jpg" 
-              alt="Charm Bracelet" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-            />
-            <span class="absolute top-2 left-2 bg-yellow-dark text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
-              Best Seller
-            </span>
-          </div>
-          <div class="text-center">
-            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Charm Bracelet</span>
-            <span class="text-[11px] text-text-muted font-sans">Stainless steel</span>
-          </div>
-        </div>
+              <!-- Overlay Gradient on Hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
 
-        <!-- Item 3: Phone Strap -->
-        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
-          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
-            <img 
-              src="/images/product-phone-strap.jpg" 
-              alt="Phone Strap" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-            />
-            <span class="absolute top-2 left-2 bg-blue-500 text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
-              Trending
-            </span>
-          </div>
-          <div class="text-center">
-            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Phone Strap</span>
-            <span class="text-[11px] text-text-muted font-sans">Custom beads</span>
-          </div>
-        </div>
+            <!-- Category & Rating -->
+            <div class="flex items-center justify-between gap-2 mb-1.5 px-1">
+              <span class="text-[11px] font-heading font-semibold uppercase tracking-wider text-pink-deep">
+                {product.categoryLabel}
+              </span>
+              <div class="flex items-center gap-1 text-[11px] font-heading font-bold text-yellow-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current text-yellow-dark" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <span>{product.rating}</span>
+                <span class="text-text-muted font-normal">({product.sales})</span>
+              </div>
+            </div>
 
-        <!-- Item 4: Hair Claw -->
-        <div class="product-card group bg-white p-3 rounded-2xl border border-pink/30 shadow-sm hover:shadow-md transition-all">
-          <div class="aspect-square rounded-xl overflow-hidden relative mb-2">
-            <img 
-              src="/images/product-hair-claw.jpg" 
-              alt="Hair Claw" 
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-            />
-            <span class="absolute top-2 left-2 bg-pink-deep/90 text-white font-heading text-[10px] px-2 py-0.5 rounded-full">
-              Cute Pastel
-            </span>
+            <!-- Product Title -->
+            <h3 class="font-heading font-bold text-base text-text-dark leading-snug mb-2 px-1 group-hover:text-pink-deep transition-colors line-clamp-1" title={product.title}>
+              {product.title}
+            </h3>
+
+            <!-- Product Description -->
+            <p class="text-xs text-text-muted leading-relaxed mb-4 px-1 line-clamp-2">
+              {product.description}
+            </p>
           </div>
-          <div class="text-center">
-            <span class="font-heading font-bold text-xs sm:text-sm text-text-dark block">Hair Claw</span>
-            <span class="text-[11px] text-text-muted font-sans">Flower accents</span>
+
+          <!-- Bottom Action Button (E-Commerce CTA) -->
+          <div class="pt-3 border-t border-gray-100 mt-auto">
+            <a 
+              href={product.actionLink}
+              class="w-full bg-yellow-light hover:bg-yellow text-text-dark font-heading font-bold text-xs py-2.5 px-4 rounded-xl shadow-xs hover:shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <span>{product.actionText}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
+
         </div>
-      </div>
+      ))}
     </div>
 
-    <!-- Category 3: Souvenir / Merchandise with Qty Badges -->
-    <div class="mb-16">
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
-        <h3 class="font-heading text-xl sm:text-2xl font-bold text-text-dark flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-yellow-dark"></span>
-          Souvenir & Custom Merchandise
-        </h3>
-        <span class="text-xs font-heading font-semibold text-yellow-dark bg-yellow-light px-3 py-1 rounded-full">
-          Bulk Order Available
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Wedding Souvenir -->
-        <div class="souvenir-card bg-white p-4 sm:p-5 rounded-3xl border border-yellow/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
-          <div class="absolute top-6 right-6 sm:top-7 sm:right-7 z-10 bg-yellow text-text-dark font-heading font-extrabold text-xs px-3 sm:px-3.5 py-1 rounded-full shadow-md">
-            300 PCS+
-          </div>
-          <div class="h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 relative">
-            <img 
-              src="/images/souvenir-wedding.jpg" 
-              alt="Wedding Souvenir" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
-              <span class="font-handwriting text-2xl text-white drop-shadow">Wedding Edition</span>
-            </div>
-          </div>
-          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Pernikahan & Tunangan</h4>
-          <p class="text-xs text-text-muted">Aksesori eksklusif dengan custom tag nama pengantin yang manis dan berkesan.</p>
-        </div>
-
-        <!-- Corporate / Institution Souvenir -->
-        <div class="souvenir-card bg-white p-4 sm:p-5 rounded-3xl border border-pink/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
-          <div class="absolute top-6 right-6 sm:top-7 sm:right-7 z-10 bg-pink-deep text-white font-heading font-extrabold text-xs px-3 sm:px-3.5 py-1 rounded-full shadow-md">
-            1000 PCS+
-          </div>
-          <div class="h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 relative">
-            <img 
-              src="/images/souvenir-corporate.jpg" 
-              alt="Corporate Souvenir" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
-              <span class="font-handwriting text-2xl text-white drop-shadow">Institution & Brand</span>
-            </div>
-          </div>
-          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Institusi & Perusahaan</h4>
-          <p class="text-xs text-text-muted">Merchandise seminar, workshop, dies natalis, dan event promosi brand berskala besar.</p>
-        </div>
-
-        <!-- Concert / Event Souvenir -->
-        <div class="souvenir-card bg-white p-4 sm:p-5 rounded-3xl border border-blue-soft/40 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
-          <div class="absolute top-6 right-6 sm:top-7 sm:right-7 z-10 bg-[#89CFF0] text-white font-heading font-extrabold text-xs px-3 sm:px-3.5 py-1 rounded-full shadow-md">
-            2500 PCS+
-          </div>
-          <div class="h-44 sm:h-48 rounded-2xl overflow-hidden mb-4 relative">
-            <img 
-              src="/images/souvenir-concert.jpg" 
-              alt="Concert & Event Souvenir" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
-              <span class="font-handwriting text-2xl text-white drop-shadow">Concert Edition</span>
-            </div>
-          </div>
-          <h4 class="font-heading font-bold text-lg text-text-dark mb-1">Concert & Fan Merch</h4>
-          <p class="text-xs text-text-muted">Freebies konser, strap lightstick, dan merchandise fan event berskala ribuan pcs.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 3: Channels (Offline Events, Online & International Delivery) -->
-    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink/30 shadow-sm">
-      <h3 class="font-heading text-lg sm:text-xl font-bold text-text-dark mb-6 text-center">
-        Tersedia di Berbagai Channel 🌍
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="p-4 rounded-2xl bg-cream border border-pink/20 flex flex-col items-center text-center">
-          <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
-            <img 
-              src="/images/channel-offline.jpg" 
-              alt="Offline Store & Events" 
-              class="w-full h-full object-cover hover:scale-105 transition-transform" 
-            />
-          </div>
-          <h4 class="font-heading font-bold text-sm text-text-dark">Offline Store & Events</h4>
-          <p class="text-xs text-text-muted mt-1">Hadir di berbagai creative market, bazar, dan pop-up booth.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-cream border border-yellow/20 flex flex-col items-center text-center">
-          <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
-            <img 
-              src="/images/channel-online.jpg" 
-              alt="Nasional Online Store" 
-              class="w-full h-full object-cover hover:scale-105 transition-transform" 
-            />
-          </div>
-          <h4 class="font-heading font-bold text-sm text-text-dark">Nasional Online Store</h4>
-          <p class="text-xs text-text-muted mt-1">Pengiriman aman ke seluruh penjuru Indonesia via Shopee & WA.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-cream border border-blue-soft/20 flex flex-col items-center text-center">
-          <div class="w-full h-32 rounded-xl overflow-hidden mb-3">
-            <img 
-              src="/images/channel-shipping.jpg" 
-              alt="International Shipping" 
-              class="w-full h-full object-cover hover:scale-105 transition-transform" 
-            />
-          </div>
-          <h4 class="font-heading font-bold text-sm text-text-dark">International Shipping</h4>
-          <p class="text-xs text-text-muted mt-1">Telah mengirim pesanan hingga mancanegara (Singapore, dll).</p>
-        </div>
-      </div>
+    <!-- Empty State Fallback (Hidden by default) -->
+    <div id="empty-state" class="hidden text-center py-16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto text-pink-deep mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+      </svg>
+      <h4 class="font-heading font-bold text-lg text-text-dark">No products found in this category</h4>
+      <p class="text-xs text-text-muted mt-1">Please check back soon or inquire custom order.</p>
     </div>
 
   </div>
 </section>
+
+<style>
+  /* Hide scrollbar for category tabs */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Smooth tab transition */
+  .product-item {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .product-item.hidden-item {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+</style>
 
 <script>
   import { gsap } from 'gsap';
@@ -280,60 +344,97 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const initProducts = () => {
-    // Reveal product cards
-    gsap.fromTo(
-      '.product-card',
-      { opacity: 0, scale: 0.9, y: 20 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        stagger: 0.06,
-        duration: 0.6,
-        ease: 'back.out(1.4)',
-        clearProps: 'all',
-        scrollTrigger: {
-          trigger: '#products',
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      }
-    );
+  const initProductTabs = () => {
+    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const productItems = document.querySelectorAll<HTMLElement>('.product-item');
+    const emptyState = document.getElementById('empty-state');
 
-    // Reveal souvenir cards
+    // Initial GSAP reveal
     gsap.fromTo(
-      '.souvenir-card',
-      { opacity: 0, y: 30 },
+      '.product-item',
+      { opacity: 0, y: 25 },
       {
         opacity: 1,
         y: 0,
-        stagger: 0.12,
-        duration: 0.6,
+        stagger: 0.05,
+        duration: 0.5,
         ease: 'power2.out',
         clearProps: 'all',
         scrollTrigger: {
-          trigger: '.souvenir-card',
-          start: 'top 90%',
+          trigger: '#products',
+          start: 'top 85%',
           toggleActions: 'play none none none',
           once: true,
         },
       }
     );
 
-    // Failsafe: Ensure everything is always 100% visible even if scroll calculation lags
+    // Tab Click Filtering Logic
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetCategory = btn.getAttribute('data-tab');
+
+        // Update Active Button Style
+        tabBtns.forEach((b) => {
+          b.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+          b.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
+        });
+
+        btn.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+        btn.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
+
+        // Filter Products
+        let visibleCount = 0;
+        productItems.forEach((item) => {
+          const itemCategory = item.getAttribute('data-category');
+
+          if (targetCategory === 'all' || itemCategory === targetCategory) {
+            item.classList.remove('hidden-item');
+            visibleCount++;
+          } else {
+            item.classList.add('hidden-item');
+          }
+        });
+
+        // Show/Hide Empty State
+        if (emptyState) {
+          if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+          }
+        }
+
+        // Animate newly visible items
+        const visibleItems = document.querySelectorAll('.product-item:not(.hidden-item)');
+        gsap.fromTo(
+          visibleItems,
+          { opacity: 0, scale: 0.95, y: 15 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            stagger: 0.04,
+            duration: 0.4,
+            ease: 'back.out(1.2)',
+            clearProps: 'all',
+          }
+        );
+      });
+    });
+
+    // Failsafe: Ensure visible items are never stuck invisible
     setTimeout(() => {
-      document.querySelectorAll('.product-card, .souvenir-card').forEach((el) => {
+      document.querySelectorAll('.product-item:not(.hidden-item)').forEach((el) => {
         (el as HTMLElement).style.opacity = '1';
         (el as HTMLElement).style.transform = 'none';
       });
-    }, 1200);
+    }, 1000);
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProducts);
+    document.addEventListener('DOMContentLoaded', initProductTabs);
   } else {
-    initProducts();
+    initProductTabs();
   }
 </script>
