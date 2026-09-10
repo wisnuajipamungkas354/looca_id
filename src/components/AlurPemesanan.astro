@@ -1,193 +1,278 @@
 ---
-// AlurPemesanan.astro
+// AlurPemesanan.astro (GSAP Horizontal Scroll Step-by-Step Order Process)
+const steps = [
+  {
+    num: '01',
+    title: 'R&D',
+    category: 'Concept & R&D',
+    borderClass: 'border-pink/30',
+    badgeClass: 'bg-pink-deep',
+    iconBgClass: 'bg-pink-light/80 text-pink-deep',
+    pillClass: 'bg-pink-light text-pink-deep',
+    desc: 'Discussion of requirements, design concepts, material selection, and desired product details.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>`
+  },
+  {
+    num: '02',
+    title: 'Sampling',
+    category: 'Sampling Process',
+    borderClass: 'border-yellow/40',
+    badgeClass: 'bg-yellow-dark',
+    iconBgClass: 'bg-yellow-light/80 text-yellow-dark',
+    pillClass: 'bg-yellow-light text-yellow-dark',
+    desc: 'Free sampling* is available, and the sample can be shipped for direct review.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`
+  },
+  {
+    num: '03',
+    title: '50% Down Payment',
+    category: 'Down Payment',
+    borderClass: 'border-blue-soft/40',
+    badgeClass: 'bg-[#5DADE2]',
+    iconBgClass: 'bg-blue-soft/30 text-blue-600',
+    pillClass: 'bg-blue-soft/20 text-blue-700',
+    desc: 'A 50% down payment of the total order is required to begin production.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>`
+  },
+  {
+    num: '04',
+    title: 'Mass Production',
+    category: 'Production Phase',
+    borderClass: 'border-pink/30',
+    badgeClass: 'bg-pink-deep',
+    iconBgClass: 'bg-pink-light/80 text-pink-deep',
+    pillClass: 'bg-pink-light text-pink-deep',
+    desc: 'Mass production is carried out according to the agreed specifications and timeline.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`
+  },
+  {
+    num: '05',
+    title: 'Finish (QC)',
+    category: 'Quality Control',
+    borderClass: 'border-yellow/40',
+    badgeClass: 'bg-yellow-dark',
+    iconBgClass: 'bg-yellow-light/80 text-yellow-dark',
+    pillClass: 'bg-yellow-light text-yellow-dark',
+    desc: 'Production is completed, and the products undergo strict quality control before proceeding to the next stage.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`
+  },
+  {
+    num: '06',
+    title: 'Final Payment',
+    category: 'Final Settlement',
+    borderClass: 'border-blue-soft/40',
+    badgeClass: 'bg-[#5DADE2]',
+    iconBgClass: 'bg-blue-soft/30 text-blue-600',
+    pillClass: 'bg-blue-soft/20 text-blue-700',
+    desc: 'The remaining payment is made before the order is ready for delivery.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
+  },
+  {
+    num: '07',
+    title: 'Shipping',
+    category: 'Secure Delivery',
+    borderClass: 'border-pink/30',
+    badgeClass: 'bg-pink-deep',
+    iconBgClass: 'bg-pink-light/80 text-pink-deep',
+    pillClass: 'bg-pink-light text-pink-deep',
+    desc: 'The order is shipped to the destination address with secure, neat, and attractive packaging.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>`
+  },
+  {
+    num: '08',
+    title: 'Feedback',
+    category: 'Reviews & Support',
+    borderClass: 'border-yellow/40',
+    badgeClass: 'bg-yellow-dark',
+    iconBgClass: 'bg-yellow-light/80 text-yellow-dark',
+    pillClass: 'bg-yellow-light text-yellow-dark',
+    desc: 'We highly appreciate client reviews and feedback to continuously improve our work.',
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>`
+  }
+];
 ---
-<section id="alur-pemesanan" class="alur-pemesanan-wrapper relative py-20 lg:py-28 px-4 sm:px-8 bg-cream overflow-hidden">
-  <div class="max-w-6xl mx-auto">
+
+<section id="alur-pemesanan" class="relative w-full bg-cream overflow-hidden">
+  <!-- Pinned Viewport Container (takes full height during horizontal scrub) -->
+  <div id="alur-pinned-container" class="h-screen w-full flex flex-col justify-between py-5 sm:py-8 px-4 sm:px-8 overflow-hidden relative">
     
-    <div class="text-center mb-14">
-      <span class="bg-[#89CFF0] text-white font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md inline-block mb-3">
-        Order Process
-      </span>
-      <h3 class="font-heading text-2xl sm:text-3xl font-extrabold text-text-dark">
+    <!-- Top Pinned Header & Dynamic Progress Ribbon -->
+    <div class="max-w-6xl w-full mx-auto flex flex-col items-center text-center z-10 shrink-0">
+      <div class="inline-flex items-center gap-1.5 bg-[#89CFF0] text-white font-handwriting text-base sm:text-xl px-4 sm:px-6 py-1 sm:py-1.5 rounded-full shadow-md mb-1.5 sm:mb-2">
+        <span>Order Process</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+        </svg>
+      </div>
+      <h3 class="font-heading text-xl sm:text-3xl lg:text-4xl font-extrabold text-text-dark tracking-tight">
         Custom Items Step-by-Step
       </h3>
-      <p class="text-xs sm:text-sm text-text-muted mt-2">
-        A transparent & easy process from concept until the order is in your hands.
-      </p>
-    </div>
-
-    <!-- 8 Steps Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
-      <!-- Step 1 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-pink/30 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-pink-deep text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          01
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-light/80 flex items-center justify-center text-pink-deep group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-          </svg>
+      <!-- Interactive Scroll-Driven Progress Tracker Ribbon -->
+      <div class="order-progress-card w-full max-w-xl mt-2 sm:mt-3 bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-pink/20 shadow-xs">
+        <div class="flex items-center justify-between text-xs sm:text-sm font-heading font-bold mb-1.5">
+          <span class="flex items-center gap-2 text-pink-deep min-w-0">
+            <span class="w-2 h-2 rounded-full bg-pink-deep animate-ping shrink-0"></span>
+            <span id="current-step-name" class="truncate text-[11px] sm:text-xs">Step 01: Concept & R&D</span>
+          </span>
+          <span class="flex items-center gap-2 text-text-muted text-[10px] sm:text-xs shrink-0 font-medium">
+            <span id="step-counter-text" class="text-pink-deep font-bold">Alur 1 / 8</span>
+            <span class="hidden sm:inline-block text-text-muted/60">&bull; Scroll Down to Slide ➔</span>
+          </span>
         </div>
-        <div class="bg-pink-light text-pink-deep text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          R&D
+        <!-- Track bar -->
+        <div class="w-full bg-cream h-2 sm:h-2.5 rounded-full overflow-hidden p-0.5 border border-pink/15 shadow-inner">
+          <div id="alur-progress-fill" class="h-full bg-gradient-to-r from-pink-deep via-yellow-dark to-[#5DADE2] rounded-full transition-all duration-100 w-[12.5%] shadow-xs"></div>
         </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          Discussion of requirements, design concepts, material selection, and desired product details.
-        </p>
       </div>
-
-      <!-- Step 2 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-yellow/40 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-yellow-dark text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          02
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-yellow-light/80 flex items-center justify-center text-yellow-dark group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-        </div>
-        <div class="bg-yellow-light text-yellow-dark text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          Sampling
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          Free sampling* is available, and the sample can be shipped for direct review.
-        </p>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-blue-soft/40 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-[#5DADE2] text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          03
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-blue-soft/30 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-            <line x1="2" y1="10" x2="22" y2="10"></line>
-          </svg>
-        </div>
-        <div class="bg-blue-soft/20 text-blue-700 text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          50% Down Payment
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          A 50% down payment of the total order is required to begin production.
-        </p>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-pink/30 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-pink-deep text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          04
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-light/80 flex items-center justify-center text-pink-deep group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
-        </div>
-        <div class="bg-pink-light text-pink-deep text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          Mass Production
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          Mass production is carried out according to the agreed specifications and timeline.
-        </p>
-      </div>
-
-      <!-- Step 5 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-yellow/40 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-yellow-dark text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          05
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-yellow-light/80 flex items-center justify-center text-yellow-dark group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
-        </div>
-        <div class="bg-yellow-light text-yellow-dark text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          Finish (QC)
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          Production is completed, and the products undergo strict quality control before proceeding to the next stage.
-        </p>
-      </div>
-
-      <!-- Step 6 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-blue-soft/40 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-[#5DADE2] text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          06
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-blue-soft/30 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <div class="bg-blue-soft/20 text-blue-700 text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          Final Payment
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          The remaining payment is made before the order is ready for delivery.
-        </p>
-      </div>
-
-      <!-- Step 7 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-pink/30 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-pink-deep text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          07
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-light/80 flex items-center justify-center text-pink-deep group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="3" width="15" height="13"></rect>
-            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-            <circle cx="5.5" cy="18.5" r="2.5"></circle>
-            <circle cx="18.5" cy="18.5" r="2.5"></circle>
-          </svg>
-        </div>
-        <div class="bg-pink-light text-pink-deep text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          Shipping
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          The order is shipped to the destination address with secure, neat, and attractive packaging.
-        </p>
-      </div>
-
-      <!-- Step 8 -->
-      <div class="step-card bg-white p-6 rounded-3xl border border-yellow/40 shadow-sm relative group hover:shadow-md transition-all">
-        <span class="step-number absolute -top-3 -left-3 w-9 h-9 rounded-full bg-yellow-dark text-white font-heading font-bold flex items-center justify-center text-sm shadow">
-          08
-        </span>
-        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-yellow-light/80 flex items-center justify-center text-yellow-dark group-hover:scale-110 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-          </svg>
-        </div>
-        <div class="bg-yellow-light text-yellow-dark text-center font-heading font-bold text-xs uppercase tracking-wider py-1 rounded-full mb-3">
-          Feedback
-        </div>
-        <p class="text-xs text-text-muted text-center leading-relaxed">
-          We highly appreciate client reviews and feedback to continuously improve our work.
-        </p>
-      </div>
-
     </div>
 
-    <!-- Free sampling footnote -->
-    <div class="mt-8 text-center">
-      <span class="inline-flex items-center gap-1.5 bg-white border border-pink-deep/30 px-5 py-2 rounded-full text-xs text-pink-deep font-heading font-semibold shadow-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
-        <span>*Free sampling applies to a minimum order of 100 pcs.</span>
+    <!-- Horizontal Sliding Track (Moves left as user scrolls down) -->
+    <div class="w-full overflow-visible my-auto py-3 sm:py-4">
+      <div id="horizontal-track" class="flex items-stretch gap-4 sm:gap-6 pl-4 sm:pl-12 pr-12 sm:pr-24 w-max">
+        
+        <!-- Intro Card -->
+        <div class="horizontal-step-card shrink-0 w-[240px] sm:w-[280px] bg-gradient-to-br from-pink-light/60 to-yellow-light/60 rounded-3xl p-5 sm:p-6 border-2 border-pink/30 flex flex-col justify-between shadow-sm">
+          <div>
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-pink-deep text-white flex items-center justify-center mb-3 sm:mb-4 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <span class="text-[10px] uppercase tracking-widest font-heading font-bold text-pink-deep">Start Your Journey</span>
+            <h4 class="font-heading text-base sm:text-xl font-bold text-text-dark mt-1 mb-2 leading-snug">Transparan & Terpercaya</h4>
+            <p class="text-xs text-text-muted leading-relaxed">
+              Gulir ke bawah untuk menelusuri 8 tahapan alur pemesanan custom handmade Anda secara berurutan.
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs font-heading font-bold text-pink-deep mt-4">
+            <span>Mulai Alur</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Steps Cards 01 to 08 -->
+        {steps.map((step, index) => (
+          <div 
+            class={`horizontal-step-card shrink-0 w-[260px] sm:w-[310px] md:w-[330px] bg-white rounded-3xl p-5 sm:p-6 border-2 ${step.borderClass} shadow-md relative flex flex-col justify-between transition-all duration-300 group`}
+            data-step-index={index}
+            data-step-title={step.category}
+            data-step-name={step.title}
+          >
+            <!-- Floating Step Number Badge -->
+            <span class={`step-number absolute -top-3 -left-3 sm:-top-3.5 sm:-left-3.5 w-8 h-8 sm:w-11 sm:h-11 rounded-full ${step.badgeClass} text-white font-heading font-extrabold flex items-center justify-center text-xs sm:text-base shadow-lg z-10`}>
+              {step.num}
+            </span>
+
+            <!-- Flow Connector Arrow on Card Edge -->
+            {index < steps.length - 1 && (
+              <div class="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-pink/30 items-center justify-center text-pink-deep shadow-xs pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            )}
+
+            <div>
+              <!-- Icon Container -->
+              <div class={`w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl ${step.iconBgClass} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs`}>
+                <span class="inline-flex items-center" set:html={step.iconSvg} />
+              </div>
+
+              <!-- Step Title Pill -->
+              <div class={`${step.pillClass} text-center font-heading font-bold text-xs uppercase tracking-wider py-1 px-3 rounded-full mb-2.5 sm:mb-3 truncate shadow-2xs`}>
+                {step.title}
+              </div>
+
+              <!-- Description -->
+              <p class="text-xs sm:text-sm text-text-muted text-center leading-relaxed">
+                {step.desc}
+              </p>
+            </div>
+
+            <!-- Bottom Step Checkpoint Status -->
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-text-muted font-heading">
+              <span class="text-pink-deep font-bold">Tahap {index + 1} dari 8</span>
+              <span class="text-[11px] text-text-muted/80">{step.category}</span>
+            </div>
+          </div>
+        ))}
+
+        <!-- Final Outro / Order Ready CTA Card -->
+        <div class="horizontal-step-card shrink-0 w-[260px] sm:w-[310px] bg-gradient-to-br from-yellow-light/80 via-white to-pink-light/80 rounded-3xl p-5 sm:p-6 border-2 border-yellow/60 flex flex-col justify-between shadow-md">
+          <div>
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-yellow text-text-dark flex items-center justify-center mb-3 sm:mb-4 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <span class="text-[10px] uppercase tracking-widest font-heading font-bold text-yellow-dark">Ready to Order?</span>
+            <h4 class="font-heading text-base sm:text-xl font-bold text-text-dark mt-1 mb-2 leading-snug">Konsultasikan Ide Anda</h4>
+            <p class="text-xs text-text-muted leading-relaxed">
+              Tim Looca ID siap membantu mewujudkan kreasi merchandise, fashion, dan souvenir impian Anda.
+            </p>
+          </div>
+          <div class="mt-4">
+            <a 
+              href="https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20untuk%20konsultasi%20pemesanan%20custom" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs py-2.5 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <span>Mulai Pesan Sekarang</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Footnote & Scroll Tip -->
+    <div class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left z-10 shrink-0">
+      <span class="inline-flex items-center gap-1.5 bg-white/90 border border-pink-deep/30 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs text-pink-deep font-heading font-semibold shadow-xs">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-current shrink-0" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+        </svg>
+        <span>*Free sampling berlaku untuk pemesanan custom min. 100 pcs.</span>
       </span>
+      <div class="flex items-center gap-2 text-[10px] sm:text-xs text-text-muted font-heading">
+        <span>Scroll terus ke bawah untuk alur berikutnya</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 animate-bounce text-pink-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>
     </div>
 
   </div>
 </section>
+
+<style>
+  .horizontal-step-card {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .horizontal-step-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 30px -8px rgba(224, 90, 114, 0.22);
+  }
+  .horizontal-step-card.step-active-flow {
+    border-color: #E05A72 !important;
+    box-shadow: 0 14px 28px -6px rgba(224, 90, 114, 0.25), 0 0 0 2px rgba(224, 90, 114, 0.3);
+    transform: translateY(-4px) scale(1.03);
+  }
+  .horizontal-step-card.step-active-flow .step-number {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px rgba(224, 90, 114, 0.25);
+  }
+</style>
 
 <script>
   import { gsap } from 'gsap';
@@ -195,39 +280,97 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const initAlurPemesanan = () => {
-    // Step cards stagger
-    gsap.fromTo(
-      '.step-card',
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: 'power2.out',
-        clearProps: 'all',
-        scrollTrigger: {
-          trigger: '#alur-pemesanan',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      }
-    );
+  const initHorizontalAlur = () => {
+    const section = document.querySelector<HTMLElement>('#alur-pemesanan');
+    const track = document.querySelector<HTMLElement>('#horizontal-track');
+    const pinnedContainer = document.querySelector<HTMLElement>('#alur-pinned-container');
+    const progressBar = document.querySelector<HTMLElement>('#alur-progress-fill');
+    const currentStepText = document.querySelector<HTMLElement>('#current-step-name');
+    const stepCounterText = document.querySelector<HTMLElement>('#step-counter-text');
+    const cards = gsap.utils.toArray<HTMLElement>('.horizontal-step-card');
 
-    // Failsafe
-    setTimeout(() => {
-      document.querySelectorAll('.step-card').forEach((el) => {
-        (el as HTMLElement).style.opacity = '1';
-        (el as HTMLElement).style.transform = 'none';
-      });
-    }, 1200);
+    if (!section || !track || !pinnedContainer) return;
+
+    // Calculate dynamic horizontal translation distance
+    const getScrollDistance = () => {
+      const trackWidth = track.scrollWidth;
+      const windowWidth = window.innerWidth;
+      return -(trackWidth - windowWidth + 80);
+    };
+
+    // Horizontal Scroll Animation using ScrollTrigger Pin
+    const horizontalTween = gsap.to(track, {
+      x: getScrollDistance,
+      ease: 'none',
+    });
+
+    const stepsData = [
+      { num: '01', title: 'R&D', category: 'Concept & R&D' },
+      { num: '02', title: 'Sampling', category: 'Sampling Process' },
+      { num: '03', title: '50% Down Payment', category: 'Down Payment' },
+      { num: '04', title: 'Mass Production', category: 'Production Phase' },
+      { num: '05', title: 'Finish (QC)', category: 'Quality Control' },
+      { num: '06', title: 'Final Payment', category: 'Final Settlement' },
+      { num: '07', title: 'Shipping', category: 'Secure Delivery' },
+      { num: '08', title: 'Feedback', category: 'Reviews & Support' },
+    ];
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${Math.max(window.innerHeight * 2, track.scrollWidth - window.innerWidth + 400)}`,
+      pin: true,
+      animation: horizontalTween,
+      scrub: 0.8,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        
+        // Update Progress Bar
+        const percent = Math.min(100, Math.max(10, progress * 100));
+        if (progressBar) {
+          progressBar.style.width = `${percent}%`;
+        }
+
+        // Calculate step active index (0 to 7)
+        const stepIndex = Math.min(
+          stepsData.length - 1,
+          Math.max(0, Math.floor(progress * stepsData.length))
+        );
+
+        // Highlight Active Card
+        const stepCardsOnly = cards.filter(c => c.hasAttribute('data-step-index'));
+        stepCardsOnly.forEach((card, idx) => {
+          if (idx === stepIndex) {
+            card.classList.add('step-active-flow');
+          } else {
+            card.classList.remove('step-active-flow');
+          }
+        });
+
+        // Update Tracker Text
+        if (stepsData[stepIndex]) {
+          const s = stepsData[stepIndex];
+          if (currentStepText) {
+            currentStepText.textContent = `Step ${s.num}: ${s.title} (${s.category})`;
+          }
+          if (stepCounterText) {
+            stepCounterText.textContent = `Alur ${stepIndex + 1} / ${stepsData.length}`;
+          }
+        }
+      },
+    });
+
+    // Refresh triggers on window resize
+    window.addEventListener('resize', () => {
+      ScrollTrigger.refresh();
+    });
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAlurPemesanan);
+    document.addEventListener('DOMContentLoaded', initHorizontalAlur);
   } else {
-    initAlurPemesanan();
+    initHorizontalAlur();
   }
 </script>
