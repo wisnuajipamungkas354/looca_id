@@ -342,7 +342,10 @@ const steps = [
     });
 
     const isMobile = window.innerWidth < 768;
-    const scrollDuration = isMobile ? Math.max(window.innerHeight * 2.2, 1400) : Math.max(window.innerHeight * 1.8, 1600);
+    // Calibrated scroll distance: allocates ample vertical swipe distance per card so scrolling is calm, stable, and not overly sensitive
+    const scrollDuration = isMobile 
+      ? Math.max(window.innerHeight * 4.2, 3000) 
+      : Math.max(window.innerHeight * 2.4, 2200);
 
     ScrollTrigger.create({
       trigger: section,
@@ -350,7 +353,13 @@ const steps = [
       end: () => `+=${scrollDuration}`,
       pin: true,
       animation: horizontalTween,
-      scrub: isMobile ? 0.6 : 0.8,
+      scrub: isMobile ? 1.1 : 0.8,
+      snap: {
+        snapTo: 1 / (cards.length - 1),
+        duration: { min: 0.2, max: 0.45 },
+        delay: 0.1,
+        ease: 'power1.inOut',
+      },
       invalidateOnRefresh: true,
       anticipatePin: 1,
       onUpdate: (self) => {
