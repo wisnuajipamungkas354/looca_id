@@ -29,20 +29,32 @@ const { title } = Astro.props;
       // Register ScrollTrigger
       gsap.registerPlugin(ScrollTrigger);
 
-      // Initialize Lenis for smooth scrolling
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // Optimize ScrollTrigger for mobile performance & prevent address bar resize jitter
+      ScrollTrigger.config({
+        ignoreMobileResize: true,
+        autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
       });
 
-      // Integrate Lenis with GSAP ScrollTrigger
-      lenis.on('scroll', ScrollTrigger.update);
+      // Detect touch screen devices
+      const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
+      // Only enable Lenis virtual smoothing on non-touch devices (Desktop / Mouse)
+      // This preserves 100% native 60fps/120fps touch scroll momentum on mobile phones
+      if (!isTouch) {
+        const lenis = new Lenis({
+          duration: 1.0,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
 
-      gsap.ticker.lagSmoothing(0);
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+      }
 
       // Refresh ScrollTrigger once images and DOM are completely loaded
       window.addEventListener('load', () => {

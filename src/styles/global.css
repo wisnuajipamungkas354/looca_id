@@ -56,6 +56,22 @@
     mask-size: 24px 100%;
     mask-repeat: repeat-x;
   }
+
+  /* Hide scrollbar for touch swipe containers */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
 }
 
 /* Custom cute scrollbar */
