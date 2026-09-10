@@ -92,63 +92,62 @@ const steps = [
 ];
 ---
 
-<section id="alur-pemesanan" class="relative w-full bg-cream overflow-hidden py-10 md:py-0">
-  <!-- Pinned Viewport Container (takes full height on desktop, natural height on mobile) -->
-  <div id="alur-pinned-container" class="md:h-screen w-full flex flex-col justify-between py-4 md:py-8 px-4 sm:px-8 overflow-hidden relative">
+<section id="alur-pemesanan" class="relative w-full bg-cream overflow-hidden">
+  <!-- Pinned Viewport Container (takes 100dvh for accurate mobile browser address bar fit) -->
+  <div id="alur-pinned-container" class="h-screen max-h-[100dvh] w-full flex flex-col justify-between py-3.5 sm:py-8 px-3 sm:px-8 overflow-hidden relative">
     
-    <!-- Top Header & Dynamic Progress Ribbon -->
+    <!-- Top Pinned Header & Dynamic Progress Ribbon -->
     <div class="max-w-6xl w-full mx-auto flex flex-col items-center text-center z-10 shrink-0">
-      <div class="inline-flex items-center gap-1.5 bg-[#89CFF0] text-white font-handwriting text-base sm:text-xl px-4 sm:px-6 py-1 sm:py-1.5 rounded-full shadow-md mb-1.5 sm:mb-2">
+      <div class="inline-flex items-center gap-1.5 bg-[#89CFF0] text-white font-handwriting text-base sm:text-xl px-4 sm:px-6 py-0.5 sm:py-1.5 rounded-full shadow-md mb-1 sm:mb-2">
         <span>Order Process</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" viewBox="0 0 24 24">
           <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
         </svg>
       </div>
-      <h3 class="font-heading text-xl sm:text-3xl lg:text-4xl font-extrabold text-text-dark tracking-tight">
+      <h3 class="font-heading text-lg sm:text-3xl lg:text-4xl font-extrabold text-text-dark tracking-tight">
         Custom Items Step-by-Step
       </h3>
       
       <!-- Interactive Scroll-Driven Progress Tracker Ribbon -->
-      <div class="order-progress-card w-full max-w-xl mt-2 sm:mt-3 bg-white/95 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-pink/20 shadow-xs">
-        <div class="flex items-center justify-between text-xs sm:text-sm font-heading font-bold mb-1.5">
-          <span class="flex items-center gap-2 text-pink-deep min-w-0">
+      <div class="order-progress-card w-full max-w-xl mt-1.5 sm:mt-3 bg-white/95 rounded-xl sm:rounded-2xl p-2 sm:p-3.5 border border-pink/20 shadow-xs">
+        <div class="flex items-center justify-between text-xs sm:text-sm font-heading font-bold mb-1 sm:mb-1.5">
+          <span class="flex items-center gap-1.5 sm:gap-2 text-pink-deep min-w-0">
             <span class="w-2 h-2 rounded-full bg-pink-deep animate-ping shrink-0"></span>
             <span id="current-step-name" class="truncate text-[11px] sm:text-xs">Step 01: Concept & R&D</span>
           </span>
-          <span class="flex items-center gap-2 text-text-muted text-[10px] sm:text-xs shrink-0 font-medium">
+          <span class="flex items-center gap-1.5 text-text-muted text-[10px] sm:text-xs shrink-0 font-medium">
             <span id="step-counter-text" class="text-pink-deep font-bold">Alur 1 / 8</span>
-            <span class="hidden md:inline-block text-text-muted/60">&bull; Scroll Down to Slide ➔</span>
-            <span class="inline-block md:hidden text-text-muted/60">&bull; Geser ke samping ➔</span>
+            <span class="text-text-muted/60">&bull; Scroll Down to Slide ➔</span>
           </span>
         </div>
         <!-- Track bar -->
-        <div class="w-full bg-cream h-2 sm:h-2.5 rounded-full overflow-hidden p-0.5 border border-pink/15 shadow-inner">
-          <div id="alur-progress-fill" class="h-full bg-gradient-to-r from-pink-deep via-yellow-dark to-[#5DADE2] rounded-full transition-all duration-100 w-[12.5%] shadow-xs"></div>
+        <div class="w-full bg-cream h-1.5 sm:h-2.5 rounded-full overflow-hidden p-0.5 border border-pink/15 shadow-inner">
+          <div id="alur-progress-fill" class="h-full bg-gradient-to-r from-pink-deep via-yellow-dark to-[#5DADE2] rounded-full transition-all duration-75 w-[12.5%] shadow-xs"></div>
         </div>
       </div>
     </div>
 
-    <!-- Horizontal Sliding Track Container -->
-    <div id="horizontal-track-container" class="w-full overflow-x-auto md:overflow-visible my-auto py-3 sm:py-4 no-scrollbar snap-x snap-mandatory">
-      <div id="horizontal-track" class="flex items-stretch gap-3.5 sm:gap-6 pl-2 sm:pl-12 pr-6 sm:pr-24 w-max gpu-accelerated">
+    <!-- Horizontal Sliding Track (Moves left as user scrolls down) -->
+    <div class="w-full overflow-visible my-auto py-2 sm:py-4">
+      <div id="horizontal-track" class="flex items-stretch gap-3.5 sm:gap-6 pl-3 sm:pl-12 pr-8 sm:pr-24 w-max gpu-accelerated">
         
         <!-- Intro Card -->
-        <div class="horizontal-step-card shrink-0 w-[240px] sm:w-[280px] snap-center bg-gradient-to-br from-pink-light/60 to-yellow-light/60 rounded-3xl p-5 sm:p-6 border-2 border-pink/30 flex flex-col justify-between shadow-sm gpu-accelerated">
+        <div class="horizontal-step-card shrink-0 w-[240px] sm:w-[280px] bg-gradient-to-br from-pink-light/60 to-yellow-light/60 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border-2 border-pink/30 flex flex-col justify-between shadow-sm gpu-accelerated">
           <div>
-            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-pink-deep text-white flex items-center justify-center mb-3 sm:mb-4 shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-pink-deep text-white flex items-center justify-center mb-2.5 sm:mb-4 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
               </svg>
             </div>
-            <span class="text-[10px] uppercase tracking-widest font-heading font-bold text-pink-deep">Start Your Journey</span>
-            <h4 class="font-heading text-base sm:text-xl font-bold text-text-dark mt-1 mb-2 leading-snug">Transparan & Terpercaya</h4>
-            <p class="text-xs text-text-muted leading-relaxed">
-              Telusuri 8 tahapan alur pemesanan custom handmade Anda secara berurutan.
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-heading font-bold text-pink-deep">Start Your Journey</span>
+            <h4 class="font-heading text-sm sm:text-xl font-bold text-text-dark mt-0.5 sm:mt-1 mb-1 sm:mb-2 leading-snug">Transparan & Terpercaya</h4>
+            <p class="text-[11px] sm:text-xs text-text-muted leading-relaxed">
+              Gulir terus ke bawah untuk melihat 8 tahapan alur pemesanan custom handmade Anda.
             </p>
           </div>
-          <div class="flex items-center gap-1.5 text-xs font-heading font-bold text-pink-deep mt-4">
+          <div class="flex items-center gap-1.5 text-[11px] sm:text-xs font-heading font-bold text-pink-deep mt-3 sm:mt-4">
             <span>Mulai Alur</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -158,19 +157,19 @@ const steps = [
         <!-- Steps Cards 01 to 08 -->
         {steps.map((step, index) => (
           <div 
-            class={`horizontal-step-card shrink-0 w-[260px] sm:w-[310px] md:w-[330px] snap-center bg-white rounded-3xl p-5 sm:p-6 border-2 ${step.borderClass} shadow-md relative flex flex-col justify-between transition-all duration-300 group gpu-accelerated`}
+            class={`horizontal-step-card shrink-0 w-[245px] sm:w-[310px] md:w-[330px] bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border-2 ${step.borderClass} shadow-md relative flex flex-col justify-between transition-all duration-300 group gpu-accelerated`}
             data-step-index={index}
             data-step-title={step.category}
             data-step-name={step.title}
           >
             <!-- Floating Step Number Badge -->
-            <span class={`step-number absolute -top-3 -left-3 sm:-top-3.5 sm:-left-3.5 w-8 h-8 sm:w-11 sm:h-11 rounded-full ${step.badgeClass} text-white font-heading font-extrabold flex items-center justify-center text-xs sm:text-base shadow-lg z-10`}>
+            <span class={`step-number absolute -top-2.5 -left-2.5 sm:-top-3.5 sm:-left-3.5 w-8 h-8 sm:w-11 sm:h-11 rounded-full ${step.badgeClass} text-white font-heading font-extrabold flex items-center justify-center text-xs sm:text-base shadow-lg z-10`}>
               {step.num}
             </span>
 
-            <!-- Flow Connector Arrow on Card Edge (Desktop) -->
+            <!-- Flow Connector Arrow on Card Edge -->
             {index < steps.length - 1 && (
-              <div class="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-pink/30 items-center justify-center text-pink-deep shadow-xs pointer-events-none">
+              <div class="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white border border-pink/30 items-center justify-center text-pink-deep shadow-xs pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
@@ -179,53 +178,53 @@ const steps = [
 
             <div>
               <!-- Icon Container -->
-              <div class={`w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl ${step.iconBgClass} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs`}>
+              <div class={`w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-4 rounded-xl sm:rounded-2xl ${step.iconBgClass} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs`}>
                 <span class="inline-flex items-center" set:html={step.iconSvg} />
               </div>
 
               <!-- Step Title Pill -->
-              <div class={`${step.pillClass} text-center font-heading font-bold text-xs uppercase tracking-wider py-1 px-3 rounded-full mb-2.5 sm:mb-3 truncate shadow-2xs`}>
+              <div class={`${step.pillClass} text-center font-heading font-bold text-[10px] sm:text-xs uppercase tracking-wider py-0.5 sm:py-1 px-2.5 sm:px-3 rounded-full mb-2 sm:mb-3 truncate shadow-2xs`}>
                 {step.title}
               </div>
 
               <!-- Description -->
-              <p class="text-xs sm:text-sm text-text-muted text-center leading-relaxed">
+              <p class="text-[11px] sm:text-sm text-text-muted text-center leading-relaxed line-clamp-3 sm:line-clamp-none">
                 {step.desc}
               </p>
             </div>
 
             <!-- Bottom Step Checkpoint Status -->
-            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-text-muted font-heading">
+            <div class="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-100 flex items-center justify-between text-[10px] sm:text-xs text-text-muted font-heading">
               <span class="text-pink-deep font-bold">Tahap {index + 1} dari 8</span>
-              <span class="text-[11px] text-text-muted/80">{step.category}</span>
+              <span class="text-[10px] sm:text-[11px] text-text-muted/80">{step.category}</span>
             </div>
           </div>
         ))}
 
         <!-- Final Outro / Order Ready CTA Card -->
-        <div class="horizontal-step-card shrink-0 w-[260px] sm:w-[310px] snap-center bg-gradient-to-br from-yellow-light/80 via-white to-pink-light/80 rounded-3xl p-5 sm:p-6 border-2 border-yellow/60 flex flex-col justify-between shadow-md gpu-accelerated">
+        <div class="horizontal-step-card shrink-0 w-[245px] sm:w-[310px] bg-gradient-to-br from-yellow-light/80 via-white to-pink-light/80 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border-2 border-yellow/60 flex flex-col justify-between shadow-md gpu-accelerated">
           <div>
-            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-yellow text-text-dark flex items-center justify-center mb-3 sm:mb-4 shadow-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-yellow text-text-dark flex items-center justify-center mb-2.5 sm:mb-4 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
               </svg>
             </div>
-            <span class="text-[10px] uppercase tracking-widest font-heading font-bold text-yellow-dark">Ready to Order?</span>
-            <h4 class="font-heading text-base sm:text-xl font-bold text-text-dark mt-1 mb-2 leading-snug">Konsultasikan Ide Anda</h4>
-            <p class="text-xs text-text-muted leading-relaxed">
-              Tim Looca ID siap membantu mewujudkan kreasi merchandise, fashion, dan souvenir impian Anda.
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-heading font-bold text-yellow-dark">Ready to Order?</span>
+            <h4 class="font-heading text-sm sm:text-xl font-bold text-text-dark mt-0.5 sm:mt-1 mb-1 sm:mb-2 leading-snug">Konsultasikan Ide Anda</h4>
+            <p class="text-[11px] sm:text-xs text-text-muted leading-relaxed">
+              Tim Looca ID siap membantu mewujudkan merchandise, fashion, dan souvenir impian Anda.
             </p>
           </div>
-          <div class="mt-4">
+          <div class="mt-3 sm:mt-4">
             <a 
               href="https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20untuk%20konsultasi%20pemesanan%20custom" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="w-full bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs py-2.5 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              class="w-full bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-[11px] sm:text-xs py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl shadow-md flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <span>Mulai Pesan Sekarang</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
@@ -237,16 +236,15 @@ const steps = [
     </div>
 
     <!-- Bottom Footnote & Scroll Tip -->
-    <div class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left z-10 shrink-0">
-      <span class="inline-flex items-center gap-1.5 bg-white/95 border border-pink-deep/30 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs text-pink-deep font-heading font-semibold shadow-xs">
+    <div class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-center sm:text-left z-10 shrink-0">
+      <span class="inline-flex items-center gap-1.5 bg-white/95 border border-pink-deep/30 px-3 sm:px-4 py-0.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs text-pink-deep font-heading font-semibold shadow-xs">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-current shrink-0" viewBox="0 0 24 24">
           <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
         </svg>
-        <span>*Free sampling berlaku untuk pemesanan custom min. 100 pcs.</span>
+        <span>*Free sampling berlaku untuk custom min. 100 pcs.</span>
       </span>
-      <div class="flex items-center gap-2 text-[10px] sm:text-xs text-text-muted font-heading">
-        <span class="hidden md:inline">Scroll terus ke bawah untuk alur berikutnya</span>
-        <span class="inline md:hidden">Geser kartu ke samping untuk melihat alur</span>
+      <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-text-muted font-heading">
+        <span>Scroll terus ke bawah untuk alur berikutnya</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 animate-bounce text-pink-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"></line>
           <polyline points="19 12 12 19 5 12"></polyline>
@@ -285,11 +283,11 @@ const steps = [
   const initHorizontalAlur = () => {
     const section = document.querySelector<HTMLElement>('#alur-pemesanan');
     const track = document.querySelector<HTMLElement>('#horizontal-track');
-    const trackContainer = document.querySelector<HTMLElement>('#horizontal-track-container');
     const progressBar = document.querySelector<HTMLElement>('#alur-progress-fill');
     const currentStepText = document.querySelector<HTMLElement>('#current-step-name');
     const stepCounterText = document.querySelector<HTMLElement>('#step-counter-text');
     const cards = gsap.utils.toArray<HTMLElement>('.horizontal-step-card');
+    const stepCardsOnly = cards.filter(c => c.hasAttribute('data-step-index'));
 
     if (!section || !track) return;
 
@@ -304,8 +302,11 @@ const steps = [
       { num: '08', title: 'Feedback', category: 'Reviews & Support' },
     ];
 
+    let lastActiveIndex = -1;
     const updateActiveStep = (stepIndex: number) => {
-      const stepCardsOnly = cards.filter(c => c.hasAttribute('data-step-index'));
+      if (stepIndex === lastActiveIndex) return;
+      lastActiveIndex = stepIndex;
+
       stepCardsOnly.forEach((card, idx) => {
         if (idx === stepIndex) {
           card.classList.add('step-active-flow');
@@ -325,102 +326,49 @@ const steps = [
       }
     };
 
-    const mm = gsap.matchMedia();
+    // Calculate dynamic horizontal translation distance
+    const getScrollDistance = () => {
+      const trackWidth = track.scrollWidth;
+      const windowWidth = window.innerWidth;
+      const padding = windowWidth < 640 ? 30 : 80;
+      return -(trackWidth - windowWidth + padding);
+    };
 
-    // Desktop & Tablet (min-width: 768px): Pinned Horizontal Scroll
-    mm.add('(min-width: 768px)', () => {
-      const getScrollDistance = () => {
-        const trackWidth = track.scrollWidth;
-        const windowWidth = window.innerWidth;
-        return -(trackWidth - windowWidth + 80);
-      };
-
-      const horizontalTween = gsap.to(track, {
-        x: getScrollDistance,
-        ease: 'none',
-      });
-
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${Math.max(window.innerHeight * 1.8, track.scrollWidth - window.innerWidth + 300)}`,
-        pin: true,
-        animation: horizontalTween,
-        scrub: 0.6,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progressBar) {
-            progressBar.style.width = `${Math.min(100, Math.max(10, progress * 100))}%`;
-          }
-          const stepIndex = Math.min(
-            stepsData.length - 1,
-            Math.max(0, Math.floor(progress * stepsData.length))
-          );
-          updateActiveStep(stepIndex);
-        },
-      });
-
-      return () => {
-        trigger.kill();
-      };
+    // Horizontal Scroll Animation using ScrollTrigger Pin
+    const horizontalTween = gsap.to(track, {
+      x: getScrollDistance,
+      ease: 'none',
+      force3D: true,
     });
 
-    // Mobile Screens (max-width: 767px): Native High-FPS Touch Swipe
-    mm.add('(max-width: 767px)', () => {
-      gsap.set(track, { clearProps: 'x,transform' });
+    const isMobile = window.innerWidth < 768;
+    const scrollDuration = isMobile ? Math.max(window.innerHeight * 2.2, 1400) : Math.max(window.innerHeight * 1.8, 1600);
 
-      // Staggered smooth fade-in
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.04,
-          duration: 0.5,
-          ease: 'power2.out',
-          clearProps: 'opacity,transform',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-            once: true,
-          },
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${scrollDuration}`,
+      pin: true,
+      animation: horizontalTween,
+      scrub: isMobile ? 0.6 : 0.8,
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        if (progressBar) {
+          progressBar.style.width = `${Math.min(100, Math.max(8, progress * 100))}%`;
         }
-      );
+        const stepIndex = Math.min(
+          stepsData.length - 1,
+          Math.max(0, Math.floor(progress * stepsData.length))
+        );
+        updateActiveStep(stepIndex);
+      },
+    });
 
-      // Listen to native swipe scroll to update step progress bar smoothly
-      if (trackContainer) {
-        let ticking = false;
-        const handleMobileScroll = () => {
-          if (!ticking) {
-            window.requestAnimationFrame(() => {
-              const scrollLeft = trackContainer.scrollLeft;
-              const maxScroll = trackContainer.scrollWidth - trackContainer.clientWidth;
-              if (maxScroll > 0) {
-                const progress = scrollLeft / maxScroll;
-                if (progressBar) {
-                  progressBar.style.width = `${Math.min(100, Math.max(10, progress * 100))}%`;
-                }
-                const stepIndex = Math.min(
-                  stepsData.length - 1,
-                  Math.max(0, Math.floor(progress * stepsData.length))
-                );
-                updateActiveStep(stepIndex);
-              }
-              ticking = false;
-            });
-            ticking = true;
-          }
-        };
-
-        trackContainer.addEventListener('scroll', handleMobileScroll, { passive: true });
-        return () => {
-          trackContainer.removeEventListener('scroll', handleMobileScroll);
-        };
-      }
+    // Refresh triggers on window resize
+    window.addEventListener('resize', () => {
+      ScrollTrigger.refresh();
     });
 
     // Failsafe: Ensure visible
