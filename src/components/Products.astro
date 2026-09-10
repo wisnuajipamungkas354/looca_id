@@ -172,37 +172,37 @@ const products = [
 ];
 ---
 
-<section id="products" class="relative py-20 lg:py-28 px-4 sm:px-8 bg-cream overflow-hidden">
+<section id="products" class="relative py-16 sm:py-20 lg:py-28 px-3 sm:px-8 bg-cream overflow-hidden">
   <div class="max-w-6xl mx-auto">
     
     <!-- Section Header -->
-    <div class="text-center mb-10 sm:mb-12">
-      <div class="inline-flex items-center gap-2 bg-yellow text-text-dark font-handwriting text-xl sm:text-2xl px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <div class="text-center mb-8 sm:mb-12">
+      <div class="inline-flex items-center gap-2 bg-yellow text-text-dark font-handwriting text-lg sm:text-2xl px-5 sm:px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
           <path d="M16 10a4 4 0 01-8 0"/>
         </svg>
         <span>Catalog & Gallery</span>
       </div>
-      <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-text-dark tracking-tight">
+      <h2 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-text-dark tracking-tight">
         Our Products & Gallery
       </h2>
-      <p class="text-text-muted mt-3 max-w-lg mx-auto text-sm sm:text-base">
+      <p class="text-text-muted mt-2 sm:mt-3 max-w-lg mx-auto text-xs sm:text-base">
         Explore our curated handmade creations, from daily accessories to custom fashion and bulk souvenir orders.
       </p>
     </div>
 
     <!-- Interactive E-Commerce Category Tabs -->
-    <div class="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-4 pt-1 mb-10 sm:mb-12 no-scrollbar">
+    <div class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-3 pt-1 mb-8 sm:mb-12 no-scrollbar px-1">
       {categories.map((cat, index) => (
         <button
           type="button"
           data-tab={cat.id}
-          class={`tab-btn shrink-0 flex items-center gap-2 font-heading font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
+          class={`tab-btn shrink-0 flex items-center gap-1.5 sm:gap-2 font-heading font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
             index === 0
               ? 'active bg-pink-deep text-white shadow-md shadow-pink-deep/20 scale-105'
-              : 'bg-white/90 text-text-dark hover:bg-white hover:text-pink-deep border border-pink/20 shadow-xs'
+              : 'bg-white/90 text-text-dark border border-pink/20 shadow-xs'
           }`}
         >
           <span class="inline-flex items-center" set:html={cat.iconSvg} />
@@ -211,17 +211,17 @@ const products = [
       ))}
     </div>
 
-    <!-- E-Commerce Product Cards Grid -->
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- E-Commerce Product Cards Grid (2 Columns on Mobile, 3 on Tablet/Laptop, 4 on Large Screens) -->
+    <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
       {products.map((product) => (
         <div 
-          class="product-item group bg-white rounded-3xl p-4 border border-pink/25 shadow-xs hover:shadow-xl hover:border-pink/50 transition-all duration-300 flex flex-col justify-between"
+          class="product-item group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-pink/25 shadow-xs hover:shadow-xl hover:border-pink/50 transition-all duration-300 flex flex-col justify-between"
           data-category={product.category}
         >
           <!-- Top Area: Image Showcase with Badges and Slide Support -->
           <div>
             <div 
-              class="product-image-wrapper relative w-full aspect-square rounded-2xl overflow-hidden bg-cream/50 mb-4"
+              class="product-image-wrapper relative w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-cream/50 mb-2.5 sm:mb-4"
               data-slides-count={product.images.length}
             >
               <!-- Seamless One-Way Infinite Slider Track -->
@@ -251,10 +251,10 @@ const products = [
 
               <!-- Slide Dots Indicator (For multi-image products) -->
               {product.images.length > 1 && (
-                <div class="slider-dots absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/35 backdrop-blur-sm pointer-events-none">
+                <div class="slider-dots absolute bottom-2 sm:bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/35 backdrop-blur-sm pointer-events-none">
                   {product.images.map((_, idx) => (
                     <span 
-                      class={`slider-dot block rounded-full transition-all duration-300 ${idx === 0 ? 'w-4 h-1.5 bg-white shadow-xs' : 'w-1.5 h-1.5 bg-white/50'}`}
+                      class={`slider-dot block rounded-full transition-all duration-300 ${idx === 0 ? 'w-3 sm:w-4 h-1 sm:h-1.5 bg-white shadow-xs' : 'w-1 sm:w-1.5 h-1 sm:h-1.5 bg-white/50'}`}
                       data-dot-index={idx}
                     ></span>
                   ))}
@@ -262,15 +262,15 @@ const products = [
               )}
               
               <!-- Floating Top Tag -->
-              <div class="absolute top-3 left-3 z-10">
-                <span class={`font-heading font-extrabold text-[10px] sm:text-[11px] px-3 py-1 rounded-full shadow-sm ${product.badgeColor}`}>
+              <div class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
+                <span class={`font-heading font-extrabold text-[8px] sm:text-[11px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-sm ${product.badgeColor}`}>
                   {product.badge}
                 </span>
               </div>
 
               <!-- Wishlist Heart SVG Icon -->
-              <div class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/85 backdrop-blur-sm border border-pink/20 flex items-center justify-center text-pink-deep shadow-xs group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-pink-deep" viewBox="0 0 24 24">
+              <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/85 backdrop-blur-sm border border-pink/20 flex items-center justify-center text-pink-deep shadow-xs group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-4 sm:h-4 fill-pink-deep" viewBox="0 0 24 24">
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                 </svg>
               </div>
@@ -280,40 +280,40 @@ const products = [
             </div>
 
             <!-- Category & Rating -->
-            <div class="flex items-center justify-between gap-1.5 mb-1.5 px-1 min-w-0">
-              <span class="text-[10px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider text-pink-deep shrink-0">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1.5 mb-1 sm:mb-1.5 px-0.5 sm:px-1">
+              <span class="text-[9px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider text-pink-deep">
                 {product.categoryLabel}
               </span>
-              <div class="flex items-center gap-1 text-[11px] font-heading font-bold text-yellow-dark shrink-0 min-w-0 max-w-[65%] justify-end">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current text-yellow-dark shrink-0" viewBox="0 0 24 24">
+              <div class="flex items-center gap-1 text-[9px] sm:text-[11px] font-heading font-bold text-yellow-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current text-yellow-dark shrink-0" viewBox="0 0 24 24">
                   <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                 </svg>
                 <span class="shrink-0">{product.rating}</span>
-                <span class="text-text-muted font-normal text-[10px] sm:text-[11px] truncate whitespace-nowrap block" title={product.sales}>
+                <span class="text-text-muted font-normal text-[9px] sm:text-[11px] truncate whitespace-nowrap" title={product.sales}>
                   ({product.sales})
                 </span>
               </div>
             </div>
 
             <!-- Product Title -->
-            <h3 class="font-heading font-bold text-base text-text-dark leading-snug mb-2 px-1 group-hover:text-pink-deep transition-colors line-clamp-1 group-hover:line-clamp-none" title={product.title}>
+            <h3 class="font-heading font-bold text-xs sm:text-base text-text-dark leading-snug mb-1 sm:mb-2 px-0.5 sm:px-1 group-hover:text-pink-deep transition-colors line-clamp-1 group-hover:line-clamp-none" title={product.title}>
               {product.title}
             </h3>
 
             <!-- Product Description -->
-            <p class="text-xs text-text-muted leading-relaxed mb-4 px-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
+            <p class="text-[10px] sm:text-xs text-text-muted leading-relaxed mb-3 sm:mb-4 px-0.5 sm:px-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
               {product.description}
             </p>
           </div>
 
           <!-- Bottom Action Button (E-Commerce CTA) -->
-          <div class="pt-3 border-t border-gray-100 mt-auto">
+          <div class="pt-2.5 sm:pt-3 border-t border-gray-100 mt-auto">
             <a 
               href={product.actionLink}
-              class="w-full bg-yellow-light hover:bg-yellow text-text-dark font-heading font-bold text-xs py-2.5 px-4 rounded-xl shadow-xs hover:shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              class="w-full bg-yellow-light hover:bg-yellow text-text-dark font-heading font-bold text-[10px] sm:text-xs py-2 sm:py-2.5 px-2 sm:px-4 rounded-lg sm:rounded-xl shadow-xs hover:shadow-md flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <span>{product.actionText}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
