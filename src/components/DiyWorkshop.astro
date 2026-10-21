@@ -1,13 +1,13 @@
 ---
 // DiyWorkshop.astro
-// Interactive DIY & Workshop Video Showcase Section with 6 Cards (Streamable Video Player Modal / Inline Play)
+// Interactive DIY & Workshop Video Showcase Section with 6 Cards using diy1.jpeg - diy6.jpeg thumbnails
 const diyWorkshops = [
   {
     id: 1,
     title: 'Princess Birthday Crown',
     category: 'Princess Craft',
     description: 'Create magical, sparkling princess crowns adorned with crystals, beads, and custom charms.',
-    thumbnail: '/images/workshop/birthday-crown.jpeg',
+    thumbnail: '/images/products/diy1.jpeg',
     video: '/images/products/Crown.mov',
     badge: 'Popular Class',
     badgeColor: 'bg-pink-deep text-white',
@@ -20,7 +20,7 @@ const diyWorkshops = [
     title: 'Orchid Flower Bagcharm',
     category: 'Botanical Craft',
     description: 'Learn the delicate art of assembling realistic beaded orchid blooms with durable stainless wire.',
-    thumbnail: '/images/about3.jpeg',
+    thumbnail: '/images/products/diy2.jpeg',
     video: '/images/products/Orchid.mov',
     badge: 'Floral Special',
     badgeColor: 'bg-yellow text-text-dark',
@@ -33,7 +33,7 @@ const diyWorkshops = [
     title: 'Painting Canvas Totebag',
     category: 'Painting Class',
     description: 'Express yourself by painting artistic custom patterns on organic cotton canvas totebags.',
-    thumbnail: '/images/workshop/kids-clay.jpeg',
+    thumbnail: '/images/products/diy3.jpeg',
     video: '/images/products/Painting%20totebag.mov',
     badge: 'Relaxing Session',
     badgeColor: 'bg-[#5DADE2] text-white',
@@ -46,7 +46,7 @@ const diyWorkshops = [
     title: 'Paracord Bagcharm Craft',
     category: 'Weaving & Cord',
     description: 'Knotting and styling colorful outdoor-grade paracords into aesthetic daily bag accessories.',
-    thumbnail: '/images/workshop/flower-bagcharms.jpeg',
+    thumbnail: '/images/products/diy4.jpeg',
     video: '/images/products/Paracord%20bagcharm.mov',
     badge: 'Trending Craft',
     badgeColor: 'bg-pink-deep text-white',
@@ -59,9 +59,9 @@ const diyWorkshops = [
     title: 'Fluffy Moru Doll DIY',
     category: 'Plush & Wire',
     description: 'Bend, twist, and fluff wire plush chenille stems into super cute portable companion dolls.',
-    thumbnail: '/images/workshop/moru-doll.jpeg',
+    thumbnail: '/images/products/diy5.jpeg',
     video: '', // Coming soon
-    badge: 'Coming Soon Video',
+    badge: 'Video Coming Soon',
     badgeColor: 'bg-yellow-dark text-white',
     duration: 'Workshop',
     hasVideo: false,
@@ -72,9 +72,9 @@ const diyWorkshops = [
     title: 'Artisan Beads Watch Strap',
     category: 'Jewelry & Timepiece',
     description: 'Combine functional timepieces with artistic colorful beads, pearls, and custom elastic cords.',
-    thumbnail: '/images/workshop/beads-watch.png',
+    thumbnail: '/images/products/diy6.jpeg',
     video: '', // Coming soon
-    badge: 'Coming Soon Video',
+    badge: 'Video Coming Soon',
     badgeColor: 'bg-yellow-dark text-white',
     duration: 'Workshop',
     hasVideo: false,
@@ -126,7 +126,7 @@ const diyWorkshops = [
               data-video-title={item.title}
               data-video-cat={item.category}
             >
-              <!-- Thumbnail Image -->
+              <!-- Thumbnail Image (diy1.jpeg - diy6.jpeg) -->
               <img 
                 src={item.thumbnail} 
                 alt={item.title} 
@@ -284,7 +284,7 @@ const diyWorkshops = [
           class="inline-flex items-center gap-1.5 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-[10px] sm:text-xs px-4 py-2 rounded-full shadow-xs hover:scale-105 transition-all"
         >
           <span>Chat on WhatsApp</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -312,14 +312,11 @@ const diyWorkshops = [
       if (!modal || !video || !source) return;
 
       source.src = src;
-      // Auto-detect MIME type based on extension
       const isMov = src.toLowerCase().endsWith('.mov');
       source.type = isMov ? 'video/quicktime' : 'video/mp4';
 
       video.load();
-      video.play().catch(() => {
-        // Autoplay policy fallback
-      });
+      video.play().catch(() => {});
 
       if (modalTitle) modalTitle.textContent = title;
       if (modalCat) modalCat.textContent = cat;
