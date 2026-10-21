@@ -1,6 +1,7 @@
 ---
 // DiyWorkshop.astro
 // Interactive DIY & Workshop Video Showcase Section with 6 Cards using diy1.jpeg - diy6.jpeg thumbnails
+// Modal designed in a TikTok/Reels portrait 9:16 mobile-first aesthetic
 const diyWorkshops = [
   {
     id: 1,
@@ -107,7 +108,7 @@ const diyWorkshops = [
         DIY Kits & Workshop Videos
       </h2>
       <p class="text-text-muted mt-2 sm:mt-3 max-w-xl mx-auto text-xs sm:text-base leading-relaxed">
-        Watch hands-on tutorial snippets and creative workshop highlights. Click any card to stream the full video!
+        Watch hands-on tutorial snippets and creative workshop highlights. Click any card to stream the full portrait video!
       </p>
     </div>
 
@@ -230,61 +231,131 @@ const diyWorkshops = [
 
   </div>
 
-  <!-- Video Streaming Modal (Responsive & High Performance) -->
+  <!-- TikTok / Reels Style Portrait Video Modal -->
   <div 
     id="video-stream-modal" 
-    class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6 transition-all duration-300"
+    class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 transition-all duration-300"
     role="dialog"
     aria-modal="true"
   >
-    <div class="relative w-full max-w-2xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-pink/30 flex flex-col">
+    <!-- Portrait Phone Frame Container (Max width approx 400px, 9:16 aspect ratio) -->
+    <div class="relative w-full max-w-[390px] h-[90vh] max-h-[780px] bg-black rounded-3xl sm:rounded-[36px] overflow-hidden shadow-2xl border border-white/20 flex flex-col justify-between">
       
-      <!-- Modal Header -->
-      <div class="px-4 sm:px-6 py-3.5 sm:py-4 bg-cream flex items-center justify-between border-b border-pink/20">
-        <div>
-          <span id="modal-video-cat" class="text-[10px] sm:text-xs font-heading font-semibold uppercase tracking-wider text-pink-deep block">Workshop Class</span>
-          <h4 id="modal-video-title" class="font-heading font-bold text-sm sm:text-lg text-text-dark leading-tight">DIY Video Player</h4>
+      <!-- Video Element: Fills entire portrait frame -->
+      <video 
+        id="stream-video-element" 
+        playsinline 
+        loop
+        preload="metadata"
+        class="absolute inset-0 w-full h-full object-cover cursor-pointer z-0"
+      >
+        <source id="video-source-element" src="" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Center Play/Pause Indicator (Overlay when paused) -->
+      <div id="video-paused-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 hidden">
+        <div class="w-16 h-16 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 shadow-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 translate-x-0.5 fill-current" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
         </div>
+      </div>
+
+      <!-- Top Overlay: Header Bar with Category, Title & Close Button -->
+      <div class="relative z-20 w-full p-4 sm:p-5 bg-gradient-to-b from-black/80 via-black/40 to-transparent flex items-start justify-between">
+        <div class="flex items-center gap-2.5">
+          <img src="/logo.png" alt="Looca" class="w-9 h-9 rounded-full border border-pink-deep object-cover shadow-sm" />
+          <div class="text-left">
+            <span id="modal-video-cat" class="text-[10px] font-heading font-extrabold uppercase tracking-widest text-[#89CFF0] block">Workshop</span>
+            <span class="text-white text-xs font-heading font-bold flex items-center gap-1">
+              <span>looca_id</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-[#5DADE2]" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
         <button 
           id="close-video-modal"
-          class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-pink-light border border-pink/30 flex items-center justify-center text-text-dark hover:text-pink-deep transition-all cursor-pointer focus:outline-none"
+          class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md hover:bg-black/70 border border-white/30 flex items-center justify-center text-white transition-all cursor-pointer focus:outline-none"
           aria-label="Close Video Player"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
       </div>
 
-      <!-- Video Player Viewport -->
-      <div class="relative w-full bg-black aspect-[9/14] sm:aspect-video max-h-[70vh] flex items-center justify-center overflow-hidden">
-        <video 
-          id="stream-video-element" 
-          controls 
-          playsinline 
-          preload="metadata"
-          class="w-full h-full object-contain"
+      <!-- Right Floating Action Sidebar (TikTok Style: Like, Sound, WhatsApp) -->
+      <div class="absolute right-3 bottom-24 z-20 flex flex-col items-center gap-4 text-white">
+        <!-- Sound Toggle -->
+        <button 
+          id="sound-toggle-btn"
+          class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all cursor-pointer"
+          aria-label="Toggle Sound"
         >
-          <source id="video-source-element" src="" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          <svg id="sound-unmuted-icon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg id="sound-muted-icon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <!-- Like Heart -->
+        <button 
+          id="tiktok-like-btn"
+          class="flex flex-col items-center gap-1 group hover:scale-110 active:scale-90 transition-all cursor-pointer"
+        >
+          <div class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:text-pink-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <span class="text-[9px] font-heading font-semibold text-white/90">Love</span>
+        </button>
+
+        <!-- Chat / Inquire -->
+        <a 
+          id="modal-inquire-icon"
+          href="https://wa.me/6281215312939" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex flex-col items-center gap-1 group hover:scale-110 active:scale-90 transition-all"
+        >
+          <div class="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+          </div>
+          <span class="text-[9px] font-heading font-semibold text-white/90">Inquire</span>
+        </a>
       </div>
 
-      <!-- Modal Footer -->
-      <div class="px-4 sm:px-6 py-3 bg-white flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
-        <p class="text-[11px] sm:text-xs text-text-muted">
-          Want to experience this workshop or order a complete DIY craft kit?
+      <!-- Bottom Overlay: Title, Description & Action CTA Button -->
+      <div class="relative z-20 w-full p-4 sm:p-5 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
+        <h4 id="modal-video-title" class="font-heading font-bold text-base sm:text-lg text-white leading-snug drop-shadow-md mb-1.5">
+          DIY Video Player
+        </h4>
+        <p class="text-[11px] sm:text-xs text-white/80 line-clamp-2 leading-relaxed mb-3 drop-shadow-sm">
+          Watch hands-on workshop highlights and DIY tutorial guides by Looca ID. Tap screen to pause/play.
         </p>
+
         <a 
           id="modal-inquire-link"
           href="https://wa.me/6281215312939" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-[10px] sm:text-xs px-4 py-2 rounded-full shadow-xs hover:scale-105 transition-all"
+          class="w-full inline-flex items-center justify-center gap-2 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
         >
-          <span>Chat on WhatsApp</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <span>Book Workshop / Order DIY Kit</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -305,8 +376,43 @@ const diyWorkshops = [
     const modalTitle = document.getElementById('modal-video-title');
     const modalCat = document.getElementById('modal-video-cat');
     const modalInquire = document.getElementById('modal-inquire-link') as HTMLAnchorElement | null;
+    const modalInquireIcon = document.getElementById('modal-inquire-icon') as HTMLAnchorElement | null;
+    const pausedOverlay = document.getElementById('video-paused-overlay');
+    const soundBtn = document.getElementById('sound-toggle-btn');
+    const soundUnmutedIcon = document.getElementById('sound-unmuted-icon');
+    const soundMutedIcon = document.getElementById('sound-muted-icon');
+    const likeBtn = document.getElementById('tiktok-like-btn');
 
     const triggers = document.querySelectorAll('.video-trigger-container, .stream-btn');
+
+    const updateSoundIcons = () => {
+      if (!video) return;
+      if (video.muted) {
+        soundUnmutedIcon?.classList.add('hidden');
+        soundMutedIcon?.classList.remove('hidden');
+      } else {
+        soundUnmutedIcon?.classList.remove('hidden');
+        soundMutedIcon?.classList.add('hidden');
+      }
+    };
+
+    const toggleSound = (e?: Event) => {
+      e?.stopPropagation();
+      if (!video) return;
+      video.muted = !video.muted;
+      updateSoundIcons();
+    };
+
+    const togglePlayPause = () => {
+      if (!video) return;
+      if (video.paused) {
+        video.play();
+        pausedOverlay?.classList.add('hidden');
+      } else {
+        video.pause();
+        pausedOverlay?.classList.remove('hidden');
+      }
+    };
 
     const openVideo = (src: string, title: string, cat: string) => {
       if (!modal || !video || !source) return;
@@ -315,14 +421,24 @@ const diyWorkshops = [
       const isMov = src.toLowerCase().endsWith('.mov');
       source.type = isMov ? 'video/quicktime' : 'video/mp4';
 
+      video.muted = false; // default unmuted with sound
       video.load();
-      video.play().catch(() => {});
+      pausedOverlay?.classList.add('hidden');
+      updateSoundIcons();
+
+      video.play().catch(() => {
+        // Fallback for browser autoplay policies: mute and play
+        video.muted = true;
+        updateSoundIcons();
+        video.play().catch(() => {});
+      });
 
       if (modalTitle) modalTitle.textContent = title;
       if (modalCat) modalCat.textContent = cat;
-      if (modalInquire) {
-        modalInquire.href = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
-      }
+      
+      const whatsappUrl = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
+      if (modalInquire) modalInquire.href = whatsappUrl;
+      if (modalInquireIcon) modalInquireIcon.href = whatsappUrl;
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -352,7 +468,20 @@ const diyWorkshops = [
       });
     });
 
-    closeBtn?.addEventListener('click', closeVideo);
+    // Tap video to toggle play/pause like TikTok
+    video?.addEventListener('click', togglePlayPause);
+    soundBtn?.addEventListener('click', toggleSound);
+
+    // Heart like animation effect
+    likeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      likeBtn.classList.toggle('text-pink-deep');
+    });
+
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeVideo();
+    });
 
     modal?.addEventListener('click', (e) => {
       if (e.target === modal) {
