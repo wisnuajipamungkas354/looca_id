@@ -418,7 +418,6 @@ const diyWorkshops = [
       } else {
         video.pause();
         pausedOverlay?.classList.remove('hidden');
-        // When paused, show info overlay
         if (infoOverlay) {
           infoOverlay.classList.remove('opacity-0', 'pointer-events-none');
           infoOverlay.classList.add('opacity-100');
@@ -430,15 +429,17 @@ const diyWorkshops = [
     const openVideo = (src: string, title: string, cat: string) => {
       if (!modal || !video) return;
 
-      // Set src directly on HTMLVideoElement to ensure cross-browser compatibility
+      // Display modal first
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      // Set video source
       video.src = src;
       if (source) {
         source.src = src;
-        const isMov = src.toLowerCase().endsWith('.mov');
-        source.type = isMov ? 'video/quicktime' : 'video/mp4';
       }
 
-      // Start muted to guarantee autoplay is permitted on mobile & modern browsers
       video.muted = true;
       video.playsInline = true;
       video.currentTime = 0;
@@ -449,7 +450,7 @@ const diyWorkshops = [
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          console.log('Autoplay deferred, awaiting user touch:', err);
+          console.log('Autoplay error / waiting for user interaction:', err);
         });
       }
 
@@ -459,12 +460,7 @@ const diyWorkshops = [
       const whatsappUrl = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
       if (modalInquire) modalInquire.href = whatsappUrl;
 
-      // Start auto-fade timer
       resetFadeTimer();
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
     };
 
     const closeVideo = () => {
@@ -476,19 +472,20 @@ const diyWorkshops = [
       document.body.style.overflow = '';
     };
 
-    triggers.forEach((trigger) => {
-      trigger.addEventListener('click', (e) => {
-        const target = trigger as HTMLElement;
-        const hasVideo = target.getAttribute('data-has-video') !== 'false';
-        const src = target.getAttribute('data-video-src');
-        const title = target.getAttribute('data-video-title') || 'DIY Workshop';
-        const cat = target.getAttribute('data-video-cat') || 'Workshop';
+    // Use event delegation on document so clicks inside nested elements always fire correctly
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('.video-trigger-container, .stream-btn') as HTMLElement | null;
+      if (!target) return;
 
-        if (hasVideo && src) {
-          e.preventDefault();
-          openVideo(src, title, cat);
-        }
-      });
+      const hasVideo = target.getAttribute('data-has-video') !== 'false';
+      const src = target.getAttribute('data-video-src');
+      const title = target.getAttribute('data-video-title') || 'DIY Workshop';
+      const cat = target.getAttribute('data-video-cat') || 'Workshop';
+
+      if (hasVideo && src) {
+        e.preventDefault();
+        openVideo(src, title, cat);
+      }
     });
 
     // Tap video to toggle play/pause like TikTok
@@ -519,9 +516,11 @@ const diyWorkshops = [
     });
   };
 
+  // Run on DOM ready, Astro page load, or immediately if already loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initVideoPlayer);
   } else {
     initVideoPlayer();
   }
+  document.addEventListener('astro:page-load', initVideoPlayer);
 </script>
