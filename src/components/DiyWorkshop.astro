@@ -9,7 +9,7 @@ const diyWorkshops = [
     category: 'Princess Craft',
     description: 'Create magical, sparkling princess crowns adorned with crystals, beads, and custom charms.',
     thumbnail: '/images/products/diy1.jpeg',
-    video: '/images/products/Crown.mov',
+    video: '/images/products/crown.mp4',
     badge: 'Popular Class',
     badgeColor: 'bg-pink-deep text-white',
     duration: '0:15',
@@ -22,7 +22,7 @@ const diyWorkshops = [
     category: 'Botanical Craft',
     description: 'Learn the delicate art of assembling realistic beaded orchid blooms with durable stainless wire.',
     thumbnail: '/images/products/diy2.jpeg',
-    video: '/images/products/Orchid.mov',
+    video: '/images/products/orchid.mp4',
     badge: 'Floral Special',
     badgeColor: 'bg-yellow text-text-dark',
     duration: '0:15',
@@ -35,7 +35,7 @@ const diyWorkshops = [
     category: 'Painting Class',
     description: 'Express yourself by painting artistic custom patterns on organic cotton canvas totebags.',
     thumbnail: '/images/products/diy3.jpeg',
-    video: '/images/products/Painting%20totebag.mov',
+    video: '/images/products/painting-totebag.mp4',
     badge: 'Relaxing Session',
     badgeColor: 'bg-[#5DADE2] text-white',
     duration: '0:15',
@@ -48,7 +48,7 @@ const diyWorkshops = [
     category: 'Weaving & Cord',
     description: 'Knotting and styling colorful outdoor-grade paracords into aesthetic daily bag accessories.',
     thumbnail: '/images/products/diy4.jpeg',
-    video: '/images/products/Paracord%20bagcharm.mov',
+    video: '/images/products/paracord-bagcharm.mp4',
     badge: 'Trending Craft',
     badgeColor: 'bg-pink-deep text-white',
     duration: '0:20',
@@ -415,23 +415,30 @@ const diyWorkshops = [
     };
 
     const openVideo = (src: string, title: string, cat: string) => {
-      if (!modal || !video || !source) return;
+      if (!modal || !video) return;
 
-      source.src = src;
-      const isMov = src.toLowerCase().endsWith('.mov');
-      source.type = isMov ? 'video/quicktime' : 'video/mp4';
+      // Set src directly on HTMLVideoElement to ensure cross-browser compatibility
+      video.src = src;
+      if (source) {
+        source.src = src;
+        const isMov = src.toLowerCase().endsWith('.mov');
+        source.type = isMov ? 'video/quicktime' : 'video/mp4';
+      }
 
-      video.muted = false; // default unmuted with sound
+      // Start muted to guarantee autoplay is permitted on mobile & modern browsers
+      video.muted = true;
+      video.playsInline = true;
+      video.currentTime = 0;
       video.load();
       pausedOverlay?.classList.add('hidden');
       updateSoundIcons();
 
-      video.play().catch(() => {
-        // Fallback for browser autoplay policies: mute and play
-        video.muted = true;
-        updateSoundIcons();
-        video.play().catch(() => {});
-      });
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.log('Autoplay deferred, awaiting user touch:', err);
+        });
+      }
 
       if (modalTitle) modalTitle.textContent = title;
       if (modalCat) modalCat.textContent = cat;
