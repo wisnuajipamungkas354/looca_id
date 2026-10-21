@@ -1,10 +1,12 @@
 ---
 // Products.astro
 import ProductCard from './ProductCard.astro';
-import { categories, products } from '../data/products';
+import DiyCard from './DiyCard.astro';
+import { products, diyWorkshops } from '../data/products';
 
-// Section on homepage displays maximum 6 items
+// Section on homepage displays maximum 6 items for each tab
 const featuredProducts = products.slice(0, 6);
+const featuredDiy = diyWorkshops.slice(0, 6);
 ---
 
 <section id="products" class="relative py-16 sm:py-20 lg:py-28 px-3 sm:px-8 bg-cream overflow-hidden">
@@ -21,90 +23,225 @@ const featuredProducts = products.slice(0, 6);
         <span>Catalog & Gallery</span>
       </div>
       <h2 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-text-dark tracking-tight">
-        Featured Products & Gallery
+        Featured Products & DIY
       </h2>
       <p class="text-text-muted mt-2 sm:mt-3 max-w-lg mx-auto text-xs sm:text-base">
-        Explore our curated handmade creations, from daily accessories to custom fashion and bulk souvenir orders.
+        Explore our curated handmade creations, custom orders, and interactive DIY workshop video tutorials.
       </p>
     </div>
 
-    <!-- Category Tabs (Filter featured items) -->
-    <div class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-3 pt-1 mb-8 sm:mb-12 no-scrollbar px-1">
-      {categories.map((cat, index) => (
-        <button
-          type="button"
-          data-tab={cat.id}
-          class={`tab-btn shrink-0 flex items-center gap-1.5 sm:gap-2 font-heading font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
-            index === 0
-              ? 'active bg-pink-deep text-white shadow-md shadow-pink-deep/20 scale-105'
-              : 'bg-white/90 text-text-dark border border-pink/20 shadow-xs'
-          }`}
-        >
-          <span class="inline-flex items-center" set:html={cat.iconSvg} />
-          <span>{cat.label}</span>
-        </button>
-      ))}
-    </div>
-
-    <!-- Product Cards Grid: 6 items limit -->
-    <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-      {featuredProducts.map((product) => (
-        <ProductCard product={product} />
-      ))}
-    </div>
-
-    <!-- Empty State Fallback (Hidden by default) -->
-    <div id="empty-state" class="hidden text-center py-12">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto text-pink-deep mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-      </svg>
-      <h4 class="font-heading font-bold text-lg text-text-dark">No featured products in this category</h4>
-      <p class="text-xs text-text-muted mt-1">Check out our full catalog to discover all creations.</p>
-    </div>
-
-    <!-- View All Products Button (Lihat Produk Lainnya in English) -->
-    <div class="mt-10 sm:mt-14 text-center">
-      <a 
-        href="/products" 
-        class="inline-flex items-center justify-center gap-2.5 sm:gap-3 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-base px-6 sm:px-9 py-3 sm:py-4 rounded-full shadow-lg shadow-pink-deep/30 hover:scale-105 active:scale-95 transition-all group"
+    <!-- 2 Main Tabs: Products & DIY -->
+    <div class="flex items-center justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+      <!-- Products Tab Button -->
+      <button
+        type="button"
+        id="tab-btn-products"
+        class="home-main-tab active flex items-center gap-2 font-heading font-bold text-xs sm:text-sm px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full bg-pink-deep text-white shadow-md shadow-pink-deep/20 scale-105 transition-all duration-300 cursor-pointer"
+        data-target="products-panel"
       >
-        <span>View More Products</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
         </svg>
-      </a>
-      <p class="text-[11px] sm:text-xs text-text-muted font-heading mt-2.5">
-        Browse our full handmade catalog, DIY kits & design portfolio
-      </p>
+        <span>Products</span>
+      </button>
+
+      <!-- DIY Tab Button -->
+      <button
+        type="button"
+        id="tab-btn-diy"
+        class="home-main-tab flex items-center gap-2 font-heading font-bold text-xs sm:text-sm px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full bg-white/90 text-text-dark border border-pink/20 shadow-xs transition-all duration-300 cursor-pointer"
+        data-target="diy-panel"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-pink-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <span>DIY & Workshop</span>
+      </button>
+    </div>
+
+    <!-- Panel 1: Products Grid (6 items limit) -->
+    <div id="products-panel" class="tab-content-panel block">
+      <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        {featuredProducts.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+
+      <!-- View All Products Button -->
+      <div class="mt-10 sm:mt-14 text-center">
+        <a 
+          href="/products" 
+          class="inline-flex items-center justify-center gap-2.5 sm:gap-3 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-base px-6 sm:px-9 py-3 sm:py-4 rounded-full shadow-lg shadow-pink-deep/30 hover:scale-105 active:scale-95 transition-all group"
+        >
+          <span>View More Products</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <p class="text-[11px] sm:text-xs text-text-muted font-heading mt-2.5">
+          Browse our complete handmade collection and accessories
+        </p>
+      </div>
+    </div>
+
+    <!-- Panel 2: DIY & Workshop Grid (6 cards with video streaming modal) -->
+    <div id="diy-panel" class="tab-content-panel hidden">
+      <div id="diy-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        {featuredDiy.map((item) => (
+          <DiyCard item={item} />
+        ))}
+      </div>
+
+      <!-- View All DIY & Workshop Button -->
+      <div class="mt-10 sm:mt-14 text-center">
+        <a 
+          href="/products#diy-workshop" 
+          class="inline-flex items-center justify-center gap-2.5 sm:gap-3 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-base px-6 sm:px-9 py-3 sm:py-4 rounded-full shadow-lg shadow-pink-deep/30 hover:scale-105 active:scale-95 transition-all group"
+        >
+          <span>Explore All DIY Workshops</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <p class="text-[11px] sm:text-xs text-text-muted font-heading mt-2.5">
+          Watch all creative tutorial snippets and workshop recordings
+        </p>
+      </div>
     </div>
 
   </div>
+
+  <!-- TikTok / Reels Style Portrait Video Modal for Homepage -->
+  <div 
+    id="home-video-stream-modal" 
+    class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 transition-all duration-300"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="relative w-full max-w-[390px] h-[90vh] max-h-[780px] bg-black rounded-3xl sm:rounded-[36px] overflow-hidden shadow-2xl border border-white/20 flex flex-col justify-between">
+      
+      <!-- Video Element -->
+      <video 
+        id="home-stream-video-element" 
+        playsinline 
+        loop
+        preload="metadata"
+        class="absolute inset-0 w-full h-full object-cover cursor-pointer z-0"
+      >
+        <source id="home-video-source-element" src="" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Center Play/Pause Indicator -->
+      <div id="home-video-paused-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 hidden">
+        <div class="w-16 h-16 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center border border-white/20 shadow-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 translate-x-0.5 fill-current" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Top Overlay: Header Bar with Logo, Info & Close -->
+      <div class="relative z-20 w-full p-4 sm:p-5 bg-gradient-to-b from-black/80 via-black/40 to-transparent flex items-start justify-between">
+        <div class="flex items-center gap-2.5">
+          <img src="/logo.png" alt="Looca" class="w-9 h-9 rounded-full border border-pink-deep object-cover shadow-sm" />
+          <div class="text-left">
+            <span id="home-modal-video-cat" class="text-[10px] font-heading font-extrabold uppercase tracking-widest text-[#89CFF0] block">Workshop</span>
+            <span class="text-white text-xs font-heading font-bold flex items-center gap-1">
+              <span>looca_id</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-[#5DADE2]" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <button 
+          id="home-close-video-modal"
+          class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md hover:bg-black/70 border border-white/30 flex items-center justify-center text-white transition-all cursor-pointer focus:outline-none"
+          aria-label="Close Video Player"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Right Floating Action Sidebar: Like & Sound -->
+      <div class="absolute right-3 bottom-24 z-20 flex flex-col items-center gap-4 text-white">
+        <!-- Sound Toggle -->
+        <button 
+          id="home-sound-toggle-btn"
+          class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all cursor-pointer"
+          aria-label="Toggle Sound"
+        >
+          <svg id="home-sound-unmuted-icon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg id="home-sound-muted-icon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <!-- Like Heart -->
+        <button 
+          id="home-tiktok-like-btn"
+          class="flex flex-col items-center gap-1 group hover:scale-110 active:scale-90 transition-all cursor-pointer"
+        >
+          <div class="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:text-pink-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <span class="text-[9px] font-heading font-semibold text-white/90">Love</span>
+        </button>
+      </div>
+
+      <!-- Bottom Overlay: Title, Description & Action CTA Button with auto-fade -->
+      <div 
+        id="home-video-info-overlay"
+        class="relative z-20 w-full p-4 sm:p-5 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-700 ease-out"
+      >
+        <h4 id="home-modal-video-title" class="font-heading font-bold text-base sm:text-lg text-white leading-snug drop-shadow-md mb-1.5">
+          DIY Video Player
+        </h4>
+        <p class="text-[11px] sm:text-xs text-white/80 line-clamp-2 leading-relaxed mb-3 drop-shadow-sm">
+          Watch hands-on workshop highlights and DIY tutorial guides by Looca ID. Tap screen to pause/play.
+        </p>
+
+        <a 
+          id="home-modal-inquire-link"
+          href="https://wa.me/6281215312939" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="w-full inline-flex items-center justify-center gap-2 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+        >
+          <span>Book Workshop / Order DIY Kit</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
 </section>
 
 <style>
-  /* Hide scrollbar for category tabs */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* Smooth tab transition */
-  .product-item {
+  .product-item, .diy-card {
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .product-item.hidden-item {
-    display: none;
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  /* Slider track */
   .product-slider-track {
     will-change: transform;
   }
@@ -116,95 +253,57 @@ const featuredProducts = products.slice(0, 6);
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const initProductHoverSliders = () => {
-    const productCards = document.querySelectorAll<HTMLElement>('.product-item');
+  const initProductsComponent = () => {
+    // 1. Two Main Tabs Switch Logic
+    const tabProducts = document.getElementById('tab-btn-products');
+    const tabDiy = document.getElementById('tab-btn-diy');
+    const panelProducts = document.getElementById('products-panel');
+    const panelDiy = document.getElementById('diy-panel');
 
-    productCards.forEach((card) => {
-      const track = card.querySelector<HTMLElement>('.product-slider-track');
-      const wrapper = card.querySelector<HTMLElement>('.product-image-wrapper');
-      const dots = card.querySelectorAll<HTMLElement>('.slider-dot');
-      
-      if (!track || !wrapper) return;
-      
-      const realCount = parseInt(wrapper.getAttribute('data-slides-count') || '1', 10);
-      if (realCount <= 1) return;
+    const switchTab = (activeTab: 'products' | 'diy') => {
+      if (activeTab === 'products') {
+        tabProducts?.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+        tabProducts?.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
 
-      let currentIndex = 0;
-      let timer: number | null = null;
-      let isSliding = false;
+        tabDiy?.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+        tabDiy?.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
 
-      // Update dot active indicator
-      const updateDots = (index: number) => {
-        const activeDotIdx = index % realCount;
-        dots.forEach((dot, idx) => {
-          if (idx === activeDotIdx) {
-            dot.classList.remove('w-1.5', 'bg-white/50');
-            dot.classList.add('w-4', 'bg-white', 'shadow-xs');
-          } else {
-            dot.classList.remove('w-4', 'bg-white', 'shadow-xs');
-            dot.classList.add('w-1.5', 'bg-white/50');
-          }
-        });
-      };
+        panelProducts?.classList.remove('hidden');
+        panelProducts?.classList.add('block');
+        panelDiy?.classList.remove('block');
+        panelDiy?.classList.add('hidden');
 
-      // Slide forward seamlessly in ONE direction without reversing
-      const slideNext = () => {
-        if (isSliding) return;
-        isSliding = true;
-        currentIndex++;
+        gsap.fromTo(
+          '#products-panel .product-item',
+          { opacity: 0, scale: 0.96, y: 15 },
+          { opacity: 1, scale: 1, y: 0, stagger: 0.04, duration: 0.35, ease: 'power2.out', clearProps: 'all' }
+        );
+      } else {
+        tabDiy?.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+        tabDiy?.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
 
-        track.style.transition = 'transform 550ms cubic-bezier(0.25, 1, 0.5, 1)';
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        updateDots(currentIndex);
+        tabProducts?.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+        tabProducts?.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
 
-        // When reaching the cloned first image at the end
-        if (currentIndex === realCount) {
-          setTimeout(() => {
-            // Seamlessly snap back to actual first image with no transition
-            track.style.transition = 'none';
-            currentIndex = 0;
-            track.style.transform = `translateX(0%)`;
-            // Trigger reflow to apply transition: none
-            void track.offsetWidth;
-            isSliding = false;
-          }, 550);
-        } else {
-          setTimeout(() => {
-            isSliding = false;
-          }, 550);
-        }
-      };
+        panelDiy?.classList.remove('hidden');
+        panelDiy?.classList.add('block');
+        panelProducts?.classList.remove('block');
+        panelProducts?.classList.add('hidden');
 
-      const startSliding = () => {
-        if (timer) clearInterval(timer);
-        // Slide to next image immediately on hover
-        slideNext();
-        // Continue sliding forward continuously in one direction
-        timer = window.setInterval(() => {
-          slideNext();
-        }, 1800);
-      };
+        gsap.fromTo(
+          '#diy-panel .diy-card',
+          { opacity: 0, scale: 0.96, y: 15 },
+          { opacity: 1, scale: 1, y: 0, stagger: 0.04, duration: 0.35, ease: 'power2.out', clearProps: 'all' }
+        );
+      }
+    };
 
-      const stopSliding = () => {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      };
+    tabProducts?.addEventListener('click', () => switchTab('products'));
+    tabDiy?.addEventListener('click', () => switchTab('diy'));
 
-      card.addEventListener('mouseenter', startSliding);
-      card.addEventListener('mouseleave', stopSliding);
-    });
-  };
-
-  const initProductTabs = () => {
-    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
-    const productItems = document.querySelectorAll<HTMLElement>('.product-item');
-    const emptyState = document.getElementById('empty-state');
-
-    // Initial GSAP reveal
+    // 2. Initial GSAP entrance animation
     gsap.fromTo(
-      '.product-item',
+      '#products-panel .product-item',
       { opacity: 0, y: 25 },
       {
         opacity: 1,
@@ -222,75 +321,232 @@ const featuredProducts = products.slice(0, 6);
       }
     );
 
-    // Tab Click Filtering Logic
-    tabBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const targetCategory = btn.getAttribute('data-tab');
+    // 3. Hover sliders for multi-image product cards
+    const productCards = document.querySelectorAll<HTMLElement>('#products-panel .product-item');
+    productCards.forEach((card) => {
+      const track = card.querySelector<HTMLElement>('.product-slider-track');
+      const wrapper = card.querySelector<HTMLElement>('.product-image-wrapper');
+      const dots = card.querySelectorAll<HTMLElement>('.slider-dot');
+      
+      if (!track || !wrapper) return;
+      
+      const realCount = parseInt(wrapper.getAttribute('data-slides-count') || '1', 10);
+      if (realCount <= 1) return;
 
-        // Update Active Button Style
-        tabBtns.forEach((b) => {
-          b.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
-          b.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
-        });
+      let currentIndex = 0;
+      let timer: number | null = null;
+      let isSliding = false;
 
-        btn.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
-        btn.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
-
-        // Filter Products
-        let visibleCount = 0;
-        productItems.forEach((item) => {
-          const itemCategory = item.getAttribute('data-category');
-
-          if (targetCategory === 'all' || itemCategory === targetCategory) {
-            item.classList.remove('hidden-item');
-            visibleCount++;
+      const updateDots = (index: number) => {
+        const activeDotIdx = index % realCount;
+        dots.forEach((dot, idx) => {
+          if (idx === activeDotIdx) {
+            dot.classList.remove('w-1.5', 'bg-white/50');
+            dot.classList.add('w-4', 'bg-white', 'shadow-xs');
           } else {
-            item.classList.add('hidden-item');
+            dot.classList.remove('w-4', 'bg-white', 'shadow-xs');
+            dot.classList.add('w-1.5', 'bg-white/50');
           }
         });
+      };
 
-        // Show/Hide Empty State
-        if (emptyState) {
-          if (visibleCount === 0) {
-            emptyState.classList.remove('hidden');
-          } else {
-            emptyState.classList.add('hidden');
-          }
+      const slideNext = () => {
+        if (isSliding) return;
+        isSliding = true;
+        currentIndex++;
+
+        track.style.transition = 'transform 550ms cubic-bezier(0.25, 1, 0.5, 1)';
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        updateDots(currentIndex);
+
+        if (currentIndex === realCount) {
+          setTimeout(() => {
+            track.style.transition = 'none';
+            currentIndex = 0;
+            track.style.transform = `translateX(0%)`;
+            void track.offsetWidth;
+            isSliding = false;
+          }, 550);
+        } else {
+          setTimeout(() => {
+            isSliding = false;
+          }, 550);
         }
+      };
 
-        // Animate newly visible items
-        const visibleItems = document.querySelectorAll('.product-item:not(.hidden-item)');
-        gsap.fromTo(
-          visibleItems,
-          { opacity: 0, scale: 0.95, y: 15 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            stagger: 0.04,
-            duration: 0.4,
-            ease: 'back.out(1.2)',
-            clearProps: 'all',
-          }
-        );
-      });
+      const startSliding = () => {
+        if (timer) clearInterval(timer);
+        slideNext();
+        timer = window.setInterval(() => {
+          slideNext();
+        }, 1800);
+      };
+
+      const stopSliding = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      };
+
+      card.addEventListener('mouseenter', startSliding);
+      card.addEventListener('mouseleave', stopSliding);
     });
 
-    // Initialize Hover Sliders for multi-image cards
-    initProductHoverSliders();
+    // 4. Video Streaming Modal for DIY Cards on Homepage
+    const modal = document.getElementById('home-video-stream-modal');
+    const closeBtn = document.getElementById('home-close-video-modal');
+    const video = document.getElementById('home-stream-video-element') as HTMLVideoElement | null;
+    const source = document.getElementById('home-video-source-element') as HTMLSourceElement | null;
+    const modalTitle = document.getElementById('home-modal-video-title');
+    const modalCat = document.getElementById('home-modal-video-cat');
+    const modalInquire = document.getElementById('home-modal-inquire-link') as HTMLAnchorElement | null;
+    const pausedOverlay = document.getElementById('home-video-paused-overlay');
+    const infoOverlay = document.getElementById('home-video-info-overlay');
+    const soundBtn = document.getElementById('home-sound-toggle-btn');
+    const soundUnmutedIcon = document.getElementById('home-sound-unmuted-icon');
+    const soundMutedIcon = document.getElementById('home-sound-muted-icon');
+    const likeBtn = document.getElementById('home-tiktok-like-btn');
 
-    // Failsafe: Ensure visible items are never stuck invisible
-    setTimeout(() => {
-      document.querySelectorAll('.product-item:not(.hidden-item)').forEach((el) => {
-        (el as HTMLElement).style.opacity = '1';
-        (el as HTMLElement).style.transform = 'none';
-      });
-    }, 1000);
+    let fadeTimer: number | null = null;
+
+    const resetFadeTimer = () => {
+      if (fadeTimer) clearTimeout(fadeTimer);
+      if (infoOverlay) {
+        infoOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        infoOverlay.classList.add('opacity-100');
+      }
+
+      fadeTimer = window.setTimeout(() => {
+        if (video && !video.paused && infoOverlay) {
+          infoOverlay.classList.remove('opacity-100');
+          infoOverlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+      }, 2500);
+    };
+
+    const updateSoundIcons = () => {
+      if (!video) return;
+      if (video.muted) {
+        soundUnmutedIcon?.classList.add('hidden');
+        soundMutedIcon?.classList.remove('hidden');
+      } else {
+        soundUnmutedIcon?.classList.remove('hidden');
+        soundMutedIcon?.classList.add('hidden');
+      }
+    };
+
+    const toggleSound = (e?: Event) => {
+      e?.stopPropagation();
+      if (!video) return;
+      video.muted = !video.muted;
+      updateSoundIcons();
+      resetFadeTimer();
+    };
+
+    const togglePlayPause = () => {
+      if (!video) return;
+      if (video.paused) {
+        video.play();
+        pausedOverlay?.classList.add('hidden');
+        resetFadeTimer();
+      } else {
+        video.pause();
+        pausedOverlay?.classList.remove('hidden');
+        if (infoOverlay) {
+          infoOverlay.classList.remove('opacity-0', 'pointer-events-none');
+          infoOverlay.classList.add('opacity-100');
+        }
+        if (fadeTimer) clearTimeout(fadeTimer);
+      }
+    };
+
+    const openVideo = (src: string, title: string, cat: string) => {
+      if (!modal || !video) return;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      video.src = src;
+      if (source) source.src = src;
+
+      video.muted = true;
+      video.playsInline = true;
+      video.currentTime = 0;
+      video.load();
+      pausedOverlay?.classList.add('hidden');
+      updateSoundIcons();
+
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.log('Autoplay error / user interaction required:', err);
+        });
+      }
+
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalCat) modalCat.textContent = cat;
+      
+      const whatsappUrl = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
+      if (modalInquire) modalInquire.href = whatsappUrl;
+
+      resetFadeTimer();
+    };
+
+    const closeVideo = () => {
+      if (!modal || !video) return;
+      video.pause();
+      if (fadeTimer) clearTimeout(fadeTimer);
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    // Listen to video clicks inside #diy-panel
+    panelDiy?.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('.video-trigger-container, .stream-btn') as HTMLElement | null;
+      if (!target) return;
+
+      const hasVideo = target.getAttribute('data-has-video') !== 'false';
+      const src = target.getAttribute('data-video-src');
+      const title = target.getAttribute('data-video-title') || 'DIY Workshop';
+      const cat = target.getAttribute('data-video-cat') || 'Workshop';
+
+      if (hasVideo && src) {
+        e.preventDefault();
+        openVideo(src, title, cat);
+      }
+    });
+
+    video?.addEventListener('click', togglePlayPause);
+    soundBtn?.addEventListener('click', toggleSound);
+
+    likeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      likeBtn.classList.toggle('text-pink-deep');
+    });
+
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeVideo();
+    });
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeVideo();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closeVideo();
+      }
+    });
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProductTabs);
+    document.addEventListener('DOMContentLoaded', initProductsComponent);
   } else {
-    initProductTabs();
+    initProductsComponent();
   }
+  document.addEventListener('astro:page-load', initProductsComponent);
 </script>

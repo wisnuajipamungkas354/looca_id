@@ -13,6 +13,101 @@ export interface ProductItem {
   actionLink: string;
 }
 
+export interface DiyWorkshopItem {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  thumbnail: string;
+  video: string;
+  badge: string;
+  badgeColor: string;
+  duration: string;
+  hasVideo: boolean;
+  actionLink: string;
+}
+
+export const diyWorkshops: DiyWorkshopItem[] = [
+  {
+    id: 1,
+    title: 'Princess Birthday Crown',
+    category: 'Princess Craft',
+    description: 'Create magical, sparkling princess crowns adorned with crystals, beads, and custom charms.',
+    thumbnail: '/images/products/diy1.jpeg',
+    video: '/images/products/crown.mp4',
+    badge: 'Popular Class',
+    badgeColor: 'bg-pink-deep text-white',
+    duration: '0:15',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Birthday%20Crown',
+  },
+  {
+    id: 2,
+    title: 'Orchid Flower Bagcharm',
+    category: 'Botanical Craft',
+    description: 'Learn the delicate art of assembling realistic beaded orchid blooms with durable stainless wire.',
+    thumbnail: '/images/products/diy2.jpeg',
+    video: '/images/products/orchid.mp4',
+    badge: 'Floral Special',
+    badgeColor: 'bg-yellow text-text-dark',
+    duration: '0:15',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Orchid%20Bagcharm',
+  },
+  {
+    id: 3,
+    title: 'Painting Canvas Totebag',
+    category: 'Painting Class',
+    description: 'Express yourself by painting artistic custom patterns on organic cotton canvas totebags.',
+    thumbnail: '/images/products/diy3.jpeg',
+    video: '/images/products/painting-totebag.mp4',
+    badge: 'Relaxing Session',
+    badgeColor: 'bg-[#5DADE2] text-white',
+    duration: '0:15',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Painting%20Totebag',
+  },
+  {
+    id: 4,
+    title: 'Paracord Bagcharm Craft',
+    category: 'Weaving & Cord',
+    description: 'Knotting and styling colorful outdoor-grade paracords into aesthetic daily bag accessories.',
+    thumbnail: '/images/products/diy4.jpeg',
+    video: '/images/products/paracord-bagcharm.mp4',
+    badge: 'Trending Craft',
+    badgeColor: 'bg-pink-deep text-white',
+    duration: '0:20',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Paracord%20Bagcharm',
+  },
+  {
+    id: 5,
+    title: 'Fluffy Moru Doll DIY',
+    category: 'Plush & Wire',
+    description: 'Bend, twist, and fluff wire plush chenille stems into super cute portable companion dolls.',
+    thumbnail: '/images/products/diy5.jpeg',
+    video: '', // Coming soon
+    badge: 'Video Coming Soon',
+    badgeColor: 'bg-yellow-dark text-white',
+    duration: 'Workshop',
+    hasVideo: false,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Moru%20Doll',
+  },
+  {
+    id: 6,
+    title: 'Artisan Beads Watch Strap',
+    category: 'Jewelry & Timepiece',
+    description: 'Combine functional timepieces with artistic colorful beads, pearls, and custom elastic cords.',
+    thumbnail: '/images/products/diy6.jpeg',
+    video: '', // Coming soon
+    badge: 'Video Coming Soon',
+    badgeColor: 'bg-yellow-dark text-white',
+    duration: 'Workshop',
+    hasVideo: false,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Beads%20Watch',
+  },
+];
+
 export const categories = [
   { 
     id: 'all', 
