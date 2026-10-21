@@ -55,7 +55,7 @@ const featuredDiy = diyWorkshops.slice(0, 6);
         class="home-main-tab flex items-center gap-2 font-heading font-bold text-xs sm:text-sm px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full bg-white/90 text-text-dark border border-pink/20 shadow-xs transition-all duration-300 cursor-pointer"
         data-target="diy-panel"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-pink-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="tab-diy-icon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-pink-deep transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
         <span>DIY & Workshop</span>
@@ -261,12 +261,17 @@ const featuredDiy = diyWorkshops.slice(0, 6);
     const panelDiy = document.getElementById('diy-panel');
 
     const switchTab = (activeTab: 'products' | 'diy') => {
+      const diyIcon = document.getElementById('tab-diy-icon');
+
       if (activeTab === 'products') {
         tabProducts?.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
         tabProducts?.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
 
         tabDiy?.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
         tabDiy?.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
+
+        diyIcon?.classList.remove('text-white');
+        diyIcon?.classList.add('text-pink-deep');
 
         panelProducts?.classList.remove('hidden');
         panelProducts?.classList.add('block');
@@ -281,6 +286,9 @@ const featuredDiy = diyWorkshops.slice(0, 6);
       } else {
         tabDiy?.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
         tabDiy?.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
+
+        diyIcon?.classList.remove('text-pink-deep');
+        diyIcon?.classList.add('text-white');
 
         tabProducts?.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
         tabProducts?.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
