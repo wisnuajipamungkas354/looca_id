@@ -50,7 +50,7 @@ const galleryMoments = [
 ];
 ---
 
-<section class="relative pt-28 sm:pt-36 pb-20 sm:pb-28 px-3 sm:px-8 bg-cream overflow-hidden min-h-screen">
+<section id="catalog-section" class="relative pt-28 sm:pt-36 pb-12 sm:pb-16 px-3 sm:px-8 bg-cream overflow-hidden">
   
   <!-- Cute Floating Decorative Elements -->
   <div class="absolute top-24 left-3 sm:left-10 w-12 sm:w-20 opacity-40 pointer-events-none animate-pulse">
@@ -76,7 +76,7 @@ const galleryMoments = [
       </a>
 
       <div class="text-xs sm:text-sm font-heading text-text-muted hidden sm:block">
-        <span class="text-pink-deep font-bold">{products.length} Products</span> Available
+        <span class="text-pink-deep font-bold" id="item-counter">{products.length} Products</span> Available
       </div>
     </div>
 
@@ -113,12 +113,12 @@ const galleryMoments = [
     </div>
 
     <!-- Category Filter Tabs -->
-    <div class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-3 pt-1 mb-8 sm:mb-12 no-scrollbar px-1">
+    <div id="catalog-tab-container" class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-3 pt-1 mb-8 sm:mb-12 no-scrollbar px-1">
       {categories.map((cat, index) => (
         <button
           type="button"
           data-tab={cat.id}
-          class={`tab-btn shrink-0 flex items-center gap-1.5 sm:gap-2 font-heading font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
+          class={`catalog-tab-btn shrink-0 flex items-center gap-1.5 sm:gap-2 font-heading font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
             index === 0
               ? 'active bg-pink-deep text-white shadow-md shadow-pink-deep/20 scale-105'
               : 'bg-white/90 text-text-dark border border-pink/20 shadow-xs'
@@ -237,10 +237,10 @@ const galleryMoments = [
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .product-item {
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  #full-product-grid .product-item {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
   }
-  .product-item.hidden-item {
+  #full-product-grid .product-item.hidden-item {
     display: none !important;
   }
   .product-slider-track {
@@ -252,10 +252,12 @@ const galleryMoments = [
   import { gsap } from 'gsap';
 
   const initGalleryPage = () => {
-    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
-    const productItems = document.querySelectorAll<HTMLElement>('.product-item');
+    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.catalog-tab-btn');
+    const productGrid = document.getElementById('full-product-grid');
+    const productItems = productGrid ? productGrid.querySelectorAll<HTMLElement>('.product-item') : [];
     const searchInput = document.getElementById('product-search-input') as HTMLInputElement | null;
     const emptyState = document.getElementById('full-empty-state');
+    const itemCounter = document.getElementById('item-counter');
 
     let currentCategory = 'all';
     let searchQuery = '';
@@ -264,7 +266,7 @@ const galleryMoments = [
       let visibleCount = 0;
 
       productItems.forEach((item) => {
-        const itemCat = item.getAttribute('data-category') || '';
+        const itemCat = (item.getAttribute('data-category') || '').trim();
         const titleEl = item.querySelector('h3');
         const descEl = item.querySelector('p');
         const titleText = (titleEl?.textContent || '').toLowerCase();
@@ -275,11 +277,17 @@ const galleryMoments = [
 
         if (matchesCategory && matchesSearch) {
           item.classList.remove('hidden-item');
+          item.style.display = 'flex';
           visibleCount++;
         } else {
           item.classList.add('hidden-item');
+          item.style.display = 'none';
         }
       });
+
+      if (itemCounter) {
+        itemCounter.textContent = `${visibleCount} Products`;
+      }
 
       if (emptyState) {
         if (visibleCount === 0) {
@@ -290,11 +298,13 @@ const galleryMoments = [
       }
     };
 
-    // Tab buttons
+    // Tab buttons click listener
     tabBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        currentCategory = btn.getAttribute('data-tab') || 'all';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentCategory = (btn.getAttribute('data-tab') || 'all').trim();
 
+        // Update Button Styling
         tabBtns.forEach((b) => {
           b.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
           b.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
@@ -305,20 +315,23 @@ const galleryMoments = [
 
         filterProducts();
 
-        const visibleItems = document.querySelectorAll('.product-item:not(.hidden-item)');
-        gsap.fromTo(
-          visibleItems,
-          { opacity: 0, scale: 0.96, y: 12 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            stagger: 0.03,
-            duration: 0.35,
-            ease: 'power2.out',
-            clearProps: 'all',
-          }
-        );
+        // Animate newly visible elements
+        const visibleItems = productGrid ? productGrid.querySelectorAll<HTMLElement>('.product-item:not(.hidden-item)') : [];
+        if (visibleItems.length > 0) {
+          gsap.fromTo(
+            visibleItems,
+            { opacity: 0, scale: 0.95, y: 12 },
+            {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              stagger: 0.03,
+              duration: 0.35,
+              ease: 'power2.out',
+              clearProps: 'transform,opacity',
+            }
+          );
+        }
       });
     });
 
@@ -329,8 +342,7 @@ const galleryMoments = [
     });
 
     // Initialize Hover Sliders for multi-image cards
-    const productCards = document.querySelectorAll<HTMLElement>('.product-item');
-    productCards.forEach((card) => {
+    productItems.forEach((card) => {
       const track = card.querySelector<HTMLElement>('.product-slider-track');
       const wrapper = card.querySelector<HTMLElement>('.product-image-wrapper');
       const dots = card.querySelectorAll<HTMLElement>('.slider-dot');

@@ -1,0 +1,378 @@
+---
+// DiyWorkshop.astro
+// Interactive DIY & Workshop Video Showcase Section with 6 Cards (Streamable Video Player Modal / Inline Play)
+const diyWorkshops = [
+  {
+    id: 1,
+    title: 'Princess Birthday Crown',
+    category: 'Princess Craft',
+    description: 'Create magical, sparkling princess crowns adorned with crystals, beads, and custom charms.',
+    thumbnail: '/images/workshop/birthday-crown.jpeg',
+    video: '/images/products/Crown.mov',
+    badge: 'Popular Class',
+    badgeColor: 'bg-pink-deep text-white',
+    duration: '0:15',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Birthday%20Crown',
+  },
+  {
+    id: 2,
+    title: 'Orchid Flower Bagcharm',
+    category: 'Botanical Craft',
+    description: 'Learn the delicate art of assembling realistic beaded orchid blooms with durable stainless wire.',
+    thumbnail: '/images/about3.jpeg',
+    video: '/images/products/Orchid.mov',
+    badge: 'Floral Special',
+    badgeColor: 'bg-yellow text-text-dark',
+    duration: '0:15',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Orchid%20Bagcharm',
+  },
+  {
+    id: 3,
+    title: 'Painting Canvas Totebag',
+    category: 'Painting Class',
+    description: 'Express yourself by painting artistic custom patterns on organic cotton canvas totebags.',
+    thumbnail: '/images/workshop/kids-clay.jpeg',
+    video: '/images/products/Painting%20totebag.mov',
+    badge: 'Relaxing Session',
+    badgeColor: 'bg-[#5DADE2] text-white',
+    duration: '0:15',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Painting%20Totebag',
+  },
+  {
+    id: 4,
+    title: 'Paracord Bagcharm Craft',
+    category: 'Weaving & Cord',
+    description: 'Knotting and styling colorful outdoor-grade paracords into aesthetic daily bag accessories.',
+    thumbnail: '/images/workshop/flower-bagcharms.jpeg',
+    video: '/images/products/Paracord%20bagcharm.mov',
+    badge: 'Trending Craft',
+    badgeColor: 'bg-pink-deep text-white',
+    duration: '0:20',
+    hasVideo: true,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Paracord%20Bagcharm',
+  },
+  {
+    id: 5,
+    title: 'Fluffy Moru Doll DIY',
+    category: 'Plush & Wire',
+    description: 'Bend, twist, and fluff wire plush chenille stems into super cute portable companion dolls.',
+    thumbnail: '/images/workshop/moru-doll.jpeg',
+    video: '', // Coming soon
+    badge: 'Coming Soon Video',
+    badgeColor: 'bg-yellow-dark text-white',
+    duration: 'Workshop',
+    hasVideo: false,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Moru%20Doll',
+  },
+  {
+    id: 6,
+    title: 'Artisan Beads Watch Strap',
+    category: 'Jewelry & Timepiece',
+    description: 'Combine functional timepieces with artistic colorful beads, pearls, and custom elastic cords.',
+    thumbnail: '/images/workshop/beads-watch.png',
+    video: '', // Coming soon
+    badge: 'Coming Soon Video',
+    badgeColor: 'bg-yellow-dark text-white',
+    duration: 'Workshop',
+    hasVideo: false,
+    actionLink: 'https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20tertarik%20mengikuti/order%20DIY%20Beads%20Watch',
+  },
+];
+---
+
+<section id="diy-workshop" class="relative py-16 sm:py-24 lg:py-28 px-3 sm:px-8 bg-gradient-to-b from-cream via-white to-cream overflow-hidden">
+  
+  <!-- Decorative Elements -->
+  <div class="absolute top-12 left-4 sm:left-12 w-12 sm:w-16 opacity-40 pointer-events-none">
+    <img src="/decorations/cherry.svg" alt="cherry" class="w-full" />
+  </div>
+  <div class="absolute bottom-10 right-4 sm:right-12 w-16 sm:w-24 opacity-30 pointer-events-none animate-spin-slow">
+    <img src="/decorations/flower-daisy.svg" alt="flower" class="w-full" />
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-10 sm:mb-14">
+      <div class="inline-flex items-center gap-2 bg-[#89CFF0] text-white font-handwriting text-lg sm:text-2xl px-5 sm:px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 fill-white" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+        </svg>
+        <span>Interactive Showcase</span>
+      </div>
+      <h2 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-text-dark tracking-tight">
+        DIY Kits & Workshop Videos
+      </h2>
+      <p class="text-text-muted mt-2 sm:mt-3 max-w-xl mx-auto text-xs sm:text-base leading-relaxed">
+        Watch hands-on tutorial snippets and creative workshop highlights. Click any card to stream the full video!
+      </p>
+    </div>
+
+    <!-- 6 Cards Grid: 2 cols on mobile, 3 cols on tablet/desktop -->
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+      {diyWorkshops.map((item) => (
+        <div 
+          class="diy-card group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-pink/25 shadow-xs hover:shadow-xl hover:border-pink/50 transition-all duration-300 flex flex-col justify-between"
+        >
+          <!-- Top Area: Video / Thumbnail Media Container -->
+          <div>
+            <div 
+              class="relative w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-cream/70 mb-2.5 sm:mb-4 cursor-pointer video-trigger-container"
+              data-has-video={item.hasVideo ? 'true' : 'false'}
+              data-video-src={item.video}
+              data-video-title={item.title}
+              data-video-cat={item.category}
+            >
+              <!-- Thumbnail Image -->
+              <img 
+                src={item.thumbnail} 
+                alt={item.title} 
+                class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                loading="lazy"
+              />
+
+              <!-- Overlay Gradient -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/70 transition-all"></div>
+
+              <!-- Top Left Badge -->
+              <div class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
+                <span class={`font-heading font-extrabold text-[8px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 rounded-full shadow-xs ${item.badgeColor}`}>
+                  {item.badge}
+                </span>
+              </div>
+
+              <!-- Play Button / Status Pill -->
+              {item.hasVideo ? (
+                <div class="absolute inset-0 flex items-center justify-center z-10">
+                  <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white/90 group-hover:bg-pink-deep text-pink-deep group-hover:text-white flex items-center justify-center shadow-lg transition-all transform group-hover:scale-115">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-7 sm:h-7 translate-x-0.5 fill-current" viewBox="0 0 24 24">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </div>
+                </div>
+              ) : (
+                <div class="absolute inset-0 flex items-center justify-center z-10">
+                  <div class="bg-black/60 backdrop-blur-sm text-white font-heading font-bold text-[9px] sm:text-xs px-2.5 py-1 rounded-full border border-white/30 flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>Video Soon</span>
+                  </div>
+                </div>
+              )}
+
+              <!-- Bottom Duration / Stream Info Tag -->
+              <div class="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-10 flex items-center gap-1 bg-black/65 backdrop-blur-sm text-white px-2 py-0.5 rounded-md text-[8px] sm:text-[10px] font-heading font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                </svg>
+                <span>{item.hasVideo ? 'Watch Video' : 'Offline Session'}</span>
+              </div>
+            </div>
+
+            <!-- Category -->
+            <div class="mb-1 sm:mb-1.5 px-0.5 sm:px-1">
+              <span class="text-[9px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider text-pink-deep">
+                {item.category}
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h3 class="font-heading font-bold text-xs sm:text-base text-text-dark leading-snug mb-1 sm:mb-2 px-0.5 sm:px-1 group-hover:text-pink-deep transition-colors line-clamp-1" title={item.title}>
+              {item.title}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-[10px] sm:text-xs text-text-muted leading-relaxed mb-3 sm:mb-4 px-0.5 sm:px-1 line-clamp-2">
+              {item.description}
+            </p>
+          </div>
+
+          <!-- Action Buttons Area -->
+          <div class="pt-2.5 sm:pt-3 border-t border-gray-100 mt-auto flex flex-col gap-1.5">
+            {item.hasVideo ? (
+              <button
+                type="button"
+                class="stream-btn w-full bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-[10px] sm:text-xs py-2 sm:py-2.5 px-2 sm:px-3 rounded-lg sm:rounded-xl shadow-xs flex items-center justify-center gap-1.5 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                data-video-src={item.video}
+                data-video-title={item.title}
+                data-video-cat={item.category}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Play Video</span>
+              </button>
+            ) : (
+              <a 
+                href={item.actionLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full bg-yellow-light hover:bg-yellow text-text-dark font-heading font-bold text-[10px] sm:text-xs py-2 sm:py-2.5 px-2 sm:px-3 rounded-lg sm:rounded-xl shadow-xs flex items-center justify-center gap-1.5 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              >
+                <span>Inquire Class</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            )}
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+  <!-- Video Streaming Modal (Responsive & High Performance) -->
+  <div 
+    id="video-stream-modal" 
+    class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6 transition-all duration-300"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="relative w-full max-w-2xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-pink/30 flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="px-4 sm:px-6 py-3.5 sm:py-4 bg-cream flex items-center justify-between border-b border-pink/20">
+        <div>
+          <span id="modal-video-cat" class="text-[10px] sm:text-xs font-heading font-semibold uppercase tracking-wider text-pink-deep block">Workshop Class</span>
+          <h4 id="modal-video-title" class="font-heading font-bold text-sm sm:text-lg text-text-dark leading-tight">DIY Video Player</h4>
+        </div>
+        <button 
+          id="close-video-modal"
+          class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-pink-light border border-pink/30 flex items-center justify-center text-text-dark hover:text-pink-deep transition-all cursor-pointer focus:outline-none"
+          aria-label="Close Video Player"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Video Player Viewport -->
+      <div class="relative w-full bg-black aspect-[9/14] sm:aspect-video max-h-[70vh] flex items-center justify-center overflow-hidden">
+        <video 
+          id="stream-video-element" 
+          controls 
+          playsinline 
+          preload="metadata"
+          class="w-full h-full object-contain"
+        >
+          <source id="video-source-element" src="" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-4 sm:px-6 py-3 bg-white flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
+        <p class="text-[11px] sm:text-xs text-text-muted">
+          Want to experience this workshop or order a complete DIY craft kit?
+        </p>
+        <a 
+          id="modal-inquire-link"
+          href="https://wa.me/6281215312939" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-[10px] sm:text-xs px-4 py-2 rounded-full shadow-xs hover:scale-105 transition-all"
+        >
+          <span>Chat on WhatsApp</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<script>
+  const initVideoPlayer = () => {
+    const modal = document.getElementById('video-stream-modal');
+    const closeBtn = document.getElementById('close-video-modal');
+    const video = document.getElementById('stream-video-element') as HTMLVideoElement | null;
+    const source = document.getElementById('video-source-element') as HTMLSourceElement | null;
+    const modalTitle = document.getElementById('modal-video-title');
+    const modalCat = document.getElementById('modal-video-cat');
+    const modalInquire = document.getElementById('modal-inquire-link') as HTMLAnchorElement | null;
+
+    const triggers = document.querySelectorAll('.video-trigger-container, .stream-btn');
+
+    const openVideo = (src: string, title: string, cat: string) => {
+      if (!modal || !video || !source) return;
+
+      source.src = src;
+      // Auto-detect MIME type based on extension
+      const isMov = src.toLowerCase().endsWith('.mov');
+      source.type = isMov ? 'video/quicktime' : 'video/mp4';
+
+      video.load();
+      video.play().catch(() => {
+        // Autoplay policy fallback
+      });
+
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalCat) modalCat.textContent = cat;
+      if (modalInquire) {
+        modalInquire.href = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeVideo = () => {
+      if (!modal || !video) return;
+      video.pause();
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        const target = trigger as HTMLElement;
+        const hasVideo = target.getAttribute('data-has-video') !== 'false';
+        const src = target.getAttribute('data-video-src');
+        const title = target.getAttribute('data-video-title') || 'DIY Workshop';
+        const cat = target.getAttribute('data-video-cat') || 'Workshop';
+
+        if (hasVideo && src) {
+          e.preventDefault();
+          openVideo(src, title, cat);
+        }
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeVideo);
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeVideo();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closeVideo();
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVideoPlayer);
+  } else {
+    initVideoPlayer();
+  }
+</script>
