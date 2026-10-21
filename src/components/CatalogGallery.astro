@@ -1,0 +1,409 @@
+---
+// CatalogGallery.astro (Full Catalog & Gallery Page Component)
+import ProductCard from './ProductCard.astro';
+import { categories, products } from '../data/products';
+
+// Additional gallery moments showcasing workshops, booth exhibitions, and finished items
+const galleryMoments = [
+  {
+    image: '/images/workshop/flower-bagcharms.jpeg',
+    title: 'Bagcharm Workshop Class',
+    subtitle: 'Hands-on creative session crafting flower bagcharms',
+    tag: 'Workshop',
+    tagColor: 'bg-pink-deep text-white',
+  },
+  {
+    image: '/images/workshop/moru-doll.jpeg',
+    title: 'Moru Doll Crafting',
+    subtitle: 'Furry, adorable DIY moru dolls made by participants',
+    tag: 'Craft',
+    tagColor: 'bg-yellow text-text-dark',
+  },
+  {
+    image: '/images/workshop/beads-watch.png',
+    title: 'Beaded Watch Straps',
+    subtitle: 'Combining functional timepieces with colorful custom beads',
+    tag: 'Accessories',
+    tagColor: 'bg-[#5DADE2] text-white',
+  },
+  {
+    image: '/images/workshop/pink-rabbit.jpeg',
+    title: 'Pink Bunny Bagcharm',
+    subtitle: 'Delicate hand-stitched and beaded novelty collection',
+    tag: 'Handmade',
+    tagColor: 'bg-pink-deep text-white',
+  },
+  {
+    image: '/images/workshop/international-session.png',
+    title: 'Creative Collaboration',
+    subtitle: 'Welcoming local & international craft enthusiasts',
+    tag: 'Community',
+    tagColor: 'bg-yellow text-text-dark',
+  },
+  {
+    image: '/images/workshop/birthday-crown.jpeg',
+    title: 'Birthday Crown Session',
+    subtitle: 'Sparkling princess crowns created for private celebrations',
+    tag: 'Special Event',
+    tagColor: 'bg-[#5DADE2] text-white',
+  },
+];
+---
+
+<section class="relative pt-28 sm:pt-36 pb-20 sm:pb-28 px-3 sm:px-8 bg-cream overflow-hidden min-h-screen">
+  
+  <!-- Cute Floating Decorative Elements -->
+  <div class="absolute top-24 left-3 sm:left-10 w-12 sm:w-20 opacity-40 pointer-events-none animate-pulse">
+    <img src="/decorations/flower-looca.svg" alt="flower" class="w-full" />
+  </div>
+  <div class="absolute top-36 right-3 sm:right-10 w-12 sm:w-20 opacity-40 pointer-events-none animate-bounce">
+    <img src="/decorations/star.svg" alt="star" class="w-full" />
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+
+    <!-- Breadcrumb & Back Navigation -->
+    <div class="mb-6 sm:mb-8 flex items-center justify-between">
+      <a 
+        href="/#products" 
+        class="inline-flex items-center gap-2 text-xs sm:text-sm font-heading font-bold text-text-muted hover:text-pink-deep bg-white/80 hover:bg-white px-3 sm:px-4 py-2 rounded-full border border-pink/25 shadow-xs transition-all"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Home</span>
+      </a>
+
+      <div class="text-xs sm:text-sm font-heading text-text-muted hidden sm:block">
+        <span class="text-pink-deep font-bold">{products.length} Products</span> Available
+      </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-10 sm:mb-14">
+      <div class="inline-flex items-center gap-2 bg-yellow text-text-dark font-handwriting text-lg sm:text-2xl px-5 sm:px-6 py-1.5 rounded-full shadow-md -rotate-1 mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span>All Products & Gallery</span>
+      </div>
+      <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-text-dark tracking-tight">
+        Complete Looca Catalog
+      </h1>
+      <p class="text-text-muted mt-3 sm:mt-4 max-w-2xl mx-auto text-xs sm:text-base leading-relaxed">
+        Browse our full archive of handcrafted products, accessories, DIY kits, custom order creations, and memorable gallery moments.
+      </p>
+
+      <!-- Search & Fast Filter Bar -->
+      <div class="mt-6 sm:mt-8 max-w-md mx-auto relative">
+        <input 
+          type="text" 
+          id="product-search-input" 
+          placeholder="Search products by title, tag, or material..." 
+          class="w-full bg-white/95 border border-pink/30 rounded-full py-2.5 sm:py-3.5 pl-11 pr-4 text-xs sm:text-sm text-text-dark placeholder-text-muted/70 focus:outline-none focus:ring-2 focus:ring-pink-deep/40 shadow-xs transition-all font-heading"
+        />
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 text-pink-deep absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-3 pt-1 mb-8 sm:mb-12 no-scrollbar px-1">
+      {categories.map((cat, index) => (
+        <button
+          type="button"
+          data-tab={cat.id}
+          class={`tab-btn shrink-0 flex items-center gap-1.5 sm:gap-2 font-heading font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 cursor-pointer ${
+            index === 0
+              ? 'active bg-pink-deep text-white shadow-md shadow-pink-deep/20 scale-105'
+              : 'bg-white/90 text-text-dark border border-pink/20 shadow-xs'
+          }`}
+        >
+          <span class="inline-flex items-center" set:html={cat.iconSvg} />
+          <span>{cat.label}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Product Grid: 2 cols on mobile, 3 on tablet, 4 on desktop -->
+    <div id="full-product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+
+    <!-- Empty State -->
+    <div id="full-empty-state" class="hidden text-center py-16">
+      <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-pink-light flex items-center justify-center text-pink-deep">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <h4 class="font-heading font-bold text-lg text-text-dark">No products match your criteria</h4>
+      <p class="text-xs text-text-muted mt-1">Try searching with different keywords or switch categories.</p>
+    </div>
+
+    <!-- Creative Gallery Moments Section -->
+    <div class="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-pink/20">
+      <div class="text-center mb-8 sm:mb-12">
+        <div class="inline-flex items-center gap-2 bg-[#89CFF0] text-white font-handwriting text-base sm:text-xl px-5 py-1 rounded-full shadow-md mb-2">
+          <span>Looca Gallery</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+        </div>
+        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-text-dark tracking-tight">
+          Handmade & Workshop Highlights
+        </h2>
+        <p class="text-text-muted mt-2 max-w-lg mx-auto text-xs sm:text-sm">
+          Snapshots of our offline crafting sessions, workshops, and custom artisan creations.
+        </p>
+      </div>
+
+      <!-- Masonry-style / Clean Grid of Gallery Moments -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
+        {galleryMoments.map((moment) => (
+          <div class="group bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-3 border border-pink/25 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+            <div class="relative w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-cream mb-2 sm:mb-3">
+              <img 
+                src={moment.image} 
+                alt={moment.title} 
+                class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                loading="lazy"
+              />
+              <span class={`absolute top-2 left-2 font-heading font-extrabold text-[8px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 rounded-full shadow-xs ${moment.tagColor}`}>
+                {moment.tag}
+              </span>
+            </div>
+            <div class="px-1 pb-1">
+              <h3 class="font-heading font-bold text-xs sm:text-base text-text-dark leading-snug group-hover:text-pink-deep transition-colors line-clamp-1">
+                {moment.title}
+              </h3>
+              <p class="text-[10px] sm:text-xs text-text-muted leading-relaxed line-clamp-2 mt-0.5">
+                {moment.subtitle}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Custom Inquiries CTA Banner -->
+    <div class="mt-16 sm:mt-24 bg-gradient-to-br from-pink-light/60 via-yellow-light/40 to-blue-soft/20 rounded-3xl p-6 sm:p-12 border-2 border-pink/30 text-center relative overflow-hidden shadow-sm">
+      <div class="max-w-xl mx-auto relative z-10">
+        <h3 class="font-heading text-xl sm:text-3xl font-extrabold text-text-dark tracking-tight mb-2 sm:mb-3">
+          Looking for Something Custom?
+        </h3>
+        <p class="text-xs sm:text-sm text-text-muted leading-relaxed mb-6 sm:mb-8">
+          We accept custom bulk souvenirs, personalized jewelry, corporate event merch, and private workshop bookings tailored to your budget.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <a 
+            href="https://wa.me/6281215312939?text=Halo%20Looca%20ID,%20saya%20ingin%20konsultasi%20pemesanan%20custom"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-sm px-6 py-3 rounded-full shadow-md shadow-pink-deep/30 transition-all hover:scale-105 active:scale-95"
+          >
+            <span>Consult on WhatsApp</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a 
+            href="https://shopee.co.id/looca_id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-orange-50 text-text-dark border border-orange-300 font-heading font-bold text-xs sm:text-sm px-6 py-3 rounded-full shadow-xs transition-all hover:scale-105 active:scale-95"
+          >
+            <span>Visit Official Shopee</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .product-item {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .product-item.hidden-item {
+    display: none !important;
+  }
+  .product-slider-track {
+    will-change: transform;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const initGalleryPage = () => {
+    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const productItems = document.querySelectorAll<HTMLElement>('.product-item');
+    const searchInput = document.getElementById('product-search-input') as HTMLInputElement | null;
+    const emptyState = document.getElementById('full-empty-state');
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    const filterProducts = () => {
+      let visibleCount = 0;
+
+      productItems.forEach((item) => {
+        const itemCat = item.getAttribute('data-category') || '';
+        const titleEl = item.querySelector('h3');
+        const descEl = item.querySelector('p');
+        const titleText = (titleEl?.textContent || '').toLowerCase();
+        const descText = (descEl?.textContent || '').toLowerCase();
+
+        const matchesCategory = currentCategory === 'all' || itemCat === currentCategory;
+        const matchesSearch = !searchQuery || titleText.includes(searchQuery) || descText.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          item.classList.remove('hidden-item');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden-item');
+        }
+      });
+
+      if (emptyState) {
+        if (visibleCount === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      }
+    };
+
+    // Tab buttons
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentCategory = btn.getAttribute('data-tab') || 'all';
+
+        tabBtns.forEach((b) => {
+          b.classList.remove('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+          b.classList.add('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
+        });
+
+        btn.classList.add('active', 'bg-pink-deep', 'text-white', 'shadow-md', 'shadow-pink-deep/20', 'scale-105');
+        btn.classList.remove('bg-white/90', 'text-text-dark', 'border', 'border-pink/20', 'shadow-xs');
+
+        filterProducts();
+
+        const visibleItems = document.querySelectorAll('.product-item:not(.hidden-item)');
+        gsap.fromTo(
+          visibleItems,
+          { opacity: 0, scale: 0.96, y: 12 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            stagger: 0.03,
+            duration: 0.35,
+            ease: 'power2.out',
+            clearProps: 'all',
+          }
+        );
+      });
+    });
+
+    // Search input
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      filterProducts();
+    });
+
+    // Initialize Hover Sliders for multi-image cards
+    const productCards = document.querySelectorAll<HTMLElement>('.product-item');
+    productCards.forEach((card) => {
+      const track = card.querySelector<HTMLElement>('.product-slider-track');
+      const wrapper = card.querySelector<HTMLElement>('.product-image-wrapper');
+      const dots = card.querySelectorAll<HTMLElement>('.slider-dot');
+      
+      if (!track || !wrapper) return;
+      
+      const realCount = parseInt(wrapper.getAttribute('data-slides-count') || '1', 10);
+      if (realCount <= 1) return;
+
+      let currentIndex = 0;
+      let timer: number | null = null;
+      let isSliding = false;
+
+      const updateDots = (index: number) => {
+        const activeDotIdx = index % realCount;
+        dots.forEach((dot, idx) => {
+          if (idx === activeDotIdx) {
+            dot.classList.remove('w-1.5', 'bg-white/50');
+            dot.classList.add('w-4', 'bg-white', 'shadow-xs');
+          } else {
+            dot.classList.remove('w-4', 'bg-white', 'shadow-xs');
+            dot.classList.add('w-1.5', 'bg-white/50');
+          }
+        });
+      };
+
+      const slideNext = () => {
+        if (isSliding) return;
+        isSliding = true;
+        currentIndex++;
+
+        track.style.transition = 'transform 550ms cubic-bezier(0.25, 1, 0.5, 1)';
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        updateDots(currentIndex);
+
+        if (currentIndex === realCount) {
+          setTimeout(() => {
+            track.style.transition = 'none';
+            currentIndex = 0;
+            track.style.transform = `translateX(0%)`;
+            void track.offsetWidth;
+            isSliding = false;
+          }, 550);
+        } else {
+          setTimeout(() => {
+            isSliding = false;
+          }, 550);
+        }
+      };
+
+      const startSliding = () => {
+        if (timer) clearInterval(timer);
+        slideNext();
+        timer = window.setInterval(() => {
+          slideNext();
+        }, 1800);
+      };
+
+      const stopSliding = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      };
+
+      card.addEventListener('mouseenter', startSliding);
+      card.addEventListener('mouseleave', stopSliding);
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryPage);
+  } else {
+    initGalleryPage();
+  }
+</script>

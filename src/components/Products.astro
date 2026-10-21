@@ -1,175 +1,10 @@
 ---
 // Products.astro
-const categories = [
-  { 
-    id: 'all', 
-    label: 'All Products', 
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>`
-  }, 
-  { 
-    id: 'fashion', 
-    label: 'Fashion', 
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>`
-  }, 
-  { 
-    id: 'accessories', 
-    label: 'Accessories & Bagcharms', 
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M11 3L8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>`
-  }, 
-  { 
-    id: 'souvenir', 
-    label: 'Souvenir & Custom Merchandise', 
-    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>`
-  }, 
-];
+import ProductCard from './ProductCard.astro';
+import { categories, products } from '../data/products';
 
-const products = [
-  // Fashion
-  {
-    id: 1,
-    category: 'fashion',
-    categoryLabel: 'Fashion',
-    title: 'Polca-Looca Scraft Hat',
-    description: '2 in 1 scraft and hat that avail for 2 size small and medium.',
-    images: ['/images/products/fashion2.jpeg', '/images/products/fashion3.jpeg'],
-    badge: 'Trending',
-    badgeColor: 'bg-yellow text-text-dark',
-    rating: '4.9',
-    sales: 'New Collection',
-    actionText: 'Shop Now',
-    actionLink: 'https://id.shp.ee/AUnMoub8',
-  },
-  {
-    id: 2,
-    category: 'fashion',
-    categoryLabel: 'Fashion',
-    title: 'Custom Attire',
-    description: 'Custom-made kebaya, family outfits, bridesmaid dresses, and more. Tailored to your design, measurements, and style.',
-    images: ['/images/products/fashion1.jpeg', '/images/products/fashion.jpeg'],
-    badge: 'Custom Made',
-    badgeColor: 'bg-pink-deep text-white',
-    rating: '5.0',
-    sales: 'Custom Order',
-    actionText: 'Request Custom',
-    actionLink: 'https://www.instagram.com/looca_tailor',
-  },
-
-  // Accessories & Bagcharms
-  {
-    id: 4,
-    category: 'accessories',
-    categoryLabel: 'Accessories',
-    title: 'Initial Bracelet',
-    description: 'Stainless steel bracelet, locally handmade by skilled crafters. Durable, timeless, and made to last.',
-    images: ['/images/about1.jpeg', '/images/about2.jpeg'],
-    badge: 'Best Seller',
-    badgeColor: 'bg-pink-deep text-white',
-    rating: '5.0',
-    sales: 'Custom Initial',
-    actionText: 'Shop Now',
-    actionLink: 'https://id.shp.ee/HYVGmweV',
-  },
-  {
-    id: 5,
-    category: 'accessories',
-    categoryLabel: 'Bagcharm',
-    title: 'Orchid Bagcharm',
-    description: 'Handmade orchid charm with delicate bead details',
-    images: ['/images/about3.jpeg'],
-    badge: 'Flower Bagcharm',
-    badgeColor: 'bg-yellow text-text-dark',
-    rating: '4.9',
-    sales: 'Orchid',
-    actionText: 'Shop Now',
-    actionLink: 'https://id.shp.ee/Egy3nwWV',
-  },
-  {
-    id: 6,
-    category: 'accessories',
-    categoryLabel: 'Accessories',
-    title: '2 in 1 Tasbeeh bracelet',
-    description: 'A versatile bracelet & tasbih in one',
-    images: ['/images/about4.jpeg', '/images/about6.jpeg'],
-    badge: 'Themed Bracelet',
-    badgeColor: 'bg-[#5DADE2] text-white',
-    rating: '5.0',
-    sales: 'Ramadhan Edition',
-    actionText: 'Shop Now',
-    actionLink: 'https://id.shp.ee/yndBxeAL',
-  },
-  {
-    id: 7,
-    category: 'accessories',
-    categoryLabel: 'Accessories',
-    title: 'K-pop bracelet – Haechan',
-    description: 'Haechan-inspired bracelet with 2 designs: Bear & Sunflower.',
-    images: ['/images/products/acc-kpop-bracelet.jpg'],
-    badge: 'Themed Bracelet',
-    badgeColor: 'bg-pink-deep text-white',
-    rating: '4.9',
-    sales: 'K-pop Edition',
-    actionText: 'Shop Now',
-    actionLink: 'https://id.shp.ee/D5oPDkBV',
-  },
-
-  // Souvenir & Custom Merchandise
-  {
-    id: 8,
-    category: 'souvenir',
-    categoryLabel: 'Merchandise',
-    title: 'Coorporate/Brand Merch',
-    description: 'Custom designs with adjustable budget & quantity. Available products: keychains, stickers, mirrors, pouches, and more.',
-    images: ['/images/products/souvenir-institution-brand.jpeg', '/images/products/souvenir-institution-brand-2.png'],
-    badge: 'Sold 5K+',
-    badgeColor: 'bg-yellow text-text-dark',
-    rating: '5.0',
-    sales: 'Corporate Merch',
-    actionText: 'Inquire Bulk Order',
-    actionLink: 'https://wa.me/6281215312939',
-  },
-  {
-    id: 9,
-    category: 'souvenir',
-    categoryLabel: 'Souvenir',
-    title: 'Wedding Souvenir',
-    description: 'Custom-made souvenirs with personalized initials',
-    images: ['/images/products/souvenir-wedding.jpeg', '/images/products/souvenir-wedding-2.jpeg'],
-    badge: 'Sold 2k+',
-    badgeColor: 'bg-pink-deep text-white',
-    rating: '5.0',
-    sales: 'Wedding Souvenir',
-    actionText: 'Inquire Bulk Order',
-    actionLink: 'https://wa.me/6281215312939',
-  },
-  {
-    id: 10,
-    category: 'souvenir',
-    categoryLabel: 'Merchandise',
-    title: 'Institution & Event Souvenir',
-    description: 'Custom merchandise for campuses, government institutions, organizations, and more.',
-    images: ['/images/products/merch-institution.jpeg', '/images/products/merch-institution-2.jpeg'],
-    badge: 'Min. 100 pcs',
-    badgeColor: 'bg-[#5DADE2] text-white',
-    rating: '5.0',
-    sales: 'Institution Merch',
-    actionText: 'Inquire Bulk Order',
-    actionLink: 'https://wa.me/6281215312939',
-  },
-  {
-    id: 11,
-    category: 'souvenir',
-    categoryLabel: 'Merchandise',
-    title: 'Concert & Fan Merch Edition',
-    description: 'Custom concert freebies, lightstick straps, and fan gathering merchandise.',
-    images: ['/images/products/merch-concert.jpeg', '/images/products/merch-concert-2.jpeg', '/images/products/merch-concert-3.jpeg'],
-    badge: 'No Minimum order',
-    badgeColor: 'bg-pink-deep text-white',
-    rating: '5.0',
-    sales: 'Fan Merch Ed.',
-    actionText: 'Inquire Bulk Order',
-    actionLink: 'https://wa.me/6281215312939',
-  },
-];
+// Section on homepage displays maximum 6 items
+const featuredProducts = products.slice(0, 6);
 ---
 
 <section id="products" class="relative py-16 sm:py-20 lg:py-28 px-3 sm:px-8 bg-cream overflow-hidden">
@@ -186,14 +21,14 @@ const products = [
         <span>Catalog & Gallery</span>
       </div>
       <h2 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-text-dark tracking-tight">
-        Our Products & Gallery
+        Featured Products & Gallery
       </h2>
       <p class="text-text-muted mt-2 sm:mt-3 max-w-lg mx-auto text-xs sm:text-base">
         Explore our curated handmade creations, from daily accessories to custom fashion and bulk souvenir orders.
       </p>
     </div>
 
-    <!-- Interactive E-Commerce Category Tabs -->
+    <!-- Category Tabs (Filter featured items) -->
     <div class="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-3 pt-1 mb-8 sm:mb-12 no-scrollbar px-1">
       {categories.map((cat, index) => (
         <button
@@ -211,128 +46,39 @@ const products = [
       ))}
     </div>
 
-    <!-- E-Commerce Product Cards Grid (2 Columns on Mobile, 3 on Tablet/Laptop, 4 on Large Screens) -->
-    <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
-      {products.map((product) => (
-        <div 
-          class="product-item group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-pink/25 shadow-xs hover:shadow-xl hover:border-pink/50 transition-all duration-300 flex flex-col justify-between"
-          data-category={product.category}
-        >
-          <!-- Top Area: Image Showcase with Badges and Slide Support -->
-          <div>
-            <div 
-              class="product-image-wrapper relative w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-cream/50 mb-2.5 sm:mb-4"
-              data-slides-count={product.images.length}
-            >
-              <!-- Seamless One-Way Infinite Slider Track -->
-              <div class="product-slider-track flex w-full h-full">
-                {product.images.map((img, idx) => (
-                  <div class="w-full h-full flex-shrink-0 relative overflow-hidden">
-                    <img 
-                      src={img} 
-                      alt={`${product.title} - ${idx + 1}`} 
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-                {/* Clone first image at the end for seamless continuous forward loop */}
-                {product.images.length > 1 && (
-                  <div class="w-full h-full flex-shrink-0 relative overflow-hidden" aria-hidden="true">
-                    <img 
-                      src={product.images[0]} 
-                      alt={`${product.title} - clone`} 
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </div>
-
-              <!-- Slide Dots Indicator (For multi-image products) -->
-              {product.images.length > 1 && (
-                <div class="slider-dots absolute bottom-2 sm:bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/35 backdrop-blur-sm pointer-events-none">
-                  {product.images.map((_, idx) => (
-                    <span 
-                      class={`slider-dot block rounded-full transition-all duration-300 ${idx === 0 ? 'w-3 sm:w-4 h-1 sm:h-1.5 bg-white shadow-xs' : 'w-1 sm:w-1.5 h-1 sm:h-1.5 bg-white/50'}`}
-                      data-dot-index={idx}
-                    ></span>
-                  ))}
-                </div>
-              )}
-              
-              <!-- Floating Top Tag -->
-              <div class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
-                <span class={`font-heading font-extrabold text-[8px] sm:text-[11px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-sm ${product.badgeColor}`}>
-                  {product.badge}
-                </span>
-              </div>
-
-              <!-- Wishlist Heart SVG Icon -->
-              <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/85 backdrop-blur-sm border border-pink/20 flex items-center justify-center text-pink-deep shadow-xs group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-4 sm:h-4 fill-pink-deep" viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-              </div>
-
-              <!-- Overlay Gradient on Hover -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-            </div>
-
-            <!-- Category & Rating -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1.5 mb-1 sm:mb-1.5 px-0.5 sm:px-1">
-              <span class="text-[9px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider text-pink-deep">
-                {product.categoryLabel}
-              </span>
-              <div class="flex items-center gap-1 text-[9px] sm:text-[11px] font-heading font-bold text-yellow-dark">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current text-yellow-dark shrink-0" viewBox="0 0 24 24">
-                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                </svg>
-                <span class="shrink-0">{product.rating}</span>
-                <span class="text-text-muted font-normal text-[9px] sm:text-[11px] truncate whitespace-nowrap" title={product.sales}>
-                  ({product.sales})
-                </span>
-              </div>
-            </div>
-
-            <!-- Product Title -->
-            <h3 class="font-heading font-bold text-xs sm:text-base text-text-dark leading-snug mb-1 sm:mb-2 px-0.5 sm:px-1 group-hover:text-pink-deep transition-colors line-clamp-1 group-hover:line-clamp-none" title={product.title}>
-              {product.title}
-            </h3>
-
-            <!-- Product Description -->
-            <p class="text-[10px] sm:text-xs text-text-muted leading-relaxed mb-3 sm:mb-4 px-0.5 sm:px-1 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
-              {product.description}
-            </p>
-          </div>
-
-          <!-- Bottom Action Button (E-Commerce CTA) -->
-          <div class="pt-2.5 sm:pt-3 border-t border-gray-100 mt-auto">
-            <a 
-              href={product.actionLink}
-              class="w-full bg-yellow-light hover:bg-yellow text-text-dark font-heading font-bold text-[10px] sm:text-xs py-2 sm:py-2.5 px-2 sm:px-4 rounded-lg sm:rounded-xl shadow-xs hover:shadow-md flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
-            >
-              <span>{product.actionText}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-text-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-          </div>
-
-        </div>
+    <!-- Product Cards Grid: 6 items limit -->
+    <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+      {featuredProducts.map((product) => (
+        <ProductCard product={product} />
       ))}
     </div>
 
     <!-- Empty State Fallback (Hidden by default) -->
-    <div id="empty-state" class="hidden text-center py-16">
+    <div id="empty-state" class="hidden text-center py-12">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto text-pink-deep mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
         <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
         <line x1="12" y1="22.08" x2="12" y2="12"></line>
       </svg>
-      <h4 class="font-heading font-bold text-lg text-text-dark">No products found in this category</h4>
-      <p class="text-xs text-text-muted mt-1">Please check back soon or inquire custom order.</p>
+      <h4 class="font-heading font-bold text-lg text-text-dark">No featured products in this category</h4>
+      <p class="text-xs text-text-muted mt-1">Check out our full catalog to discover all creations.</p>
+    </div>
+
+    <!-- View All Products Button (Lihat Produk Lainnya in English) -->
+    <div class="mt-10 sm:mt-14 text-center">
+      <a 
+        href="/products" 
+        class="inline-flex items-center justify-center gap-2.5 sm:gap-3 bg-pink-deep hover:bg-pink-dark text-white font-heading font-bold text-xs sm:text-base px-6 sm:px-9 py-3 sm:py-4 rounded-full shadow-lg shadow-pink-deep/30 hover:scale-105 active:scale-95 transition-all group"
+      >
+        <span>View More Products</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+      <p class="text-[11px] sm:text-xs text-text-muted font-heading mt-2.5">
+        Browse our full handmade catalog, DIY kits & design portfolio
+      </p>
     </div>
 
   </div>
