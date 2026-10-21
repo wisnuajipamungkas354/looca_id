@@ -289,7 +289,7 @@ const diyWorkshops = [
         </button>
       </div>
 
-      <!-- Right Floating Action Sidebar (TikTok Style: Like, Sound, WhatsApp) -->
+      <!-- Right Floating Action Sidebar (TikTok Style: Like & Sound) -->
       <div class="absolute right-3 bottom-24 z-20 flex flex-col items-center gap-4 text-white">
         <!-- Sound Toggle -->
         <button 
@@ -320,26 +320,13 @@ const diyWorkshops = [
           </div>
           <span class="text-[9px] font-heading font-semibold text-white/90">Love</span>
         </button>
-
-        <!-- Chat / Inquire -->
-        <a 
-          id="modal-inquire-icon"
-          href="https://wa.me/6281215312939" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="flex flex-col items-center gap-1 group hover:scale-110 active:scale-90 transition-all"
-        >
-          <div class="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-white" viewBox="0 0 24 24">
-              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-            </svg>
-          </div>
-          <span class="text-[9px] font-heading font-semibold text-white/90">Inquire</span>
-        </a>
       </div>
 
-      <!-- Bottom Overlay: Title, Description & Action CTA Button -->
-      <div class="relative z-20 w-full p-4 sm:p-5 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
+      <!-- Bottom Overlay: Title, Description & Action CTA Button with auto-fade -->
+      <div 
+        id="video-info-overlay"
+        class="relative z-20 w-full p-4 sm:p-5 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-700 ease-out"
+      >
         <h4 id="modal-video-title" class="font-heading font-bold text-base sm:text-lg text-white leading-snug drop-shadow-md mb-1.5">
           DIY Video Player
         </h4>
@@ -376,14 +363,32 @@ const diyWorkshops = [
     const modalTitle = document.getElementById('modal-video-title');
     const modalCat = document.getElementById('modal-video-cat');
     const modalInquire = document.getElementById('modal-inquire-link') as HTMLAnchorElement | null;
-    const modalInquireIcon = document.getElementById('modal-inquire-icon') as HTMLAnchorElement | null;
     const pausedOverlay = document.getElementById('video-paused-overlay');
+    const infoOverlay = document.getElementById('video-info-overlay');
     const soundBtn = document.getElementById('sound-toggle-btn');
     const soundUnmutedIcon = document.getElementById('sound-unmuted-icon');
     const soundMutedIcon = document.getElementById('sound-muted-icon');
     const likeBtn = document.getElementById('tiktok-like-btn');
 
-    const triggers = document.querySelectorAll('.video-trigger-container, .stream-btn');
+    let fadeTimer: number | null = null;
+
+    const resetFadeTimer = () => {
+      if (fadeTimer) {
+        clearTimeout(fadeTimer);
+      }
+      if (infoOverlay) {
+        infoOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        infoOverlay.classList.add('opacity-100');
+      }
+
+      // Automatically fade out title & info after 2.5 seconds of playing
+      fadeTimer = window.setTimeout(() => {
+        if (video && !video.paused && infoOverlay) {
+          infoOverlay.classList.remove('opacity-100');
+          infoOverlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+      }, 2500);
+    };
 
     const updateSoundIcons = () => {
       if (!video) return;
@@ -401,6 +406,7 @@ const diyWorkshops = [
       if (!video) return;
       video.muted = !video.muted;
       updateSoundIcons();
+      resetFadeTimer();
     };
 
     const togglePlayPause = () => {
@@ -408,9 +414,16 @@ const diyWorkshops = [
       if (video.paused) {
         video.play();
         pausedOverlay?.classList.add('hidden');
+        resetFadeTimer();
       } else {
         video.pause();
         pausedOverlay?.classList.remove('hidden');
+        // When paused, show info overlay
+        if (infoOverlay) {
+          infoOverlay.classList.remove('opacity-0', 'pointer-events-none');
+          infoOverlay.classList.add('opacity-100');
+        }
+        if (fadeTimer) clearTimeout(fadeTimer);
       }
     };
 
@@ -445,7 +458,9 @@ const diyWorkshops = [
       
       const whatsappUrl = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
       if (modalInquire) modalInquire.href = whatsappUrl;
-      if (modalInquireIcon) modalInquireIcon.href = whatsappUrl;
+
+      // Start auto-fade timer
+      resetFadeTimer();
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -455,6 +470,7 @@ const diyWorkshops = [
     const closeVideo = () => {
       if (!modal || !video) return;
       video.pause();
+      if (fadeTimer) clearTimeout(fadeTimer);
       modal.classList.add('hidden');
       modal.classList.remove('flex');
       document.body.style.overflow = '';
