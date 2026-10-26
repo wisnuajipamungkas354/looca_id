@@ -69,6 +69,28 @@ const getPosterUrl = (posterPath?: string) => {
   if (posterPath.startsWith('http')) return posterPath;
   return `${apiUrl}${posterPath.startsWith('/') ? posterPath : '/' + posterPath}`;
 };
+
+const resolveEventLink = (shortLink?: string | null, originLink?: string | null) => {
+  if (shortLink && shortLink.trim() !== '') {
+    let s = shortLink.trim();
+    if (s.includes('looca.id')) {
+      s = s.replace(/https?:\/\/(?:www\.)?looca\.id/i, 'https://looca-id.com');
+    } else if (s.startsWith('/event/') || s.startsWith('/r/')) {
+      s = `https://looca-id.com${s}`;
+    } else if (!s.startsWith('http://') && !s.startsWith('https://')) {
+      s = `https://looca-id.com/event/${s}`;
+    }
+    return s;
+  }
+  if (originLink && originLink.trim() !== '') {
+    let d = originLink.trim();
+    if (!d.startsWith('http://') && !d.startsWith('https://')) {
+      d = 'https://' + d;
+    }
+    return d;
+  }
+  return 'https://instagram.com/looca_id';
+};
 ---
 
 <div id="upcoming-events-container" class="relative mb-16 sm:mb-20" data-api-url={apiUrl}>
@@ -145,7 +167,7 @@ const getPosterUrl = (posterPath?: string) => {
         const washiColor = isEven ? 'bg-yellow/90' : 'bg-pink/90';
         const washiRotate = isEven ? '-rotate-2' : 'rotate-2';
         const cardRotate = idx % 3 === 0 ? '-rotate-1 hover:rotate-0' : idx % 3 === 1 ? 'rotate-1 hover:rotate-0' : 'hover:-rotate-1';
-        const eventLink = evt.short_link || evt.origin_link || 'https://instagram.com/looca_id';
+        const eventLink = resolveEventLink(evt.short_link, evt.origin_link);
 
         return (
           <div class={`event-card relative bg-white rounded-3xl p-5 border-2 border-pink/30 shadow-md ${cardRotate} transition-all duration-300 flex flex-col justify-between group hover:shadow-xl hover:border-pink-deep/50`}>
@@ -283,7 +305,7 @@ const getPosterUrl = (posterPath?: string) => {
             </tr>
           ) : (
             initialEvents.map((evt) => {
-              const eventLink = evt.short_link || evt.origin_link || 'https://instagram.com/looca_id';
+              const eventLink = resolveEventLink(evt.short_link, evt.origin_link);
               return (
                 <tr class="hover:bg-cream/70 transition-colors">
                   <!-- Title & Poster -->
@@ -390,6 +412,28 @@ const getPosterUrl = (posterPath?: string) => {
     return `${apiUrl}${posterPath.startsWith('/') ? posterPath : '/' + posterPath}`;
   };
 
+  const resolveEventLinkClient = (shortLink: string | undefined | null, originLink: string | undefined | null) => {
+    if (shortLink && shortLink.trim() !== '') {
+      let s = shortLink.trim();
+      if (s.includes('looca.id')) {
+        s = s.replace(/https?:\/\/(?:www\.)?looca\.id/i, 'https://looca-id.com');
+      } else if (s.startsWith('/event/') || s.startsWith('/r/')) {
+        s = `https://looca-id.com${s}`;
+      } else if (!s.startsWith('http://') && !s.startsWith('https://')) {
+        s = `https://looca-id.com/event/${s}`;
+      }
+      return s;
+    }
+    if (originLink && originLink.trim() !== '') {
+      let d = originLink.trim();
+      if (!d.startsWith('http://') && !d.startsWith('https://')) {
+        d = 'https://' + d;
+      }
+      return d;
+    }
+    return 'https://instagram.com/looca_id';
+  };
+
   // Dynamic client-side view toggle & live refresh from API
   const initUpcomingEvents = () => {
     const container = document.getElementById('upcoming-events-container');
@@ -471,7 +515,7 @@ const getPosterUrl = (posterPath?: string) => {
             const washiColor = isEven ? 'bg-yellow/90' : 'bg-pink/90';
             const washiRotate = isEven ? '-rotate-2' : 'rotate-2';
             const cardRotate = idx % 3 === 0 ? '-rotate-1 hover:rotate-0' : idx % 3 === 1 ? 'rotate-1 hover:rotate-0' : 'hover:-rotate-1';
-            const eventLink = evt.short_link || evt.origin_link || 'https://instagram.com/looca_id';
+            const eventLink = resolveEventLinkClient(evt.short_link, evt.origin_link);
             const poster = getPosterUrlClient(evt.poster, apiUrl);
             const dateStr = formatDateClient(evt.start_date);
             const priceStr = formatPriceClient(evt.admission_fee);
@@ -582,7 +626,7 @@ const getPosterUrl = (posterPath?: string) => {
           // Render Live Table Rows
           if (tableTbody) {
             tableTbody.innerHTML = events.map((evt: any) => {
-              const eventLink = evt.short_link || evt.origin_link || 'https://instagram.com/looca_id';
+              const eventLink = resolveEventLinkClient(evt.short_link, evt.origin_link);
               const poster = getPosterUrlClient(evt.poster, apiUrl);
               const dateStr = formatDateClient(evt.start_date);
               const priceStr = formatPriceClient(evt.admission_fee);
