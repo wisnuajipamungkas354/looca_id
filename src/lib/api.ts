@@ -59,9 +59,10 @@ export interface DiyWorkshopItem {
   actionLink: string;
 }
 
+export const PUBLIC_API_URL = (import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com').replace(/\/$/, '');
+
 export const getPublicApiUrl = (): string => {
-  const url = import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com';
-  return url.replace(/\/$/, '');
+  return PUBLIC_API_URL;
 };
 
 export const getFetchApiUrl = (): string => {
