@@ -1,6 +1,6 @@
 ---
 // DiyCard.astro
-import type { DiyWorkshopItem } from '../data/products';
+import type { DiyWorkshopItem } from '../lib/api';
 
 interface Props {
   item: DiyWorkshopItem;
@@ -20,6 +20,7 @@ const { item } = Astro.props;
       data-video-src={item.video}
       data-video-title={item.title}
       data-video-cat={item.category}
+      data-workshop-id={item.id}
     >
       <!-- Thumbnail Image (diy1.jpeg - diy6.jpeg) -->
       <img 
@@ -97,6 +98,7 @@ const { item } = Astro.props;
         data-video-src={item.video}
         data-video-title={item.title}
         data-video-cat={item.category}
+        data-workshop-id={item.id}
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>

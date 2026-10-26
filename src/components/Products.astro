@@ -2,11 +2,17 @@
 // Products.astro
 import ProductCard from './ProductCard.astro';
 import DiyCard from './DiyCard.astro';
-import { products, diyWorkshops } from '../data/products';
+import { fetchProducts, fetchWorkshops } from '../lib/api';
+import { products as fallbackProducts, diyWorkshops as fallbackWorkshops } from '../data/products';
 
-// Section on homepage displays maximum 6 items for each tab
-const featuredProducts = products.slice(0, 6);
-const featuredDiy = diyWorkshops.slice(0, 6);
+const apiProducts = await fetchProducts();
+const apiWorkshops = await fetchWorkshops();
+
+const productsList = apiProducts.length > 0 ? apiProducts : fallbackProducts;
+const workshopsList = apiWorkshops.length > 0 ? apiWorkshops : fallbackWorkshops;
+
+const featuredProducts = productsList.slice(0, 6);
+const featuredDiy = workshopsList.slice(0, 6);
 ---
 
 <section id="products" class="relative py-16 sm:py-20 lg:py-28 px-3 sm:px-8 bg-cream overflow-hidden">
@@ -116,7 +122,7 @@ const featuredDiy = diyWorkshops.slice(0, 6);
 
   </div>
 
-  <!-- TikTok / Reels Style Portrait Video Modal for Homepage -->
+  <!-- TikTok / Reels Style Portrait Video Streaming Modal for Homepage -->
   <div 
     id="home-video-stream-modal" 
     class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 transition-all duration-300"
@@ -125,10 +131,11 @@ const featuredDiy = diyWorkshops.slice(0, 6);
   >
     <div class="relative w-full max-w-[390px] h-[90vh] max-h-[780px] bg-black rounded-3xl sm:rounded-[36px] overflow-hidden shadow-2xl border border-white/20 flex flex-col justify-between">
       
-      <!-- Video Element -->
+      <!-- Video Element: HTTP Range Streaming enabled -->
       <video 
         id="home-stream-video-element" 
         playsinline 
+        webkit-playsinline
         loop
         preload="metadata"
         class="absolute inset-0 w-full h-full object-cover cursor-pointer z-0"
@@ -469,8 +476,40 @@ const featuredDiy = diyWorkshops.slice(0, 6);
       }
     };
 
-    const openVideo = (src: string, title: string, cat: string) => {
+    let activeWorkshopId: string | null = null;
+    let playTracked = false;
+
+    video?.addEventListener('timeupdate', () => {
+      if (video && video.currentTime >= 5 && !playTracked && activeWorkshopId) {
+        playTracked = true;
+        const apiUrl = (import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com').replace(/\/$/, '');
+        fetch(`${apiUrl}/api/public/workshops/${activeWorkshopId}/play`, {
+          method: 'POST',
+          keepalive: true,
+        }).catch(() => {});
+      }
+    });
+
+    // Product click analytics tracking
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.product-action-btn') as HTMLElement | null;
+      if (btn) {
+        const pId = btn.getAttribute('data-product-id');
+        if (pId) {
+          const apiUrl = (import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com').replace(/\/$/, '');
+          fetch(`${apiUrl}/api/public/products/${pId}/click`, {
+            method: 'POST',
+            keepalive: true,
+          }).catch(() => {});
+        }
+      }
+    });
+
+    const openVideo = (src: string, title: string, cat: string, id?: string | null) => {
       if (!modal || !video) return;
+
+      activeWorkshopId = id || null;
+      playTracked = false;
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -496,7 +535,7 @@ const featuredDiy = diyWorkshops.slice(0, 6);
       if (modalTitle) modalTitle.textContent = title;
       if (modalCat) modalCat.textContent = cat;
       
-      const whatsappUrl = `https://wa.me/6281215312939?text=${encodeURIComponent(`Halo Looca ID, saya tertarik dengan workshop/DIY: ${title}`)}`;
+      const whatsappUrl = `https://wa.me/6281215312939?text=${encodeURIComponent(`Hello Looca ID, I am interested in joining or ordering the workshop DIY: ${title}`)}`;
       if (modalInquire) modalInquire.href = whatsappUrl;
 
       resetFadeTimer();
@@ -509,6 +548,8 @@ const featuredDiy = diyWorkshops.slice(0, 6);
       modal.classList.add('hidden');
       modal.classList.remove('flex');
       document.body.style.overflow = '';
+      activeWorkshopId = null;
+      playTracked = false;
     };
 
     // Listen to video clicks inside #diy-panel
@@ -520,10 +561,11 @@ const featuredDiy = diyWorkshops.slice(0, 6);
       const src = target.getAttribute('data-video-src');
       const title = target.getAttribute('data-video-title') || 'DIY Workshop';
       const cat = target.getAttribute('data-video-cat') || 'Workshop';
+      const id = target.getAttribute('data-workshop-id');
 
       if (hasVideo && src) {
         e.preventDefault();
-        openVideo(src, title, cat);
+        openVideo(src, title, cat, id);
       }
     });
 

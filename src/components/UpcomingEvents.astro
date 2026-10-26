@@ -1,0 +1,416 @@
+---
+// UpcomingEvents.astro
+// Cute Upcoming Events component fetching active events from Looca Go backend API
+// Includes cute Scrapbook Ticket Cards and a Cute Pastel Schedule Table toggle
+
+export interface EventItem {
+  id: number;
+  title: string;
+  sub_title?: string;
+  description?: string;
+  poster?: string;
+  start_date?: string;
+  start_time?: string;
+  place?: string;
+  admission_fee?: number | null;
+  origin_link?: string;
+  short_link?: string;
+  is_coming_soon: boolean;
+  is_active: boolean;
+}
+
+const rawApiUrl = import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com';
+const apiUrl = rawApiUrl.replace(/\/$/, '');
+
+let initialEvents: EventItem[] = [];
+
+try {
+  const res = await fetch(`${apiUrl}/api/public/events`, {
+    headers: {
+      'Accept': 'application/json',
+    },
+  });
+  if (res.ok) {
+    const data = await res.json();
+    if (Array.isArray(data)) {
+      initialEvents = data;
+    }
+  }
+} catch (error) {
+  console.error('[UpcomingEvents] Error fetching events at build time:', error);
+}
+
+// Fallback sample data if API is currently offline / unreachable during static build
+if (initialEvents.length === 0) {
+  initialEvents = [
+    {
+      id: 1,
+      title: 'Weekend Beads & Blooms Workshop',
+      sub_title: 'Creative Gathering',
+      description: 'Hands-on jewelry making with tea, treats, and fresh flowers at One Ten Cafe Karawang.',
+      poster: '/images/workshop/flower-bagcharms.jpeg',
+      start_date: '2026-11-15',
+      start_time: '14:00',
+      place: 'One Ten Cafe, Galuh Mas Karawang',
+      admission_fee: 125000,
+      origin_link: 'https://instagram.com/looca_id',
+      short_link: 'https://looca.id/event/beads-blooms',
+      is_coming_soon: false,
+      is_active: true,
+    },
+    {
+      id: 2,
+      title: 'Moru Doll Pop-Up Studio',
+      sub_title: 'Craft & Sip',
+      description: 'Bring your favorite fluffy friends to life in this cozy 2-hour guided crafting session.',
+      poster: '/images/workshop/moru-doll.jpeg',
+      start_date: '2026-11-28',
+      start_time: '10:30',
+      place: 'Klinik Bisnis IPB, Bogor',
+      admission_fee: 85000,
+      origin_link: 'https://instagram.com/looca_id',
+      short_link: 'https://looca.id/event/moru-studio',
+      is_coming_soon: false,
+      is_active: true,
+    },
+    {
+      id: 3,
+      title: 'Looca Year-End Art Bazaar',
+      sub_title: 'Annual Showcase',
+      description: 'Exclusive new handcrafted lines, live custom tailor orders, and interactive booth games.',
+      poster: '/images/workshop/pink-rabbit.jpeg',
+      start_date: '2026-12-20',
+      start_time: '09:00',
+      place: 'Outlet Dekranasda Karawang',
+      admission_fee: null,
+      origin_link: 'https://instagram.com/looca_id',
+      short_link: 'https://looca.id/event/art-bazaar',
+      is_coming_soon: true,
+      is_active: true,
+    },
+  ];
+}
+
+const formatDate = (dateStr?: string) => {
+  if (!dateStr) return 'TBA';
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    return d.toLocaleDateString('en-US', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return dateStr;
+  }
+};
+
+const formatPrice = (price?: number | null) => {
+  if (!price || price <= 0) return 'Free / TBA';
+  return `IDR ${Number(price).toLocaleString('en-US')}`;
+};
+
+const getPosterUrl = (posterPath?: string) => {
+  if (!posterPath) return '/images/workshop/moru-doll.jpeg';
+  if (posterPath.startsWith('http')) return posterPath;
+  return `${apiUrl}${posterPath.startsWith('/') ? posterPath : '/' + posterPath}`;
+};
+---
+
+<div id="upcoming-events-container" class="relative mb-16 sm:mb-20" data-api-url={apiUrl}>
+  <!-- Section Header -->
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+    <div class="text-center sm:text-left">
+      <div class="inline-flex items-center gap-1.5 text-xs font-heading font-semibold text-pink-deep bg-pink/20 px-3 py-1 rounded-full border border-pink/40 mb-1.5">
+        <span>Upcoming Schedule</span>
+      </div>
+      <h3 class="font-heading text-2xl sm:text-3xl font-extrabold text-text-dark flex items-center justify-center sm:justify-start gap-2">
+        <span>Upcoming Events & Classes</span>
+      </h3>
+      <p class="text-xs sm:text-sm text-text-muted mt-1 max-w-lg">
+        Join our interactive creative workshops and craft gatherings. Limited slots available for each class.
+      </p>
+    </div>
+
+    <!-- View Switcher: Cards vs Table -->
+    <div class="inline-flex items-center p-1 bg-white border-2 border-pink/30 rounded-2xl shadow-xs shrink-0">
+      <button
+        id="btn-view-cards"
+        type="button"
+        class="px-3.5 py-1.5 rounded-xl font-heading font-bold text-xs transition-all flex items-center gap-1.5 bg-pink-deep text-white shadow-xs cursor-pointer"
+        aria-label="View as Cards"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>Card View</span>
+      </button>
+      <button
+        id="btn-view-table"
+        type="button"
+        class="px-3.5 py-1.5 rounded-xl font-heading font-bold text-xs transition-all flex items-center gap-1.5 text-text-muted hover:text-pink-deep cursor-pointer"
+        aria-label="View as Table"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="6" x2="3.01" y2="6"></line>
+          <line x1="3" y1="12" x2="3.01" y2="12"></line>
+          <line x1="3" y1="18" x2="3.01" y2="18"></line>
+        </svg>
+        <span>Schedule Table</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- VIEW 1: SCRAPBOOK TICKET CARDS -->
+  <div id="events-cards-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+    {initialEvents.map((evt, idx) => {
+      const isEven = idx % 2 === 0;
+      const washiColor = isEven ? 'bg-yellow/90' : 'bg-pink/90';
+      const washiRotate = isEven ? '-rotate-2' : 'rotate-2';
+      const cardRotate = idx % 3 === 0 ? '-rotate-1 hover:rotate-0' : idx % 3 === 1 ? 'rotate-1 hover:rotate-0' : 'hover:-rotate-1';
+      const eventLink = evt.short_link || evt.origin_link || 'https://instagram.com/looca_id';
+
+      return (
+        <div class={`event-card relative bg-white rounded-3xl p-5 border-2 border-pink/30 shadow-md ${cardRotate} transition-all duration-300 flex flex-col justify-between group hover:shadow-xl hover:border-pink-deep/50`}>
+          <!-- Washi tape header deco -->
+          <div class={`absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 ${washiColor} ${washiRotate} rounded-sm shadow-xs z-20 flex items-center justify-center pointer-events-none`}>
+            <span class="text-[9px] font-heading font-bold text-text-dark opacity-75">Workshop</span>
+          </div>
+
+          <div>
+            <!-- Poster Frame with Polaroid feel -->
+            <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-pink-light/50 border border-pink/30 mb-4 shadow-inner">
+              <img
+                src={getPosterUrl(evt.poster)}
+                alt={evt.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='/images/workshop/flower-bagcharms.jpeg';"
+              />
+
+              <!-- Status Badge Pill -->
+              <div class="absolute top-2.5 left-2.5 z-10">
+                {evt.is_coming_soon ? (
+                  <span class="bg-yellow text-text-dark font-heading font-bold text-[11px] px-2.5 py-0.5 rounded-full shadow-xs border border-yellow-dark/30">
+                    Coming Soon
+                  </span>
+                ) : (
+                  <span class="bg-pink-deep text-white font-heading font-bold text-[11px] px-2.5 py-0.5 rounded-full shadow-xs border border-white/30">
+                    Open Registration
+                  </span>
+                )}
+              </div>
+
+              <!-- Time Tag overlay at bottom -->
+              {evt.start_time && (
+                <div class="absolute bottom-2.5 right-2.5 z-10 bg-black/60 backdrop-blur-xs text-white text-[10px] font-heading font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span>{evt.start_time}</span>
+                </div>
+              )}
+            </div>
+
+            <!-- Date & Category chips -->
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="inline-flex items-center gap-1.5 text-xs font-heading font-extrabold text-pink-deep bg-pink-light px-2.5 py-1 rounded-xl border border-pink/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-pink-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>{formatDate(evt.start_date)}</span>
+              </div>
+
+              {evt.sub_title && (
+                <span class="text-[11px] font-heading font-semibold text-yellow-dark bg-yellow-light px-2 py-0.5 rounded-lg border border-yellow/40 truncate max-w-[120px]">
+                  {evt.sub_title}
+                </span>
+              )}
+            </div>
+
+            <!-- Title -->
+            <h4 class="font-heading font-bold text-base sm:text-lg text-text-dark leading-snug mb-1.5 group-hover:text-pink-deep transition-colors line-clamp-1" title={evt.title}>
+              {evt.title}
+            </h4>
+
+            <!-- Description -->
+            {evt.description && (
+              <p class="text-xs text-text-muted leading-relaxed line-clamp-2 mb-3">
+                {evt.description}
+              </p>
+            )}
+
+            <!-- Venue / Place -->
+            {evt.place && (
+              <div class="flex items-start gap-1.5 text-[11px] text-text-muted mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-pink-deep shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="line-clamp-1">{evt.place}</span>
+              </div>
+            )}
+          </div>
+
+          <!-- Bottom Ticket Area with Perforated dashed border -->
+          <div class="pt-3 border-t-2 border-dashed border-pink/30 mt-auto flex items-center justify-between gap-3">
+            <div>
+              <span class="text-[10px] uppercase font-heading font-bold text-text-muted block">Admission</span>
+              <span class="font-heading font-extrabold text-sm text-pink-deep">
+                {formatPrice(evt.admission_fee)}
+              </span>
+            </div>
+
+            <a
+              href={eventLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 bg-yellow hover:bg-yellow-dark text-text-dark font-heading font-bold text-xs py-2 px-3.5 rounded-xl shadow-xs hover:scale-105 active:scale-95 transition-all"
+            >
+              <span>{evt.is_coming_soon ? 'Details' : 'Register'}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- VIEW 2: SCHEDULE TABLE -->
+  <div id="events-table-view" class="hidden overflow-hidden bg-white rounded-3xl border-2 border-pink/30 shadow-md">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-pink-light/70 border-b-2 border-pink/30 text-text-dark font-heading font-bold text-xs sm:text-sm">
+            <th class="py-3.5 px-4 sm:px-6">Workshop / Event</th>
+            <th class="py-3.5 px-4 sm:px-6">Date & Time</th>
+            <th class="py-3.5 px-4 sm:px-6 hidden sm:table-cell">Location</th>
+            <th class="py-3.5 px-4 sm:px-6">Admission</th>
+            <th class="py-3.5 px-4 sm:px-6 text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-pink/20 text-xs sm:text-sm">
+          {initialEvents.map((evt) => {
+            const eventLink = evt.short_link || evt.origin_link || 'https://instagram.com/looca_id';
+            return (
+              <tr class="hover:bg-cream/70 transition-colors">
+                <!-- Title & Poster -->
+                <td class="py-3.5 px-4 sm:px-6">
+                  <div class="flex items-center gap-3">
+                    <img
+                      src={getPosterUrl(evt.poster)}
+                      alt={evt.title}
+                      class="w-12 h-12 rounded-xl object-cover border border-pink/30 shadow-xs shrink-0"
+                      loading="lazy"
+                      onerror="this.onerror=null; this.src='/images/workshop/flower-bagcharms.jpeg';"
+                    />
+                    <div>
+                      <p class="font-heading font-bold text-text-dark hover:text-pink-deep transition-colors line-clamp-1">
+                        {evt.title}
+                      </p>
+                      {evt.sub_title && (
+                        <p class="text-[11px] font-heading font-semibold text-pink-deep">{evt.sub_title}</p>
+                      )}
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Date & Time -->
+                <td class="py-3.5 px-4 sm:px-6 whitespace-nowrap">
+                  <div class="font-heading font-bold text-text-dark">
+                    {formatDate(evt.start_date)}
+                  </div>
+                  <div class="text-[11px] text-text-muted">
+                    {evt.start_time ? evt.start_time : 'Time TBA'}
+                  </div>
+                </td>
+
+                <!-- Location -->
+                <td class="py-3.5 px-4 sm:px-6 hidden sm:table-cell text-text-muted">
+                  <span class="line-clamp-1">{evt.place || 'Karawang / Online'}</span>
+                </td>
+
+                <!-- Fee -->
+                <td class="py-3.5 px-4 sm:px-6 whitespace-nowrap font-heading font-bold text-pink-deep">
+                  {formatPrice(evt.admission_fee)}
+                </td>
+
+                <!-- Action button -->
+                <td class="py-3.5 px-4 sm:px-6 text-right whitespace-nowrap">
+                  <a
+                    href={eventLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 bg-pink hover:bg-pink-dark text-text-dark font-heading font-bold text-xs py-1.5 px-3 rounded-xl shadow-xs transition-all hover:scale-105 active:scale-95"
+                  >
+                    <span>{evt.is_coming_soon ? 'Details' : 'Register'}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dynamic client-side view toggle & live refresh from API
+  const initUpcomingEvents = () => {
+    const btnCards = document.getElementById('btn-view-cards');
+    const btnTable = document.getElementById('btn-view-table');
+    const cardsView = document.getElementById('events-cards-view');
+    const tableView = document.getElementById('events-table-view');
+
+    if (!btnCards || !btnTable || !cardsView || !tableView) return;
+
+    btnCards.addEventListener('click', () => {
+      cardsView.classList.remove('hidden');
+      tableView.classList.add('hidden');
+
+      btnCards.classList.add('bg-pink-deep', 'text-white', 'shadow-xs');
+      btnCards.classList.remove('text-text-muted');
+
+      btnTable.classList.remove('bg-pink-deep', 'text-white', 'shadow-xs');
+      btnTable.classList.add('text-text-muted');
+    });
+
+    btnTable.addEventListener('click', () => {
+      cardsView.classList.add('hidden');
+      tableView.classList.remove('hidden');
+
+      btnTable.classList.add('bg-pink-deep', 'text-white', 'shadow-xs');
+      btnTable.classList.remove('text-text-muted');
+
+      btnCards.classList.remove('bg-pink-deep', 'text-white', 'shadow-xs');
+      btnCards.classList.add('text-text-muted');
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUpcomingEvents);
+  } else {
+    initUpcomingEvents();
+  }
+  document.addEventListener('astro:page-load', initUpcomingEvents);
+</script>
