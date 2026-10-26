@@ -19,16 +19,19 @@ export interface EventItem {
   is_active: boolean;
 }
 
-const rawApiUrl = import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com';
-const apiUrl = rawApiUrl.replace(/\/$/, '');
+const publicApiUrl = (import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com').replace(/\/$/, '');
+const internalApiUrl = import.meta.env.INTERNAL_API_URL;
+const fetchApiUrl = (internalApiUrl && internalApiUrl.trim() !== '') ? internalApiUrl.trim().replace(/\/$/, '') : publicApiUrl;
+const apiUrl = publicApiUrl;
 
 let initialEvents: EventItem[] = [];
 
 try {
-  const res = await fetch(`${apiUrl}/api/public/events`, {
+  const res = await fetch(`${fetchApiUrl}/api/public/events`, {
     headers: {
       'Accept': 'application/json',
     },
+    signal: AbortSignal.timeout(3000),
   });
   if (res.ok) {
     const data = await res.json();
@@ -37,7 +40,7 @@ try {
     }
   }
 } catch (error) {
-  console.error('[UpcomingEvents] Error fetching events at build time:', error);
+  console.warn('[UpcomingEvents] Build-time fetch notice (using fallback events):', error);
 }
 
 // Fallback sample data if API is currently offline / unreachable during static build

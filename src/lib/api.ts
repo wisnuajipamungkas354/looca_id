@@ -59,19 +59,30 @@ export interface DiyWorkshopItem {
   actionLink: string;
 }
 
-export const getApiUrl = (): string => {
+export const getPublicApiUrl = (): string => {
   const url = import.meta.env.PUBLIC_API_URL || 'https://backend.looca-id.com';
   return url.replace(/\/$/, '');
 };
+
+export const getFetchApiUrl = (): string => {
+  const internal = import.meta.env.INTERNAL_API_URL;
+  if (internal && internal.trim() !== '') {
+    return internal.trim().replace(/\/$/, '');
+  }
+  return getPublicApiUrl();
+};
+
+export const getApiUrl = getPublicApiUrl;
 
 export const getMediaUrl = (path?: string | null): string => {
   if (!path) return '';
   if (path.startsWith('http://') || path.startsWith('https://')) {
     return path;
   }
-  const apiUrl = getApiUrl();
+  const apiUrl = getPublicApiUrl();
   return `${apiUrl}${path.startsWith('/') ? path : '/' + path}`;
 };
+
 
 // Fallback badges for cute e-commerce styling
 const getProductBadge = (name: string, categorySlug: string, idx: number) => {
@@ -101,15 +112,16 @@ const getProductBadge = (name: string, categorySlug: string, idx: number) => {
 
 export async function fetchCategories(): Promise<BackendCategory[]> {
   try {
-    const res = await fetch(`${getApiUrl()}/api/public/categories`, {
+    const res = await fetch(`${getFetchApiUrl()}/api/public/categories`, {
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(3000),
     });
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data)) return data;
     }
   } catch (err) {
-    console.error('[API] Error fetching categories:', err);
+    console.warn('[API] Warning fetching categories at build time (using defaults):', err);
   }
   return [
     { id: 1, slug: 'fashion', categories_name: 'Fashion' },
@@ -123,7 +135,10 @@ export async function fetchCategories(): Promise<BackendCategory[]> {
 export async function fetchProducts(): Promise<ProductItem[]> {
   try {
     const [rawProducts, rawCategories] = await Promise.all([
-      fetch(`${getApiUrl()}/api/public/products`, { headers: { Accept: 'application/json' } })
+      fetch(`${getFetchApiUrl()}/api/public/products`, {
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(3000),
+      })
         .then((r) => (r.ok ? r.json() : []))
         .catch(() => []),
       fetchCategories(),
@@ -156,7 +171,7 @@ export async function fetchProducts(): Promise<ProductItem[]> {
       });
     }
   } catch (err) {
-    console.error('[API] Error fetching products:', err);
+    console.warn('[API] Warning fetching products at build time (using fallbacks):', err);
   }
 
   // Fallback if backend API is unreachable
@@ -165,8 +180,9 @@ export async function fetchProducts(): Promise<ProductItem[]> {
 
 export async function fetchWorkshops(): Promise<DiyWorkshopItem[]> {
   try {
-    const res = await fetch(`${getApiUrl()}/api/public/workshops`, {
+    const res = await fetch(`${getFetchApiUrl()}/api/public/workshops`, {
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(3000),
     });
     if (res.ok) {
       const rawWorkshops = await res.json();
@@ -203,7 +219,7 @@ export async function fetchWorkshops(): Promise<DiyWorkshopItem[]> {
       }
     }
   } catch (err) {
-    console.error('[API] Error fetching workshops:', err);
+    console.warn('[API] Warning fetching workshops at build time (using fallbacks):', err);
   }
 
   // Fallback
