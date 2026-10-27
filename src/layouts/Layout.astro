@@ -29,6 +29,18 @@ const { title } = Astro.props;
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <script define:vars={{ apiUrl: PUBLIC_API_URL }}>
+      // Immediately intercept shortlinks (/event/:slug or /r/:slug) and redirect via backend API
+      (function() {
+        try {
+          var p = window.location.pathname;
+          if (p.startsWith('/event/') || p.startsWith('/r/')) {
+            window.location.replace(apiUrl + p + window.location.search);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <script define:vars={{ apiUrl: PUBLIC_API_URL }}>
@@ -81,6 +93,8 @@ const { title } = Astro.props;
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
         });
+
+        (window as any).__lenis = lenis;
 
         lenis.on('scroll', ScrollTrigger.update);
 
