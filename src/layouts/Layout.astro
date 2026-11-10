@@ -44,23 +44,27 @@ const { title } = Astro.props;
   </head>
   <body>
     <script define:vars={{ apiUrl: PUBLIC_API_URL }}>
-      // Record visitor analytics once per browser session
+      // Record visitor analytics once per browser session with traffic source
       (function() {
         try {
           const sessionKey = 'looca_visit_recorded';
+          const referrer = document.referrer || window.location.search || '';
           if (!sessionStorage.getItem(sessionKey)) {
             sessionStorage.setItem(sessionKey, '1');
             fetch(`${apiUrl}/api/public/visit`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ referrer: referrer }),
               keepalive: true
             }).catch(function() {});
           }
         } catch (e) {
           // If storage is restricted, send once
+          var referrer = document.referrer || window.location.search || '';
           fetch(`${apiUrl}/api/public/visit`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ referrer: referrer }),
             keepalive: true
           }).catch(function() {});
         }
